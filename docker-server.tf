@@ -16,6 +16,17 @@ locals {
 
 }
 
+data "cloudinit_config" "configuration" {
+  gzip = false
+  base64_encode = false
+
+  part {
+    content_type = "text/cloud-config"
+    content = file("docker-server.cloud-init.yaml")
+    filename = "docker-server.cloud-init.conf"
+  }
+}
+
 resource "google_compute_instance" "gcp_instance_docker_host" {
 	project				= "${local.docker-host-project}"
 	zone				= "${local.docker-host-zone}"
@@ -55,7 +66,11 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 	metadata = {
 		ssh-keys = "${local.docker-host-ssh-username}:${file(local.docker-host-ssh-public-key-file)}"
 		startup-script	= "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y"
+		user-data = "${data.cloudinit_config.configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_host"
 
+output "docker_host_output" {
+	value 	= "Provisioning ${google_compute_instance.gcp_instance_docker_host.name}"
+}
 
