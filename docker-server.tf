@@ -10,10 +10,19 @@ locals {
 	
 	//Make sure these are set for this machine
 	docker-host-vm-name		= "docker-host-vm-t"
+	docker-host-image		= "ubuntu-os-cloud/ubuntu-2110"
 	docker-host-network-ip		= "10.0.0.5"
+	docker-host-tags 		= ["docker-host","web-server"]
 	docker-host-disk-size-gb	= 25 //GB
 	docker-host-description		= "A docker server to run containers on the ${local.docker-host-subnetwork-name} subnet"
 
+	docker-host-labels 		= "${merge(
+						tomap({ 
+							"purpose"	= "application-server",
+							"asset-type"	= "virtual-machine"
+						}),
+						var.default_labels)
+					}"
 }
 
 data "cloudinit_config" "configuration" {
@@ -35,12 +44,8 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 	machine_type			= "e2-small"
 	allow_stopping_for_update	= true
 	can_ip_forward			= false
-	tags = ["docker-host","web-server"]
-	labels = {
-		"purpose"	= "application-server"
-		"owner"		= "jeremy-druin"
-		"asset-type"	= "virtual-machine"
-	}
+	tags = "${local.docker-host-tags}"
+	labels = "${local.docker-host-labels}"
 	boot_disk {
 		auto_delete	= true
 		device_name	= "${local.docker-host-vm-name}-disk"
@@ -48,7 +53,7 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		initialize_params {
 			size	= local.docker-host-disk-size-gb
 			type	= "pd-standard"
-			image	= "debian-cloud/debian-11"
+			image	= "${local.docker-host-image}"
 		}
 	}
 	network_interface {
@@ -69,8 +74,4 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		user-data = "${data.cloudinit_config.configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_host"
-
-output "docker_host_output" {
-	value 	= "Provisioning ${google_compute_instance.gcp_instance_docker_host.name}"
-}
 

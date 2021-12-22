@@ -29,3 +29,27 @@ variable "zone" {
   type = string
   default = "us-central1-a"
 }
+
+variable "owner" {
+  type = string
+  default = ""
+}
+
+variable "environment" {
+  type = string
+  default = "testnet"
+}
+
+variable "application" {
+  type = string
+  default = "mutillidae"
+}
+
+variable "default_labels" { 
+    type = map(string)
+    default = {
+        owner: "jeremy-druin",
+        environment: "testnet",
+        application: "mutillidae"
+  } 
+}
