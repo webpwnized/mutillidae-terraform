@@ -1,0 +1,12 @@
+#cloud-config
+
+# install docker
+packages:
+    - docker.io
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
+# create the docker group and add user jeremy
+groups: 
+  - docker: [jeremy]
