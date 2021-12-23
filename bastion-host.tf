@@ -16,6 +16,17 @@ locals {
 
 }
 
+data "cloudinit_config" "bastion_host_configuration" {
+  gzip = false
+  base64_encode = false
+
+  part {
+    content_type = "text/cloud-config"
+    content = file("bastion-host.cloud-init.yaml")
+    filename = "bastion-host.cloud-init.conf"
+  }
+}
+
 resource "google_compute_instance" "gcp_instance_bastion_host" {
 	project				= "${local.bastion-host-project}"
 	zone				= "${local.bastion-host-zone}"
@@ -55,6 +66,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 	metadata = {
 		ssh-keys = "${local.bastion-host-ssh-username}:${file(local.bastion-host-ssh-public-key-file)}"
 		startup-script	= "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y"
+		user-data = "${data.cloudinit_config.bastion_host_configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_bastion_host"
 

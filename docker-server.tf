@@ -25,7 +25,7 @@ locals {
 					}"
 }
 
-data "cloudinit_config" "configuration" {
+data "cloudinit_config" "docker_server_configuration" {
   gzip = false
   base64_encode = false
 
@@ -62,6 +62,9 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		subnetwork_project 	= "${local.docker-host-project}"
 		network_ip		= "${local.docker-host-network-ip}"
 		stack_type		= "IPV4_ONLY"
+		access_config{
+			network_tier	= "STANDARD"
+		}
 	}
 	shielded_instance_config {
 		enable_secure_boot		= true
@@ -71,7 +74,7 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 	metadata = {
 		ssh-keys = "${local.docker-host-ssh-username}:${file(local.docker-host-ssh-public-key-file)}"
 		startup-script	= "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y"
-		user-data = "${data.cloudinit_config.configuration.rendered}"
+		user-data = "${data.cloudinit_config.docker_server_configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_host"
 
