@@ -1,6 +1,6 @@
 locals {
 	network-project		= "${var.project}"
-	network-name		= "mutillidae-vpc-t"
+	network-name		= "mutillidae-vpc"
 }
 
 resource "google_compute_network" "gcp_vpc_network" {

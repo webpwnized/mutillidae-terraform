@@ -30,3 +30,5 @@ runcmd:
   - chown -R jeremy:jeremy /home/jeremy/mutillidae-dockerhub
   - sudo -u jeremy docker-compose -f /home/jeremy/mutillidae-dockerhub/docker-compose.yml up -d
 
+final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
+

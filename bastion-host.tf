@@ -5,15 +5,20 @@ locals {
 	bastion-host-zone			= "${var.zone}"
 	bastion-host-network-name		= "${google_compute_network.gcp_vpc_network.name}"
 	bastion-host-subnetwork-name		= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
-	bastion-host-ssh-username		= "${var.gcp-ssh-username}"
-	bastion-host-ssh-public-key-file	= "${var.gcp-ssh-public-key-file}"
 	
 	//Make sure these are set for this machine
-	bastion-host-vm-name 			= "bastion-host-vm-t"
+	bastion-host-vm-name 			= "bastion-host-vm"
 	bastion-host-network-ip			= "10.0.0.2"
-	bastion-host-disk-size-gb		= 10 //GB
+	bastion-host-tags 			= ["bastion-host"]
+	bastion-host-disk-size-gb		= 10
 	bastion-host-description		= "A jump server to allow access to other IaaS on the ${local.bastion-host-subnetwork-name} subnet"
-
+	bastion-host-labels 			= "${merge(
+							tomap({ 
+								"purpose"	= "bastion-host",
+								"asset-type"	= "virtual-machine"
+							}),
+							var.default_labels)
+						}"
 }
 
 data "cloudinit_config" "bastion_host_configuration" {
@@ -32,23 +37,19 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 	zone				= "${local.bastion-host-zone}"
 	name				= "${local.bastion-host-vm-name}"
 	description			= "${local.bastion-host-description}"
-	machine_type			= "e2-small"
+	machine_type			= "${var.vm_machine_type}"
 	allow_stopping_for_update	= true
 	can_ip_forward			= false
-	tags = ["bastion-host"]
-	labels = {
-		"purpose"	= "bastion-host"
-		"owner"		= "jeremy-druin"
-		"asset-type"	= "virtual-machine"
-	}
+	tags = local.bastion-host-tags
+	labels = local.bastion-host-labels
 	boot_disk {
 		auto_delete	= true
 		device_name	= "${local.bastion-host-vm-name}-disk"
 		mode		= "READ_WRITE"
 		initialize_params {
 			size	= local.bastion-host-disk-size-gb
-			type	= "pd-standard"
-			image	= "debian-cloud/debian-11"
+			type	= "${var.vm_boot_disk_type}"
+			image	= "${var.vm_boot_disk_image}"
 		}
 	}
 	network_interface {
@@ -64,10 +65,10 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${local.bastion-host-ssh-username}:${file(local.bastion-host-ssh-public-key-file)}"
-		startup-script	= "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y"
+		ssh-keys = "${var.gcp-ssh-username}:${file(var.gcp-ssh-public-key-file)}"
+		startup-script	= "${var.vm-metadata-startup-script}"
 		user-data = "${data.cloudinit_config.bastion_host_configuration.rendered}"
- 	}
+ 	}	
 } // end resource "google_compute_instance" "gcp_instance_bastion_host"
 
 

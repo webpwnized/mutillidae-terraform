@@ -5,15 +5,12 @@ locals {
 	docker-host-zone		= "${var.zone}"
 	docker-host-network-name	= "${google_compute_network.gcp_vpc_network.name}"
 	docker-host-subnetwork-name	= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
-	docker-host-ssh-username	= "${var.gcp-ssh-username}"
-	docker-host-ssh-public-key-file	= "${var.gcp-ssh-public-key-file}"
 	
 	//Make sure these are set for this machine
-	docker-host-vm-name		= "docker-host-vm-t"
-	docker-host-image		= "ubuntu-os-cloud/ubuntu-2110"
+	docker-host-vm-name		= "docker-host-vm"
 	docker-host-network-ip		= "10.0.0.5"
 	docker-host-tags 		= ["docker-host","web-server"]
-	docker-host-disk-size-gb	= 25 //GB
+	docker-host-disk-size-gb	= 25
 	docker-host-description		= "A docker server to run containers on the ${local.docker-host-subnetwork-name} subnet"
 
 	docker-host-labels 		= "${merge(
@@ -41,7 +38,7 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 	zone				= "${local.docker-host-zone}"
 	name				= "${local.docker-host-vm-name}"
 	description			= "${local.docker-host-description}"
-	machine_type			= "e2-small"
+	machine_type			= "${var.vm_machine_type}"
 	allow_stopping_for_update	= true
 	can_ip_forward			= false
 	tags = "${local.docker-host-tags}"
@@ -52,8 +49,8 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		mode		= "READ_WRITE"
 		initialize_params {
 			size	= local.docker-host-disk-size-gb
-			type	= "pd-standard"
-			image	= "${local.docker-host-image}"
+			type	= "${var.vm_boot_disk_type}"
+			image	= "${var.vm_boot_disk_image}"
 		}
 	}
 	network_interface {
@@ -72,8 +69,8 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${local.docker-host-ssh-username}:${file(local.docker-host-ssh-public-key-file)}"
-		startup-script	= "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y"
+		ssh-keys = "${var.gcp-ssh-username}:${file(var.gcp-ssh-public-key-file)}"
+		startup-script	= "${var.vm-metadata-startup-script}"
 		user-data = "${data.cloudinit_config.docker_server_configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_host"
