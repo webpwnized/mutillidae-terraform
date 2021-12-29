@@ -1,0 +1,15 @@
+#cloud-config
+  
+# create user jeremy
+users:
+    - name: jeremy
+      gecos: "Jeremy Druin"
+      homedir: "/home/jeremy"
+      primary_group: "jeremy"
+      shell: "/bin/bash"
+      ssh_authorized_keys:
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuz17wgiGT9Ynz5R4FEdnAn4nhmg3HB/SOq42OBeaoN jeremy@host.local"
+      sudo: "ALL= (ALL) NOPASSWD"
+      
+final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
+
