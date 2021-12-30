@@ -17,7 +17,7 @@ resource "google_compute_firewall" "allow-ssh-to-docker-host-from-bastion-host" 
 
 	allow {
 		protocol	= "tcp"
-		ports		= [var.ssh_port]
+		ports		= [var.ssh-port]
 	}
 
 	source_tags	= ["bastion-host"]
@@ -39,10 +39,10 @@ resource "google_compute_firewall" "allow-http-to-docker-host-from-internet" {
 
 	allow {
 		protocol	= "tcp"
-		ports		= ["${var.http_port}","${var.mysql_admin_http_port}","${var.ldap_admin_http_port}"]
+		ports		= ["${var.http-port}","${var.mysql-admin-http-port}","${var.ldap-admin-http-port}"]
 	}
 
-	source_ranges	= var.admin_office_ip_address_range
+	source_ranges	= var.admin-office-ip-address-range
 	target_tags	= ["docker-host"]
 	
 	log_config {

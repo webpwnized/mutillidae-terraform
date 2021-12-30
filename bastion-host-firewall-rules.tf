@@ -18,10 +18,10 @@ resource "google_compute_firewall" "allow-ssh-to-bastion-host-from-iap" {
 
 	allow {
 		protocol	= "tcp"
-		ports		= ["${var.ssh_port}"]
+		ports		= ["${var.ssh-port}"]
 	}
 
-	source_ranges	= var.gcp_iap_ip_address_range
+	source_ranges	= var.gcp-iap-ip-address-range
 	target_tags	= ["bastion-host"]
 	
 	log_config {

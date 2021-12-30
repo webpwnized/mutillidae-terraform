@@ -17,7 +17,7 @@ locals {
 								"purpose"	= "bastion-host",
 								"asset-type"	= "virtual-machine"
 							}),
-							var.default_labels)
+							var.default-labels)
 						}"
 	bastion-host-cloud-init-config-file	= "bastion-host.cloud-init.yaml"
 }
@@ -49,7 +49,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 	zone				= "${local.bastion-host-zone}"
 	name				= "${local.bastion-host-vm-name}"
 	description			= "${local.bastion-host-description}"
-	machine_type			= "${var.vm_machine_type}"
+	machine_type			= "${var.vm-machine-type}"
 	allow_stopping_for_update	= true
 	can_ip_forward			= false
 	tags = local.bastion-host-tags
@@ -60,8 +60,8 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		mode		= "READ_WRITE"
 		initialize_params {
 			size	= local.bastion-host-disk-size-gb
-			type	= "${var.vm_boot_disk_type}"
-			image	= "${var.vm_boot_disk_image}"
+			type	= "${var.vm-boot-disk-type}"
+			image	= "${var.vm-boot-disk-image}"
 		}
 	}
 	network_interface {

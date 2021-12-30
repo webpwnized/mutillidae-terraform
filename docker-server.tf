@@ -18,7 +18,7 @@ locals {
 							"purpose"	= "application-server",
 							"asset-type"	= "virtual-machine"
 						}),
-						var.default_labels)
+						var.default-labels)
 					}"
 }
 
@@ -38,7 +38,7 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 	zone				= "${local.docker-host-zone}"
 	name				= "${local.docker-host-vm-name}"
 	description			= "${local.docker-host-description}"
-	machine_type			= "${var.vm_machine_type}"
+	machine_type			= "${var.vm-machine-type}"
 	allow_stopping_for_update	= true
 	can_ip_forward			= false
 	tags = "${local.docker-host-tags}"
@@ -49,8 +49,8 @@ resource "google_compute_instance" "gcp_instance_docker_host" {
 		mode		= "READ_WRITE"
 		initialize_params {
 			size	= local.docker-host-disk-size-gb
-			type	= "${var.vm_boot_disk_type}"
-			image	= "${var.vm_boot_disk_image}"
+			type	= "${var.vm-boot-disk-type}"
+			image	= "${var.vm-boot-disk-image}"
 		}
 	}
 	network_interface {

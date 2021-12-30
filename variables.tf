@@ -34,7 +34,7 @@ variable "gcp-ssh-private-key-secret" {
 	default = "gcp-iaas-server-ssh-private-key"
 }
 
-variable "default_labels" { 
+variable "default-labels" { 
 	type = map(string)
 	default = {
 		owner: "jeremy-druin",
@@ -43,47 +43,47 @@ variable "default_labels" {
 	} 
 }
 
-variable "admin_office_ip_address_range" {
+variable "admin-office-ip-address-range" {
 	type = list(string)
 	default = ["104.0.151.118/32"]
 }
 
-variable "gcp_iap_ip_address_range" {
+variable "gcp-iap-ip-address-range" {
 	type = list(string)
 	default = ["35.235.240.0/20"]
 }
 
-variable "ssh_port" {
+variable "ssh-port" {
 	type = string
 	default = "22"
 }
 
-variable "http_port" {
+variable "http-port" {
 	type = string
 	default = "80"
 }
 
-variable "mysql_admin_http_port" {
+variable "mysql-admin-http-port" {
 	type = string
 	default = "81"
 }
 
-variable "ldap_admin_http_port" {
+variable "ldap-admin-http-port" {
 	type = string
 	default = "82"
 }
 
-variable "vm_machine_type" {
+variable "vm-machine-type" {
 	type = string
 	default = "e2-small"
 }
 
-variable "vm_boot_disk_type" {
+variable "vm-boot-disk-type" {
 	type = string
 	default = "pd-standard"
 }
 
-variable "vm_boot_disk_image" {
+variable "vm-boot-disk-image" {
 	type = string
 	default = "ubuntu-os-cloud/ubuntu-2110"
 }

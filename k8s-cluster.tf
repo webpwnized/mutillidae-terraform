@@ -1,5 +1,10 @@
 
 locals {
+	gke-cluster-project	= var.project
+	gke-cluster-location	= var.zone
+	gke-cluster-network	= "${google_compute_subnetwork.gcp_vpc_k8s_subnetwork.network}"
+	gke-cluster-subnetwork	= "${google_compute_subnetwork.gcp_vpc_k8s_subnetwork.name}"
+
 	gke-cluster-name 	= "mutillidae-gke-cluster"
 	gke-cluster-description	= "A GKE Cluster to run Docker containers"
 
@@ -11,10 +16,10 @@ locals {
 }
 
 resource "google_container_cluster" "gke_cluster" {
-	project		= "${var.project}"
-	location	= "${var.location}"
-	network		= "${var.network}"
-	subnetwork	= "${var.subnetwork}"
+	project		= "${local.gke-cluster-project}"
+	location	= "${local.gke-cluster-location}"
+	network		= "${local.gke-cluster-network}"
+	subnetwork	= "${local.gke-cluster-subnetwork}"
 	name		= "${local.gke-cluster-name}"
 	remove_default_node_pool	= true
 	initial_node_count		= 1
@@ -28,9 +33,6 @@ resource "google_container_cluster" "gke_cluster" {
 		network_policy_config {
 			disabled	= false
 		}
-	}
-	confidential_nodes {
-		enabled		= true
 	}
 }
 
