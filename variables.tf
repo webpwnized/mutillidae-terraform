@@ -29,6 +29,11 @@ variable "gcp-ssh-public-key-file" {
 	default = "/home/jeremy/.ssh/gcp-mutillidae-app-server-1.pub"
 }
 
+variable "gcp-ssh-private-key-secret" {
+	type = string
+	default = "gcp-iaas-server-ssh-private-key"
+}
+
 variable "default_labels" { 
 	type = map(string)
 	default = {

@@ -19,17 +19,29 @@ locals {
 							}),
 							var.default_labels)
 						}"
+	bastion-host-cloud-init-config-file	= "bastion-host.cloud-init.yaml"
+}
+
+data "google_secret_manager_secret_version" "gcp_iaas_server_ssh_private_key" {
+	project		= "${local.bastion-host-project}"
+	secret 		= "${var.gcp-ssh-private-key-secret}"
+	version		= "1"
 }
 
 data "cloudinit_config" "bastion_host_configuration" {
-  gzip = false
-  base64_encode = false
+	gzip = false
+	base64_encode = false
 
-  part {
-    content_type = "text/cloud-config"
-    content = file("bastion-host.cloud-init.yaml")
-    filename = "bastion-host.cloud-init.conf"
-  }
+	part {
+		content_type = "text/cloud-config"
+		content = templatefile("${local.bastion-host-cloud-init-config-file}",
+			{
+				filename	= "${var.gcp-ssh-private-key-secret}"
+				content		= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
+			}
+		)
+		filename = "${local.bastion-host-cloud-init-config-file}"
+	}
 }
 
 resource "google_compute_instance" "gcp_instance_bastion_host" {
