@@ -1,0 +1,112 @@
+
+//########################################################################
+//	These variables must be set
+//	Rename this file to variables.tf when finished
+//########################################################################
+
+variable "project" {
+	type 		= string
+	default 	= "<project>"
+	description	= "The GCP project in which the assets will be built"
+}
+
+variable "terraform-credentials-file" {
+	type 		= string
+	default 	= "<file>"
+	description	= "The GCP service account that Terraform will use to authenticate to the project. Create a service account in GCP for Terraform to use. See https://cloud.google.com/community/tutorials/getting-started-on-gcp-with-terraform"
+}
+
+variable "gcp-ssh-username" {
+	type 		= string
+	default 	= "<username>"
+	description	= "The linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "gcp-ssh-public-key-file" {
+	type 		= string
+	default 	= "<public key file>"
+	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "gcp-ssh-private-key-secret" {
+	type 		= string
+	default 	= "<name of GCP secret>"
+	description	= "The name of the GCP secret that stores the SSH private key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. Because the private key is sensitive, the private key must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
+}
+
+variable "default-labels" { 
+	type = map(string)
+	default = {
+		owner: "<owner>",
+		environment: "<env>",
+		application: "mutillidae"
+	}
+	description	= "The labels that will be applied to the IaaS assets"
+}
+
+variable "admin-office-ip-address-range" {
+	type = list(string)
+	default = ["<ip address>/32"]
+	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
+}
+
+//########################################################################
+//	The default value of these varaibles may be used or changed
+//########################################################################
+
+variable "region" {
+	type = string
+	default = "us-central1"
+}
+
+variable "zone" {
+	type = string
+	default = "us-central1-a"
+}
+
+variable "gcp-iap-ip-address-range" {
+	type = list(string)
+	default = ["35.235.240.0/20"]
+}
+
+variable "ssh-port" {
+	type = string
+	default = "22"
+}
+
+variable "http-port" {
+	type = string
+	default = "80"
+}
+
+variable "mysql-admin-http-port" {
+	type = string
+	default = "81"
+}
+
+variable "ldap-admin-http-port" {
+	type = string
+	default = "82"
+}
+
+variable "vm-machine-type" {
+	type = string
+	default = "e2-small"
+}
+
+variable "vm-boot-disk-type" {
+	type = string
+	default = "pd-standard"
+}
+
+variable "vm-boot-disk-image" {
+	type = string
+	default = "ubuntu-os-cloud/ubuntu-2110"
+}
+
+variable "vm-metadata-startup-script" {
+	type = string
+	default = "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y\napt autoremove -y"
+}
+
+
