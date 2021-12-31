@@ -1,5 +1,5 @@
 locals {
-	docker-server-firewall-project	= "${google_compute_network.gcp_vpc_network.project}"
+	docker-server-firewall-project		= "${google_compute_network.gcp_vpc_network.project}"
 	docker-server-firewall-region		= "${var.region}"
 	docker-server-firewall-network-name	= "${google_compute_network.gcp_vpc_network.name}"
 	docker-server-firewall-rule-2-name	= "${local.docker-server-firewall-network-name}-allow-ssh-to-docker-host-from-bastion-host"

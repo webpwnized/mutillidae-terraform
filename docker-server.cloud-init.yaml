@@ -8,27 +8,27 @@ package_update: true
 package_upgrade: true
 package_reboot_if_required: true
 
-# create the docker group and add user jeremy
+# create the docker group and add user ${username}
 groups: 
   - docker
   
-# create user jeremy
+# create user ${username}
 users:
-    - name: jeremy
-      gecos: "Jeremy Druin"
+    - name: "${username}"
+      gecos: "${username}"
       groups: docker
-      homedir: "/home/jeremy"
-      primary_group: "jeremy"
+      homedir: "/home/${username}"
+      primary_group: "${username}"
       shell: "/bin/bash"
       ssh_authorized_keys:
-          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuz17wgiGT9Ynz5R4FEdnAn4nhmg3HB/SOq42OBeaoN jeremy@host.local"
+          - "${ssh-public-key}"
       sudo: "ALL= (ALL) NOPASSWD"
 
 runcmd:
-  - git clone https://github.com/webpwnized/mutillidae-dockerhub.git /home/jeremy/mutillidae-dockerhub
-  - sed -i 's/127.0.0.1://g' /home/jeremy/mutillidae-dockerhub/docker-compose.yml
-  - chown -R jeremy:jeremy /home/jeremy/mutillidae-dockerhub
-  - sudo -u jeremy docker-compose -f /home/jeremy/mutillidae-dockerhub/docker-compose.yml up -d
+  - git clone https://github.com/webpwnized/mutillidae-dockerhub.git /home/${username}/mutillidae-dockerhub
+  - sed -i 's/127.0.0.1://g' /home/${username}/mutillidae-dockerhub/docker-compose.yml
+  - chown -R ${username}:${username} /home/${username}/mutillidae-dockerhub
+  - sudo -u ${username} docker-compose -f /home/${username}/mutillidae-dockerhub/docker-compose.yml up -d
 
 final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
 

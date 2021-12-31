@@ -36,8 +36,10 @@ data "cloudinit_config" "bastion_host_configuration" {
 		content_type = "text/cloud-config"
 		content = templatefile("${local.bastion-host-cloud-init-config-file}",
 			{
-				filename	= "${var.gcp-ssh-private-key-secret}"
-				content		= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
+				username			= "${var.gcp-ssh-username}"
+				ssh-public-key			= "${file(var.gcp-ssh-public-key-file)}"
+				ssh-private-key-filename	= "${var.gcp-ssh-private-key-secret}"
+				ssh-private-key			= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
 			}
 		)
 		filename = "${local.bastion-host-cloud-init-config-file}"

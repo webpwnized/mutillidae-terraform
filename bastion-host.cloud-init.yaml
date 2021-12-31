@@ -1,20 +1,20 @@
 #cloud-config
   
-# create user jeremy
+# create user ${username}
 users:
-  - name: jeremy
-    gecos: "Jeremy Druin"
-    homedir: "/home/jeremy"
-    primary_group: "jeremy"
+  - name: "${username}"
+    gecos: "${username}"
+    homedir: "/home/${username}"
+    primary_group: "${username}"
     shell: "/bin/bash"
     ssh_authorized_keys:
-      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHuz17wgiGT9Ynz5R4FEdnAn4nhmg3HB/SOq42OBeaoN jeremy@host.local"
+      - "${ssh-public-key}"
     sudo: "ALL= (ALL) NOPASSWD"
 
 write_files:
-  - path: "/home/jeremy/.ssh/${filename}"
-    content: ${jsonencode(content)}
-    owner: "jeremy"
+  - path: "/home/${username}/.ssh/${ssh-private-key-filename}"
+    content: ${jsonencode(ssh-private-key)}
+    owner: "${username}"
     permissions: "0400"
     append: false
     defer: true
