@@ -7,7 +7,7 @@ locals {
 	docker-server-subnetwork-name	= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
 	
 	//Make sure these are set for this machine
-	docker-server-vm-name		= "docker-server-vm"
+	docker-server-vm-name		= "docker-server"
 	docker-server-network-ip		= "10.0.0.5"
 	docker-server-tags 		= ["docker-server","web-server"]
 	docker-server-disk-size-gb	= 25

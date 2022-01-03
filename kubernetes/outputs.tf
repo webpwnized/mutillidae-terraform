@@ -16,3 +16,11 @@ output "gke-cluster-services-ip-range" {
 	sensitive	= false
 }
 
+
+output "gke-cluster-name" {
+	value 	= google_container_cluster.gke_cluster.name
+	description	= "The GKE cluster name"
+	sensitive	= false
+}
+
+

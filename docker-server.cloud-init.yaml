@@ -16,7 +16,7 @@ groups:
 users:
     - name: "${username}"
       gecos: "${username}"
-      groups: docker
+      groups: "docker"
       homedir: "/home/${username}"
       primary_group: "${username}"
       shell: "/bin/bash"

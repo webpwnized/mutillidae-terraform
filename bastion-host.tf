@@ -7,7 +7,7 @@ locals {
 	bastion-host-subnetwork-name		= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
 	
 	//Make sure these are set for this machine
-	bastion-host-vm-name 			= "bastion-host-vm"
+	bastion-host-vm-name 			= "bastion-host"
 	bastion-host-network-ip			= "10.0.0.2"
 	bastion-host-tags 			= ["bastion-host"]
 	bastion-host-disk-size-gb		= 10
