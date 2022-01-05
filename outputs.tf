@@ -11,8 +11,3 @@ output "docker_server_ip_address" {
 	description	= "External-facing IP address of the web service exposed by the application on the docker server"
 }
 
-output "gke_cluster_name" {
-	value		= "${google_container_cluster.gke_cluster.name}"
-	description	= "The GKE cluster name. The name must be provided to kubectl to deploy containers onto the cluster"
-}
-
