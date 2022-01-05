@@ -1,5 +1,5 @@
 //module "kubernetes_module"{
-//	source	= "./kubernetes"
+//	source	= "./modules/kubernetes"
 //
 //	project			= var.project
 //	location		= var.zone
