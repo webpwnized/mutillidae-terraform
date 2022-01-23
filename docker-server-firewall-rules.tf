@@ -43,7 +43,7 @@ resource "google_compute_firewall" "allow-http-to-docker-server-from-internet" {
 	}
 
 	source_ranges	= var.admin-office-ip-address-range
-	target_tags	= ["docker-server"]
+	target_tags	= ["web-server"]
 	
 	log_config {
 		metadata	= "EXCLUDE_ALL_METADATA"
