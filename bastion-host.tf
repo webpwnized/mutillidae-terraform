@@ -9,7 +9,7 @@ locals {
 	//Make sure these are set for this machine
 	bastion-host-vm-name 			= "bastion-host"
 	bastion-host-network-ip			= "10.0.0.2"
-	bastion-host-tags 			= ["bastion-host"]
+	bastion-host-tags 			= ["bastion-host","iaas-host"]
 	bastion-host-disk-size-gb		= 10
 	bastion-host-description		= "A jump server to allow access to other IaaS on the ${local.bastion-host-subnetwork-name} subnet"
 	bastion-host-labels 			= "${merge(

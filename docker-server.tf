@@ -9,7 +9,7 @@ locals {
 	//Make sure these are set for this machine
 	docker-server-vm-name		= "docker-server"
 	docker-server-network-ip		= "10.0.0.5"
-	docker-server-tags 		= ["docker-server","web-server"]
+	docker-server-tags 		= ["docker-server","web-server","iaas-host"]
 	docker-server-disk-size-gb	= 25
 	docker-server-description		= "A docker server to run containers on the ${local.docker-server-subnetwork-name} subnet"
 
