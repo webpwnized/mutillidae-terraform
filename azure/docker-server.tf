@@ -12,9 +12,9 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	priority			= "Regular"
 	provision_vm_agent		= true
 	disable_password_authentication	= true
-	encryption_at_host_enabled	= true
-	secure_boot_enabled		= true
-	vtpm_enabled			= true
+	encryption_at_host_enabled	= false	//Not supported for base level subscriptions
+	secure_boot_enabled		= false //Not supported for Ubuntu 18.04-LTS image
+	vtpm_enabled			= false //Not supported for Ubuntu 18.04-LTS image
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.docker-server-internal-network-interface.id]
 	
@@ -23,7 +23,7 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	source_image_reference {
 		publisher = "Canonical"
 		offer     = "UbuntuServer"
-		sku       = "20.04-LTS"
+		sku       = "18.04-LTS"
 		version   = "latest"
 	}
 	
@@ -61,12 +61,12 @@ output "docker-server-tenant_id" {
 }
 
 output "docker-server-private-ip-addresses" {
-	value 		= "${local.docker-server-name} DNS Server: ${azurerm_linux_virtual_machine.docker-server.private_ip_addresses}"
+	value 		= "${jsonencode(azurerm_linux_virtual_machine.docker-server.private_ip_addresses)}"
 	description	= "A list of Private IP Addresses assigned to this Virtual Machine"
 }
 
 output "docker-server-public-ip-addresses" {
-	value 		= "${local.docker-server-name} DNS Server: ${azurerm_linux_virtual_machine.docker-server.public_ip_addresses}"
+	value 		= "${jsonencode(azurerm_linux_virtual_machine.docker-server.public_ip_addresses)}"
 	description	= "A list of Public IP Addresses assigned to this Virtual Machine"
 }
 

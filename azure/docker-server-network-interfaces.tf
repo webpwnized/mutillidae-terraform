@@ -1,5 +1,5 @@
 locals {
-	docker-server-internal-nic-name	= "docker-server-internal-network-interface-1}"
+	docker-server-internal-nic-name	= "docker-server-internal-network-interface-1"
 }
 
 resource "azurerm_network_interface" "docker-server-internal-network-interface" {
@@ -13,31 +13,31 @@ resource "azurerm_network_interface" "docker-server-internal-network-interface" 
 	
 	ip_configuration {
 		name                          	= "${local.docker-server-internal-nic-name}-ip-configuration"
-		//subnet_id                     	= azurerm_virtual_network.virtual-network.subnet.id
+		subnet_id                     	= azurerm_subnet.application-server-subnet.id
 		private_ip_address_allocation 	= "Static"
 		private_ip_address_version	= "IPv4"
 		primary				= true
-		private_ip_address		= "10.0.0.5"
+		private_ip_address		= "10.0.1.5"
 	}
 }
 
 output "docker-server-dns-server" {
-	value 		= "${local.docker-server-internal-nic-name} DNS Server: ${azurerm_network_interface.docker-server-internal-network-interface.applied_dns_servers}"
+	value 		= "${jsonencode(azurerm_network_interface.docker-server-internal-network-interface.applied_dns_servers)}"
 	description	= "The union of all DNS servers from all Network Interfaces"
 }
 
 output "docker-server-nic-internal-domain-name-suffix" {
-	value 		= "${local.docker-server-internal-nic-name} Internal Domain Name Suffix: ${azurerm_network_interface.docker-server-internal-network-interface.internal_domain_name_suffix}"
+	value 		= "${azurerm_network_interface.docker-server-internal-network-interface.internal_domain_name_suffix}"
 	description	= "The value of internal_domain_name_suffix"
 }
 
 output "docker-server-nic-mac-address" {
-	value 		= "${local.docker-server-internal-nic-name} MAC Address: ${azurerm_network_interface.docker-server-internal-network-interface.mac_address}"
+	value 		= "${azurerm_network_interface.docker-server-internal-network-interface.mac_address}"
 	description	= "The Media Access Control (MAC) Address of the Network Interface"
 }
 
 output "docker-server-nic-private-ip-address" {
-	value 		= "${local.docker-server-internal-nic-name} MAC Address: ${azurerm_network_interface.docker-server-internal-network-interface.private_ip_address}"
+	value 		= "${azurerm_network_interface.docker-server-internal-network-interface.private_ip_address}"
 	description	= "The first private IP address of the network interface"
 }
 
