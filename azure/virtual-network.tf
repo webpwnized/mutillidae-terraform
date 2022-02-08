@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "virtual-network" {
 
 	subnet {
 		name	= "iaas-subnet"
-		address_prefix	= "10.0.1.0/28"
+		address_prefix	= "10.0.0.0/28"
 		security_group	= "${azurerm_network_security_group.network-security-group.id}"
 	}
 }
