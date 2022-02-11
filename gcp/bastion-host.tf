@@ -19,7 +19,7 @@ locals {
 							}),
 							var.default-labels)
 						}"
-	bastion-host-cloud-init-config-file	= "bastion-host.cloud-init.yaml"
+	bastion-host-cloud-init-config-file	= "../cloud-init/bastion-host.cloud-init.yaml"
 }
 
 data "google_secret_manager_secret_version" "gcp_iaas_server_ssh_private_key" {

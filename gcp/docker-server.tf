@@ -20,7 +20,7 @@ locals {
 						}),
 						var.default-labels)
 					}"
-	docker-server-cloud-init-config-file	= "docker-server.cloud-init.yaml"
+	docker-server-cloud-init-config-file	= "../cloud-init/docker-server.cloud-init.yaml"
 }
 
 data "cloudinit_config" "docker_server_configuration" {
