@@ -5,10 +5,9 @@ resource "azurerm_public_ip" "bastion-host-public-ip" {
 	tags				= "${var.default-tags}"
 	sku				= "Basic"
 	sku_tier			= "Regional"
-	allocation_method		= "dynamic"	
-	availability_zone		= "Zone-Redundant"
+	allocation_method		= "Dynamic"	
 	ip_version			= "IPv4"
-	domain_name_label		= "bastion-host"	
+	domain_name_label		= "${local.bastion-host-name}-ext"
 }
 
 output "bastion-host-public-ip-address-id" {
