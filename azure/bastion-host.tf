@@ -1,5 +1,24 @@
 locals {
-	bastion-host-name	= "bastion-host"
+	bastion-host-name			= "bastion-host"
+	bastion-host-cloud-init-config-file	= "../cloud-init/bastion-host.cloud-init.yaml"
+}
+
+data "cloudinit_config" "bastion_host_configuration" {
+	gzip = false
+	base64_encode = false
+
+	part {
+		content_type = "text/cloud-config"
+		content = templatefile("${local.bastion-host-cloud-init-config-file}",
+			{
+				username			= "${var.gcp-ssh-username}"
+				//ssh-public-key			= "${file(var.gcp-ssh-public-key-file)}"
+				//ssh-private-key-filename	= "${var.gcp-ssh-private-key-secret}"
+				//ssh-private-key			= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
+			}
+		)
+		filename = "${local.bastion-host-cloud-init-config-file}"
+	}
 }
 
 resource "azurerm_linux_virtual_machine" "bastion-host" {
