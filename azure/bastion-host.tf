@@ -1,24 +1,6 @@
 locals {
 	bastion-host-name			= "bastion-host"
-	bastion-host-cloud-init-config-file	= "../cloud-init/bastion-host.cloud-init.yaml"
-}
-
-data "cloudinit_config" "bastion_host_configuration" {
-	gzip = false
-	base64_encode = false
-
-	part {
-		content_type = "text/cloud-config"
-		content = templatefile("${local.bastion-host-cloud-init-config-file}",
-			{
-				username			= "${var.gcp-ssh-username}"
-				//ssh-public-key			= "${file(var.gcp-ssh-public-key-file)}"
-				//ssh-private-key-filename	= "${var.gcp-ssh-private-key-secret}"
-				//ssh-private-key			= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
-			}
-		)
-		filename = "${local.bastion-host-cloud-init-config-file}"
-	}
+	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.cloud-init.yaml"
 }
 
 resource "azurerm_linux_virtual_machine" "bastion-host" {
@@ -37,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.bastion-host-internal-network-interface-1.id]
 	
-	user_data			= filebase64("../gcp/bastion-host.cloud-init.yaml")
+	//user_data			= filebase64("${local.bastion-host-cloud-init-config-file}")
 	
 	source_image_reference {
 		publisher = "Canonical"
@@ -54,10 +36,10 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 		//disk_size_gb			= "20"
 	}
 	
-	admin_username		= "jeremy"
+	admin_username		= "${var.ssh-username}"
 	admin_ssh_key {
-		username	= "jeremy"
-		public_key	= file("/home/jeremy/.ssh/azure-cloud-ssh-key.pub")
+		username	= "${var.ssh-username}"
+		public_key	= file("${var.ssh-public-key-file}")
 	}
 	
 	additional_capabilities {

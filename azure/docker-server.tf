@@ -1,5 +1,6 @@
 locals {
 	docker-server-name	= "docker-server"
+	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
 }
 
 resource "azurerm_linux_virtual_machine" "docker-server" {
@@ -18,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.docker-server-internal-network-interface-1.id]
 	
-	user_data			= filebase64("../gcp/docker-server.cloud-init.yaml")
+	user_data			= filebase64("./cloud-init/docker-server.yaml")
 	
 	source_image_reference {
 		publisher = "Canonical"
@@ -35,10 +36,10 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 		//disk_size_gb			= "20"
 	}
 	
-	admin_username		= "jeremy"
+	admin_username		= "${var.ssh-username}"
 	admin_ssh_key {
-		username	= "jeremy"
-		public_key	= file("/home/jeremy/.ssh/azure-cloud-ssh-key.pub")
+		username	= "${var.ssh-username}"
+		public_key	= file("${var.ssh-public-key-file}")
 	}
 	
 	additional_capabilities {
