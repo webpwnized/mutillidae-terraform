@@ -13,11 +13,12 @@ resource "azurerm_network_interface" "bastion-host-internal-network-interface-1"
 	
 	ip_configuration {
 		name                          	= "${local.bastion-host-internal-nic-name}-ip-configuration"
-		subnet_id                     	= azurerm_subnet.bastion-host-subnet.id
+		subnet_id                     	= "${azurerm_subnet.bastion-host-subnet.id}"
 		private_ip_address_allocation 	= "Static"
 		private_ip_address_version	= "IPv4"
 		primary				= true
 		private_ip_address		= "10.0.1.5"
+		public_ip_address_id		= "${azurerm_public_ip.bastion-host-public-ip.id}"
 	}
 }
 
