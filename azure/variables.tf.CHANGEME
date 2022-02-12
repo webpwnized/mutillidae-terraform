@@ -1,0 +1,74 @@
+
+//########################################################################
+//	These variables must be set
+//	Rename this file to variables.tf when finished
+//########################################################################
+
+variable "project-name" {
+	type 		= string
+	default 	= "<project>"
+	description	= "The project in which the assets will be built"
+}
+
+variable "ssh-username" {
+	type 		= string
+	default 	= "<username>"
+	description	= "The linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "ssh-public-key-file" {
+	type 		= string
+	default 	= "<public key file>"
+	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "default-tags" { 
+	type = map(string)
+	default = {
+		owner: "<owner>",
+		environment: "<env>",
+		application: "mutillidae"
+	}
+	description	= "The labels that will be applied to the IaaS assets"
+}
+
+variable "admin-office-ip-address-range" {
+	type = list(string)
+	default = ["<ip address>/32"]
+	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
+}
+
+//########################################################################
+//	The default value of these varaibles may be used or changed
+//########################################################################
+
+variable "location" {
+	type = string
+	default = "eastus"
+	description = "East US"
+}
+
+variable "ssh-port" {
+	type = string
+	default = "22"
+}
+
+variable "http-port" {
+	type = string
+	default = "80"
+}
+
+variable "mysql-admin-http-port" {
+	type = string
+	default = "81"
+}
+
+variable "ldap-admin-http-port" {
+	type = string
+	default = "82"
+}
+
+variable "https-port" {
+	type = string
+	default = "443"
+}
