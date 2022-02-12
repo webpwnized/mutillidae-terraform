@@ -1,6 +1,6 @@
 locals {
 	bastion-host-name			= "bastion-host"
-	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.cloud-init.yaml"
+	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"
 }
 
 resource "azurerm_linux_virtual_machine" "bastion-host" {
@@ -33,7 +33,6 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 		caching				= "ReadWrite"
 		storage_account_type		= "Standard_LRS"
 		write_accelerator_enabled	= false
-		//disk_size_gb			= "20"
 	}
 	
 	admin_username		= "${var.ssh-username}"

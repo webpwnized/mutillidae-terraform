@@ -1,6 +1,22 @@
 locals {
-	docker-server-name	= "docker-server"
+	docker-server-name			= "docker-server"
 	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
+}
+
+data "cloudinit_config" "docker_server_configuration" {
+	gzip = false
+	base64_encode = false
+
+	part {
+		content_type = "text/cloud-config"
+		content = templatefile("${local.docker-server-cloud-init-config-file}",
+			{
+				username	= "${var.ssh-username}"
+				ssh-public-key	= "${file(var.ssh-public-key-file)}"
+			}
+		)
+		filename = "${local.docker-server-cloud-init-config-file}"
+	}
 }
 
 resource "azurerm_linux_virtual_machine" "docker-server" {
@@ -18,9 +34,9 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	vtpm_enabled			= false //Not supported for Ubuntu 18.04-LTS image
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.docker-server-internal-network-interface-1.id]
-	
-	user_data			= filebase64("./cloud-init/docker-server.yaml")
-	
+
+	user_data			= "${data.cloudinit_config.docker_server_configuration.rendered}"
+
 	source_image_reference {
 		publisher = "Canonical"
 		offer     = "UbuntuServer"
