@@ -24,7 +24,7 @@ locals {
 
 data "google_secret_manager_secret_version" "gcp_iaas_server_ssh_private_key" {
 	project		= "${local.bastion-host-project}"
-	secret 		= "${var.gcp-ssh-private-key-secret}"
+	secret 		= "${var.ssh-private-key-secret}"
 	version		= "1"
 }
 
@@ -36,9 +36,9 @@ data "cloudinit_config" "bastion_host_configuration" {
 		content_type = "text/cloud-config"
 		content = templatefile("${local.bastion-host-cloud-init-config-file}",
 			{
-				username			= "${var.gcp-ssh-username}"
-				ssh-public-key			= "${file(var.gcp-ssh-public-key-file)}"
-				ssh-private-key-filename	= "${var.gcp-ssh-private-key-secret}"
+				username			= "${var.ssh-username}"
+				ssh-public-key			= "${file(var.ssh-public-key-file)}"
+				ssh-private-key-filename	= "${var.ssh-private-key-secret}"
 				ssh-private-key			= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
 			}
 		)
@@ -79,7 +79,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${var.gcp-ssh-username}:${file(var.gcp-ssh-public-key-file)}"
+		ssh-keys = "${var.ssh-username}:${file(var.ssh-public-key-file)}"
 		startup-script	= "${var.vm-metadata-startup-script}"
 		user-data = "${data.cloudinit_config.bastion_host_configuration.rendered}"
  	}	

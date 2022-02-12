@@ -31,8 +31,8 @@ data "cloudinit_config" "docker_server_configuration" {
 		content_type = "text/cloud-config"
 		content = templatefile("${local.docker-server-cloud-init-config-file}",
 			{
-				username	= "${var.gcp-ssh-username}"
-				ssh-public-key	= "${file(var.gcp-ssh-public-key-file)}"
+				username	= "${var.ssh-username}"
+				ssh-public-key	= "${file(var.ssh-public-key-file)}"
 			}
 		)
 		filename = "${local.docker-server-cloud-init-config-file}"
@@ -75,9 +75,19 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${var.gcp-ssh-username}:${file(var.gcp-ssh-public-key-file)}"
+		ssh-keys = "${var.ssh-username}:${file(var.ssh-public-key-file)}"
 		startup-script	= "${var.vm-metadata-startup-script}"
 		user-data = "${data.cloudinit_config.docker_server_configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_server"
+
+output "docker-server-internal-ip-address" {
+	value 		= "${google_compute_instance.gcp_instance_docker_server.network_interface.0.network_ip}"
+	description	= "The IP Addresses assigned to this Virtual Machine"
+}
+
+output "docker-server-external-ip-address" {
+	value 		= "${google_compute_instance.gcp_instance_docker_server.network_interface.0.access_config.0.nat_ip}"
+	description	= "The IP Addresses assigned to this Virtual Machine"
+}
 

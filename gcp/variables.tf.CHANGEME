@@ -16,19 +16,19 @@ variable "terraform-credentials-file" {
 	description	= "The GCP service account that Terraform will use to authenticate to the project. Create a service account in GCP for Terraform to use. See https://cloud.google.com/community/tutorials/getting-started-on-gcp-with-terraform"
 }
 
-variable "gcp-ssh-username" {
+variable "ssh-username" {
 	type 		= string
 	default 	= "<username>"
 	description	= "The linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
 }
 
-variable "gcp-ssh-public-key-file" {
+variable "ssh-public-key-file" {
 	type 		= string
 	default 	= "<public key file>"
 	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
 }
 
-variable "gcp-ssh-private-key-secret" {
+variable "ssh-private-key-secret" {
 	type 		= string
 	default 	= "<name of GCP secret>"
 	description	= "The name of the GCP secret that stores the SSH private key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. Because the private key is sensitive, the private key must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
