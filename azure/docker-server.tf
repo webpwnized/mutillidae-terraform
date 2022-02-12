@@ -33,7 +33,7 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	secure_boot_enabled		= false //Not supported for Ubuntu 18.04-LTS image
 	vtpm_enabled			= false //Not supported for Ubuntu 18.04-LTS image
 	patch_mode			= "AutomaticByPlatform" 
-	network_interface_ids		= [azurerm_network_interface.docker-server-internal-network-interface-1.id]
+	network_interface_ids		= [azurerm_network_interface.docker-server-network-interface-1.id]
 
 	user_data			= "${data.cloudinit_config.docker_server_configuration.rendered}"
 

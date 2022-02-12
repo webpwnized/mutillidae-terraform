@@ -17,7 +17,7 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 	secure_boot_enabled		= false //Not supported for Ubuntu 18.04-LTS image
 	vtpm_enabled			= false //Not supported for Ubuntu 18.04-LTS image
 	patch_mode			= "AutomaticByPlatform" 
-	network_interface_ids		= [azurerm_network_interface.bastion-host-internal-network-interface-1.id]
+	network_interface_ids		= [azurerm_network_interface.bastion-host-network-interface-1.id]
 	
 	//user_data			= filebase64("${local.bastion-host-cloud-init-config-file}")
 	
