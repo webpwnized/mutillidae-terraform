@@ -1,9 +1,9 @@
 locals {
-	bastion-host-internal-nic-name	= "bastion-host-internal-network-interface-1"
+	bastion-host-nic-name	= "bastion-host-network-interface-1"
 }
 
-resource "azurerm_network_interface" "bastion-host-internal-network-interface-1" {
-	name                		= "${local.bastion-host-internal-nic-name}"
+resource "azurerm_network_interface" "bastion-host-network-interface-1" {
+	name                		= "${local.bastion-host-nic-name}"
 	location            		= "${azurerm_resource_group.resource-group.location}"
 	resource_group_name 		= "${azurerm_resource_group.resource-group.name}"
 	enable_ip_forwarding		= false
@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "bastion-host-internal-network-interface-1"
 	tags				= "${var.default-tags}"
 	
 	ip_configuration {
-		name                          	= "${local.bastion-host-internal-nic-name}-ip-configuration"
+		name                          	= "${local.bastion-host-nic-name}-ip-configuration"
 		subnet_id                     	= "${azurerm_subnet.bastion-host-subnet.id}"
 		private_ip_address_allocation 	= "Static"
 		private_ip_address_version	= "IPv4"
@@ -23,22 +23,22 @@ resource "azurerm_network_interface" "bastion-host-internal-network-interface-1"
 }
 
 output "bastion-host-dns-server" {
-	value 		= "${jsonencode(azurerm_network_interface.bastion-host-internal-network-interface-1.applied_dns_servers)}"
+	value 		= "${jsonencode(azurerm_network_interface.bastion-host-network-interface-1.applied_dns_servers)}"
 	description	= "The union of all DNS servers from all Network Interfaces"
 }
 
 output "bastion-host-nic-internal-domain-name-suffix" {
-	value 		= "${azurerm_network_interface.bastion-host-internal-network-interface-1.internal_domain_name_suffix}"
+	value 		= "${azurerm_network_interface.bastion-host-network-interface-1.internal_domain_name_suffix}"
 	description	= "The value of internal_domain_name_suffix"
 }
 
 output "bastion-host-nic-mac-address" {
-	value 		= "${azurerm_network_interface.bastion-host-internal-network-interface-1.mac_address}"
+	value 		= "${azurerm_network_interface.bastion-host-network-interface-1.mac_address}"
 	description	= "The Media Access Control (MAC) Address of the Network Interface"
 }
 
 output "bastion-host-nic-private-ip-address" {
-	value 		= "${azurerm_network_interface.bastion-host-internal-network-interface-1.private_ip_address}"
+	value 		= "${azurerm_network_interface.bastion-host-network-interface-1.private_ip_address}"
 	description	= "The first private IP address of the network interface"
 }
 
