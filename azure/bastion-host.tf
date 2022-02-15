@@ -3,6 +3,32 @@ locals {
 	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"
 }
 
+data "azurerm_key_vault" "iaas-ssh-keys" {
+	name                = "iaas-ssh-keys"
+	resource_group_name = "key-vault-resource-group"
+}
+
+data "azurerm_key_vault_secret" "azure-cloud-ssh-key" {
+	name         = "azure-cloud-ssh-key"
+	key_vault_id = data.azurerm_key_vault.iaas-ssh-keys.id
+}
+
+data "cloudinit_config" "bastion-host-configuration" {
+	gzip = false
+	base64_encode = true
+
+	part {
+		content_type = "text/cloud-config"
+		content = templatefile("${local.bastion-host-cloud-init-config-file}",
+			{
+				username			= "${var.ssh-username}"
+				ssh-private-key-filename	= "${var.ssh-private-key-filename}"
+				ssh-private-key 		= "${data.azurerm_key_vault_secret.azure-cloud-ssh-key.value}"
+			}
+		)
+	}
+}
+
 resource "azurerm_linux_virtual_machine" "bastion-host" {
 	name                		= "${local.bastion-host-name}"
 	location            		= "${azurerm_resource_group.resource-group.location}"
@@ -19,8 +45,8 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.bastion-host-network-interface-1.id]
 	
-	//user_data			= filebase64("${local.bastion-host-cloud-init-config-file}")
-	
+	custom_data			= "${data.cloudinit_config.bastion-host-configuration.rendered}"
+		
 	source_image_reference {
 		publisher = "Canonical"
 		offer     = "UbuntuServer"
@@ -69,4 +95,3 @@ output "bastion-host-public-ip-addresses" {
 	value 		= "${jsonencode(azurerm_linux_virtual_machine.bastion-host.public_ip_addresses)}"
 	description	= "A list of Public IP Addresses assigned to this Virtual Machine"
 }
-

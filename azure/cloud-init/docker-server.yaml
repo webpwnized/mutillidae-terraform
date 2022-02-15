@@ -1,4 +1,3 @@
-#cloud-config
 
 # install docker
 packages:
@@ -11,18 +10,6 @@ package_reboot_if_required: true
 # create the docker group and add user ${username}
 groups: 
   - docker
-  
-# create user ${username}
-users:
-    - name: "${username}"
-      gecos: "${username}"
-      groups: "docker"
-      homedir: "/home/${username}"
-      primary_group: "${username}"
-      shell: "/bin/bash"
-      ssh_authorized_keys:
-          - "${ssh-public-key}"
-      sudo: "ALL= (ALL) NOPASSWD"
 
 runcmd:
   - git clone https://github.com/webpwnized/mutillidae-dockerhub.git /home/${username}/mutillidae-dockerhub

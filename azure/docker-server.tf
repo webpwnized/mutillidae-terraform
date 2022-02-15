@@ -3,7 +3,7 @@ locals {
 	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
 }
 
-data "cloudinit_config" "docker_server_configuration" {
+data "cloudinit_config" "docker-server-configuration" {
 	gzip = false
 	base64_encode = true
 
@@ -12,10 +12,8 @@ data "cloudinit_config" "docker_server_configuration" {
 		content = templatefile("${local.docker-server-cloud-init-config-file}",
 			{
 				username	= "${var.ssh-username}"
-				ssh-public-key	= "${file(var.ssh-public-key-file)}"
 			}
 		)
-		filename = "${local.docker-server-cloud-init-config-file}"
 	}
 }
 
@@ -35,8 +33,8 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	patch_mode			= "AutomaticByPlatform" 
 	network_interface_ids		= [azurerm_network_interface.docker-server-network-interface-1.id]
 
-	user_data			= "${data.cloudinit_config.docker_server_configuration.rendered}"
-
+	custom_data			= "${data.cloudinit_config.docker-server-configuration.rendered}"
+	
 	source_image_reference {
 		publisher = "Canonical"
 		offer     = "UbuntuServer"

@@ -1,16 +1,5 @@
-#cloud-config
-  
-# create user ${username}
-users:
-  - name: "${username}"
-    gecos: "${username}"
-    homedir: "/home/${username}"
-    primary_group: "${username}"
-    shell: "/bin/bash"
-    ssh_authorized_keys:
-      - "${ssh-public-key}"
-    sudo: "ALL= (ALL) NOPASSWD"
 
+# write private key to file in .ssh directory and set permissions
 write_files:
   - path: "/home/${username}/.ssh/${ssh-private-key-filename}"
     content: ${jsonencode(ssh-private-key)}
