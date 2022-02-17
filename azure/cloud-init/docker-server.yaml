@@ -9,7 +9,7 @@ package_reboot_if_required: true
 
 # create the docker group and add user ${username}
 groups: 
-  - docker
+  - docker: [${username}]
 
 runcmd:
   - git clone https://github.com/webpwnized/mutillidae-dockerhub.git /home/${username}/mutillidae-dockerhub
