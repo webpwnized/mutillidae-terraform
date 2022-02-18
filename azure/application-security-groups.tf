@@ -11,3 +11,11 @@ resource "azurerm_application_security_group" "application-servers-application-s
 	location		= "${azurerm_resource_group.resource-group.location}"
 	tags			= "${var.default-tags}"
 }
+
+resource "azurerm_application_security_group" "application-gateway-application-security-group" {
+	name			= "application-gateway-application-security-group"
+	resource_group_name	= "${azurerm_resource_group.resource-group.name}"
+	location		= "${azurerm_resource_group.resource-group.location}"
+	tags			= "${var.default-tags}"
+}
+

@@ -7,11 +7,12 @@ package_update: true
 package_upgrade: true
 package_reboot_if_required: true
 
-# create the docker group and add user ${username}
+# create the docker group
 groups: 
-  - docker: [${username}]
+  - docker
 
 runcmd:
+  - usermod -a -G docker ${username}
   - git clone https://github.com/webpwnized/mutillidae-dockerhub.git /home/${username}/mutillidae-dockerhub
   - sed -i 's/127.0.0.1://g' /home/${username}/mutillidae-dockerhub/docker-compose.yml
   - chown -R ${username}:${username} /home/${username}/mutillidae-dockerhub
