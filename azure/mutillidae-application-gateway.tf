@@ -11,8 +11,8 @@ locals {
 
 resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 	name			= "mutillidae-application-gateway"
-	location		= "${azurerm-resource-group.resource-group.location}"
-	resource-group-name 	= "${azurerm-resource-group.resource-group.name}"
+	location		= "${azurerm_resource_group.resource-group.location}"
+	resource_group_name 	= "${azurerm_resource_group.resource-group.name}"
 	tags			= "${var.default-tags}"
 	fips_enabled		= false
 
@@ -29,20 +29,20 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 		port	= "80"
 	}
 	
-	backend-address-pool {
+	backend_address_pool {
 		name		= "${local.mutillidae-backend-address-pool-name}"
-		ip-adressesses	= ["${azurerm-linux-virtual-machine.bastion-host.private-ip-address}"]
+		ip_addresses	= ["${azurerm_linux_virtual_machine.bastion-host.private_ip_address}"]
 	}
 	
-	backend-http-settings {
+	backend_http_settings {
 		name			= "${local.mutillidae-backend-http-setting-name}"
-		cookie-based-affinity	= "Disabled"
+		cookie_based_affinity	= "Disabled"
 		path			= "/*"
 		port			= "${var.http-port}"
 		protocol		= "Http"
-		request-timeout		= 60
+		request_timeout		= 60
 		connection_draining {
-			enabled			= "True"
+			enabled			= "true"
 			drain_timeout_sec	= 60
 		}
 	}
@@ -59,6 +59,20 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 		protocol			= "Http"
 		require_sni			= false
 		firewall_policy_id		= "${azurerm_firewall_policy.mutillidae-application-firewall-policy.id}"
+	}
+	
+	request_routing_rule {
+		name				= "${local.mutillidae-request-routing-rule-name}"
+		rule_type			= "Basic"
+		http_listener_name		= "${local.mutillidae-http-listener-name}"
+		backend_address_pool_name	= "${local.mutillidae-backend-address-pool-name}"
+		backend_http_settings_name	= "${local.mutillidae-backend-http-setting-name}"
+	}
+
+	sku {
+		name		= "WAF_Medium"
+		tier		= "WAF"
+		capacity	= 1
 	}
 
 }

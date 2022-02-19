@@ -91,11 +91,6 @@ output "bastion-host-private-ip-address" {
 	description	= "The Private IP Address assigned to this Virtual Machine"
 }
 
-output "bastion-host-public-ip-address" {
-	value 		= "${azurerm_linux_virtual_machine.bastion-host.public_ip_address}"
-	description	= "The Public IP Address assigned to this Virtual Machine"
-}
-
 output "bastion-host-private-ip-addresses" {
 	value 		= "${jsonencode(azurerm_linux_virtual_machine.bastion-host.private_ip_addresses)}"
 	description	= "A list of Private IP Addresses assigned to this Virtual Machine"
