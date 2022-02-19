@@ -86,6 +86,16 @@ output "bastion-host-tenant_id" {
 	description	= "The ID of the Tenant the System Managed Service Principal is assigned in"
 }
 
+output "bastion-host-private-ip-address" {
+	value 		= "${azurerm_linux_virtual_machine.bastion-host.private_ip_address}"
+	description	= "The Private IP Address assigned to this Virtual Machine"
+}
+
+output "bastion-host-public-ip-address" {
+	value 		= "${azurerm_linux_virtual_machine.bastion-host.public_ip_address}"
+	description	= "The Public IP Address assigned to this Virtual Machine"
+}
+
 output "bastion-host-private-ip-addresses" {
 	value 		= "${jsonencode(azurerm_linux_virtual_machine.bastion-host.private_ip_addresses)}"
 	description	= "A list of Private IP Addresses assigned to this Virtual Machine"
