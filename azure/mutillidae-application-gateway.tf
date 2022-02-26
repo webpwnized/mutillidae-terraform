@@ -17,10 +17,14 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 	fips_enabled		= false
 
 	frontend_ip_configuration {
-		name		= "${local.mutillidae-frontend-ip-configuration-name}"
+		name		= "${local.mutillidae-frontend-ip-configuration-name}-private-ip"
 		subnet_id	= "${azurerm_subnet.application-gateway-subnet.id}"
 		private_ip_address	= "10.0.3.5"
 		private_ip_address_allocation	= "Static"
+	}
+
+	frontend_ip_configuration {
+		name		= "${local.mutillidae-frontend-ip-configuration-name}-public-ip"
 		public_ip_address_id	= "${azurerm_public_ip.mutillidae-application-public-ip.id}"
 	}
 
@@ -58,7 +62,7 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 		frontend_port_name		= "${local.mutillidae-frontend-port-name}"
 		protocol			= "Http"
 		require_sni			= false
-		firewall_policy_id		= "${azurerm_firewall_policy.mutillidae-application-firewall-policy.id}"
+		firewall_policy_id		= "${azurerm_web_application_firewall_policy.web-application-firewall-policy.id}"
 	}
 	
 	request_routing_rule {
@@ -70,10 +74,9 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 	}
 
 	sku {
-		name		= "WAF_Medium"
-		tier		= "WAF"
+		name		= "WAF_v2"
+		tier		= "WAF_v2"
 		capacity	= 1
 	}
-
 }
 

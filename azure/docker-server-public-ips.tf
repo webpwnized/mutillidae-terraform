@@ -16,6 +16,8 @@ output "mutillidae-application-public-ip-address-id" {
 	description	= "The Public IP ID"
 }
 
+###############################################################################################
+
 output "mutillidae-application-public-ip-address" {
 	value 		= "${azurerm_public_ip.mutillidae-application-public-ip.ip_address}"
 	description	= "The IP address value that was allocated"
@@ -25,6 +27,8 @@ output "mutillidae-application-public-ip-address-fqdn" {
 	value 		= "${azurerm_public_ip.mutillidae-application-public-ip.fqdn}"
 	description	= "Fully qualified domain name of the A DNS record associated with the public IP"
 }
+
+###############################################################################################
 
 resource "azurerm_public_ip" "mysql-admin-application-public-ip" {
 	name				= "mysql-admin-application-public-ip"
