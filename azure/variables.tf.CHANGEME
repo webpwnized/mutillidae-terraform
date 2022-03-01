@@ -60,6 +60,11 @@ variable "location" {
 	description = "East US"
 }
 
+variable "azure-load-balancer-health-probe-ip-address" {
+	type = string
+	default = "168.63.129.16"
+}
+
 variable "ssh-port" {
 	type = string
 	default = "22"
