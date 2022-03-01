@@ -10,6 +10,16 @@ variable "project-name" {
 	description	= "The project in which the assets will be built"
 }
 
+variable "default-tags" { 
+	type = map(string)
+	default = {
+		owner: "<owner>",
+		environment: "<env>",
+		application: "mutillidae"
+	}
+	description	= "The labels that will be applied to the IaaS assets"
+}
+
 variable "ssh-username" {
 	type 		= string
 	default 	= "<username>"
@@ -22,14 +32,16 @@ variable "ssh-public-key-file" {
 	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
 }
 
-variable "default-tags" { 
-	type = map(string)
-	default = {
-		owner: "<owner>",
-		environment: "<env>",
-		application: "mutillidae"
-	}
-	description	= "The labels that will be applied to the IaaS assets"
+variable "ssh-private-key-filename" {
+	type 		= string
+	default 	= "<name of private key file>"
+	description	= "The SSH private key fileame you will use to authenticate to the IaaS hosts"
+}
+
+variable "ssh-private-key-file" {
+	type 		= string
+	default 	= "<path to private key file>/<name of private key file>""
+	description	= "The SSH private key you will use to authenticate to the IaaS hosts"
 }
 
 variable "admin-office-ip-address-range" {
@@ -72,3 +84,19 @@ variable "https-port" {
 	type = string
 	default = "443"
 }
+
+variable "mutillidae-application-name" {
+	type = string
+	default = "mutillidae"
+}
+
+variable "mysql-admin-application-name" {
+	type = string
+	default = "mysql-admin"
+}
+
+variable "ldap-admin-application-name" {
+	type = string
+	default = "ldap-admin"
+}
+

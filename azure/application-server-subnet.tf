@@ -8,11 +8,6 @@ resource "azurerm_subnet" "application-server-subnet" {
 	address_prefixes				= ["10.0.2.0/28"]
 }
 
-output "application-server-subnet-id" {
-	value		= "${azurerm_subnet.application-server-subnet.id}"
-	description	= "The name of the subnet"
-}
-
 output "application-server-subnet-address-prefixes" {
 	value 		= "${jsonencode(azurerm_subnet.application-server-subnet.address_prefixes)}"
 	description	= "The address prefixes for the subnet"

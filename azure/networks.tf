@@ -5,3 +5,13 @@ resource "azurerm_virtual_network" "virtual-network" {
 	location            	= "${azurerm_resource_group.resource-group.location}"
 	tags			= "${var.default-tags}"
 }
+
+output "virtual-network-address-space" {
+	value		= "${azurerm_virtual_network.virtual-network.address_space}"
+	description	= "The list of address spaces used by the virtual network"
+}
+
+output "virtual-network-subnet" {
+	value		= "${jsonencode(azurerm_virtual_network.virtual-network.subnet)}"
+	description	= "Subnet blocks"
+}

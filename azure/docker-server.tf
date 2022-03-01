@@ -61,20 +61,6 @@ resource "azurerm_linux_virtual_machine" "docker-server" {
 	}
 }
 
-output "docker-server-principal_id" {
-	value = flatten([
-		for identity in azurerm_linux_virtual_machine.docker-server[*].identity : identity[*].principal_id
-	])
-	description	= "The ID of the System Managed Service Principal"
-}
-
-output "docker-server-tenant_id" {
-	value = flatten([
-		for identity in azurerm_linux_virtual_machine.docker-server[*].identity : identity[*].tenant_id
-	])
-	description	= "The ID of the Tenant the System Managed Service Principal is assigned in"
-}
-
 output "docker-server-private-ip-addresses" {
 	value 		= "${jsonencode(azurerm_linux_virtual_machine.docker-server.private_ip_addresses)}"
 	description	= "A list of Private IP Addresses assigned to this Virtual Machine"

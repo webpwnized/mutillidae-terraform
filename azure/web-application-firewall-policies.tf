@@ -14,7 +14,3 @@ resource "azurerm_web_application_firewall_policy" "web-application-firewall-pol
 	}
 }
 
-output "web-application-firewall-policy-id" {
-	value		= "${azurerm_web_application_firewall_policy.web-application-firewall-policy.id}"
-	description	= "The ID of the Web Application Firewall Policy"
-}

@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/public_ip
+
 resource "azurerm_public_ip" "bastion-host-public-ip" {
 	name				= "bastion-host-public-ip"
 	location            		= "${azurerm_resource_group.resource-group.location}"
@@ -8,11 +11,6 @@ resource "azurerm_public_ip" "bastion-host-public-ip" {
 	allocation_method		= "Dynamic"	
 	ip_version			= "IPv4"
 	domain_name_label		= "${local.bastion-host-name}-ext"
-}
-
-output "bastion-host-public-ip-address-id" {
-	value 		= "${azurerm_public_ip.bastion-host-public-ip.id}"
-	description	= "The Public IP ID"
 }
 
 output "bastion-host-public-ip-address" {

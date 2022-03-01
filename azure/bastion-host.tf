@@ -72,20 +72,6 @@ resource "azurerm_linux_virtual_machine" "bastion-host" {
 	}
 }
 
-output "bastion-host-principal_id" {
-	value = flatten([
-		for identity in azurerm_linux_virtual_machine.bastion-host[*].identity : identity[*].principal_id
-	])
-	description	= "The ID of the System Managed Service Principal"
-}
-
-output "bastion-host-tenant_id" {
-	value = flatten([
-		for identity in azurerm_linux_virtual_machine.bastion-host[*].identity : identity[*].tenant_id
-	])
-	description	= "The ID of the Tenant the System Managed Service Principal is assigned in"
-}
-
 output "bastion-host-private-ip-address" {
 	value 		= "${azurerm_linux_virtual_machine.bastion-host.private_ip_address}"
 	description	= "The Private IP Address assigned to this Virtual Machine"
