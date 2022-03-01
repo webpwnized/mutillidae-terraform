@@ -85,6 +85,11 @@ variable "https-port" {
 	default = "443"
 }
 
+variable "azure-gateway-manager-port-range" {
+	type = string
+	default = "65200-65535"
+}
+
 variable "mutillidae-application-name" {
 	type = string
 	default = "mutillidae"
