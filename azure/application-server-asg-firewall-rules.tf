@@ -73,4 +73,3 @@ resource "azurerm_network_security_rule" "inbound-deny-all-to-application-securi
 	destination_application_security_group_ids	= ["${azurerm_application_security_group.application-servers-application-security-group.id}"]
 	destination_port_range				= "*"
 }
-
