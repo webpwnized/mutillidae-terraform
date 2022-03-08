@@ -5,7 +5,7 @@ resource "azurerm_subnet" "bastion-host-subnet" {
 	
 	enforce_private_link_endpoint_network_policies	= true
 	enforce_private_link_service_network_policies	= true
-	address_prefixes				= ["10.0.1.0/28"]
+	address_prefixes				= ["${var.bastion-host-subnet-range}"]
 }
 
 output "bastion-host-subnet-address-prefixes" {

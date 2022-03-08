@@ -5,7 +5,7 @@ resource "azurerm_subnet" "application-server-subnet" {
 	
 	enforce_private_link_endpoint_network_policies	= true
 	enforce_private_link_service_network_policies	= true
-	address_prefixes				= ["10.0.2.0/28"]
+	address_prefixes				= ["${var.application-server-subnet-range}"]
 }
 
 output "application-server-subnet-address-prefixes" {

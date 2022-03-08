@@ -43,7 +43,7 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 	backend_http_settings {
 		name			= "${local.mutillidae-backend-http-setting-name}"
 		cookie_based_affinity	= "Disabled"
-		path			= "/*"
+		path			= "/"
 		port			= "${var.http-port}"
 		protocol		= "Http"
 		request_timeout		= 60

@@ -60,9 +60,34 @@ variable "location" {
 	description = "East US"
 }
 
-variable "azure-load-balancer-health-probe-ip-address" {
+variable "mutillidae-application-name" {
 	type = string
-	default = "168.63.129.16"
+	default = "mutillidae"
+}
+
+variable "mysql-admin-application-name" {
+	type = string
+	default = "mysql-admin"
+}
+
+variable "ldap-admin-application-name" {
+	type = string
+	default = "ldap-admin"
+}
+
+variable "bastion-host-subnet-range" {
+	type = string
+	default = "10.0.1.0/28"
+}
+
+variable "application-server-subnet-range" {
+	type = string
+	default = "10.0.2.0/28"
+}
+
+variable "application-gateway-subnet-range" {
+	type = string
+	default = "10.0.3.0/28"
 }
 
 variable "ssh-port" {
@@ -90,23 +115,14 @@ variable "https-port" {
 	default = "443"
 }
 
+variable "azure-load-balancer-health-probe-ip-address" {
+	type = string
+	default = "168.63.129.16"
+}
+
 variable "azure-gateway-manager-port-range" {
 	type = string
 	default = "65200-65535"
 }
 
-variable "mutillidae-application-name" {
-	type = string
-	default = "mutillidae"
-}
-
-variable "mysql-admin-application-name" {
-	type = string
-	default = "mysql-admin"
-}
-
-variable "ldap-admin-application-name" {
-	type = string
-	default = "ldap-admin"
-}
 

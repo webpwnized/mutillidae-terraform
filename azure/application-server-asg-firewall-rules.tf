@@ -29,16 +29,16 @@ resource "azurerm_network_security_rule" "inbound-allow-icmp-bastion-hosts-asg-t
 	destination_port_range				= "*"
 }
 
-resource "azurerm_network_security_rule" "inbound-allow-http-application-gateway-asg-to-application-server-asg" {
-	name						= "inbound-allow-http-application-gateway-asg-to-application-server-asg"
-	description					= "Allow HTTP from Application Gateway ASG to App Server ASG"
+resource "azurerm_network_security_rule" "inbound-allow-http-application-gateway-to-application-server-asg" {
+	name						= "inbound-allow-http-application-gateway-to-application-server-asg"
+	description					= "Allow HTTP from Application Gateway to App Server ASG"
 	resource_group_name 				= "${azurerm_resource_group.resource-group.name}"
 	network_security_group_name			= "${azurerm_network_security_group.network-security-group.name}"
 	priority					= "112"
 	access						= "Allow"
 	direction					= "Inbound"
 	protocol					= "TCP"
-	source_application_security_group_ids	= ["${azurerm_application_security_group.application-gateway-application-security-group.id}"]
+	source_address_prefix				= "GatewayManager"
 	source_port_range				= "*"
 	destination_application_security_group_ids	= ["${azurerm_application_security_group.application-servers-application-security-group.id}"]
 	destination_port_ranges				= ["${var.http-port}","${var.mysql-admin-http-port}","${var.ldap-admin-http-port}","${var.https-port}"]	
