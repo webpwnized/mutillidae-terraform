@@ -8,6 +8,7 @@ locals {
 	mutillidae-http-listener-name		= "${var.mutillidae-application-name}-http-listener-name"
 	mutillidae-request-routing-rule-name	= "${var.mutillidae-application-name}-request-routing-rule-name"
 	mutillidae-redirect-configuration-name	= "${var.mutillidae-application-name}-redirect-configuration-name"
+	mutillidae-gateway-private-ip-address	= "10.0.3.5"
 }
 
 resource "azurerm_application_gateway" "mutillidae-application-gateway" {
@@ -21,7 +22,7 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 	frontend_ip_configuration {
 		name		= "${local.mutillidae-private-frontend-ip-configuration-name}"
 		subnet_id	= "${azurerm_subnet.application-gateway-subnet.id}"
-		private_ip_address	= "10.0.3.5"
+		private_ip_address	= "${local.mutillidae-gateway-private-ip-address}"
 		private_ip_address_allocation	= "Static"
 	}
 
@@ -80,69 +81,3 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 		capacity	= 1
 	}
 }
-
-output "mutillidae-application-gateway-backend-address-pool" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.backend_address_pool)}"
-	description	= "The backend_address_pool"
-}
-
-output "mutillidae-application-gateway-backend-http-settings" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.backend_http_settings)}"
-	description	= "A list of backend_http_settings blocks"
-}
-
-output "mutillidae-application-gateway-frontend-ip-configuration" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.frontend_ip_configuration)}"
-	description	= "A list of frontend_ip_configuration blocks"
-}
-
-output "mutillidae-application-gateway-frontend-port" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.frontend_port)}"
-	description	= "A list of frontend_port blocks"
-}
-
-output "mutillidae-application-gateway-gateway-ip-configuration" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.gateway_ip_configuration)}"
-	description	= "A list of gateway_ip_configuration blocks"
-}
-
-output "mutillidae-application-gateway-http-listener" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.http_listener)}"
-	description	= "A list of http_listener blocks"
-}
-
-output "mutillidae-application-private-endpoint-connection" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.private_endpoint_connection)}"
-	description	= "A list of private_endpoint_connection blocks"
-}
-
-output "mutillidae-application-private-link-configuration" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.private_link_configuration)}"
-	description	= "A list of private_link_configuration blocks"
-}
-
-output "mutillidae-application-probe" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.probe)}"
-	description	= "A list of probe blocks"
-}
-
-output "mutillidae-application-request-routing-rule" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.request_routing_rule)}"
-	description	= "A list of request_routing_rule blocks"
-}
-
-output "mutillidae-application-url-path-map" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.url_path_map)}"
-	description	= "A list of url_path_map blocks"
-}
-
-output "mutillidae-application-custom-error-configuration" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.custom_error_configuration)}"
-	description	= "A list of custom_error_configuration blocks"
-}
-
-output "mutillidae-application-redirect-configuration" {
-	value 		= "${jsonencode(azurerm_application_gateway.mutillidae-application-gateway.redirect_configuration)}"
-	description	= "A list of redirect_configuration blocks"
-}
-
