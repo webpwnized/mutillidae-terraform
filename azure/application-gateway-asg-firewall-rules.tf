@@ -13,7 +13,7 @@ resource "azurerm_network_security_rule" "inbound-allow-http-to-application-gate
 	source_address_prefix				= "Internet"
 	source_port_range				= "*"
 	destination_address_prefix			= "${var.application-gateway-subnet-range}"
-	destination_port_ranges				= ["${var.http-port}","${var.mysql-admin-http-port}","${var.ldap-admin-http-port}","${var.https-port}"]	
+	destination_port_range				= "${var.http-port}"
 }
 
 resource "azurerm_network_security_rule" "inbound-allow-gateway-manager-to-all" {

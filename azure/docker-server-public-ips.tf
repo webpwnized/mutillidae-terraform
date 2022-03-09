@@ -30,9 +30,9 @@ resource "azurerm_public_ip" "mysql-admin-application-public-ip" {
 	location            		= "${azurerm_resource_group.resource-group.location}"
 	resource_group_name 		= "${azurerm_resource_group.resource-group.name}"
 	tags				= "${var.default-tags}"
-	sku				= "Basic"
+	sku				= "Standard"
 	sku_tier			= "Regional"
-	allocation_method		= "Dynamic"	
+	allocation_method		= "Static"	
 	ip_version			= "IPv4"
 	domain_name_label		= "${var.mysql-admin-application-name}"
 }
@@ -54,9 +54,9 @@ resource "azurerm_public_ip" "ldap-admin-application-public-ip" {
 	location            		= "${azurerm_resource_group.resource-group.location}"
 	resource_group_name 		= "${azurerm_resource_group.resource-group.name}"
 	tags				= "${var.default-tags}"
-	sku				= "Basic"
+	sku				= "Standard"
 	sku_tier			= "Regional"
-	allocation_method		= "Dynamic"	
+	allocation_method		= "Static"	
 	ip_version			= "IPv4"
 	domain_name_label		= "${var.ldap-admin-application-name}"
 }

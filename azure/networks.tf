@@ -6,12 +6,17 @@ resource "azurerm_virtual_network" "virtual-network" {
 	tags			= "${var.default-tags}"
 }
 
+output "virtual-network-name" {
+	value		= "${azurerm_virtual_network.virtual-network.name}"
+	description	= "The name of the virtual network"
+}
+
 output "virtual-network-address-space" {
 	value		= "${azurerm_virtual_network.virtual-network.address_space}"
 	description	= "The list of address spaces used by the virtual network"
 }
 
 output "virtual-network-subnet" {
-	value		= "${jsonencode(azurerm_virtual_network.virtual-network.subnet)}"
+	value 		= [ for subnet in azurerm_virtual_network.virtual-network.subnet : tomap({"name" = subnet.name, "range"=subnet.address_prefix}) ]
 	description	= "Subnet blocks"
 }
