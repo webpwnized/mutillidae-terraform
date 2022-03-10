@@ -1,14 +1,16 @@
 
 locals {
+	// The default value of these variables should work
 	docker-server-project		= "${google_compute_network.gcp_vpc_network.project}"
 	docker-server-region		= "${var.region}"
 	docker-server-zone		= "${var.zone}"
 	docker-server-network-name	= "${google_compute_network.gcp_vpc_network.name}"
-	docker-server-subnetwork-name	= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
+	docker-server-subnetwork-name	= "${google_compute_subnetwork.gcp-vpc-application-server-subnetwork.name}"
+	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
 	
 	//Make sure these are set for this machine
 	docker-server-vm-name		= "docker-server"
-	docker-server-network-ip		= "10.0.0.5"
+	docker-server-network-ip		= "10.0.1.5"
 	docker-server-tags 		= ["docker-server","web-server","iaas-host"]
 	docker-server-disk-size-gb	= 25
 	docker-server-description		= "A docker server to run containers on the ${local.docker-server-subnetwork-name} subnet"
@@ -20,7 +22,6 @@ locals {
 						}),
 						var.default-labels)
 					}"
-	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
 }
 
 data "cloudinit_config" "docker_server_configuration" {
@@ -81,13 +82,19 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_server"
 
+output "docker-server-cpu-platform" {
+	value 		= "${google_compute_instance.gcp_instance_docker_server.cpu_platform}"
+	description	= "The CPU platform used by this instance"
+}
+
 output "docker-server-internal-ip-address" {
 	value 		= "${google_compute_instance.gcp_instance_docker_server.network_interface.0.network_ip}"
-	description	= "The IP Addresses assigned to this Virtual Machine"
+	description	= "The internal ip address of the instance, either manually or dynamically assigned"
 }
 
 output "docker-server-external-ip-address" {
-	value 		= "${google_compute_instance.gcp_instance_docker_server.network_interface.0.access_config.0.nat_ip}"
-	description	= "The IP Addresses assigned to this Virtual Machine"
+	  value = length(google_compute_instance.gcp_instance_docker_server.network_interface.0.access_config.*.nat_ip) > 0 ? google_compute_instance.gcp_instance_docker_server.network_interface.0.access_config.*.nat_ip : null
+	description	= "If the instance has an access config, either the given external ip (in the nat_ip field) or the ephemeral (generated) ip"
 }
+
 

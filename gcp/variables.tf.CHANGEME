@@ -54,6 +54,11 @@ variable "admin-office-ip-address-range" {
 //	The default value of these varaibles may be used or changed
 //########################################################################
 
+variable "application-name" {
+	type = string
+	default = "mutillidae"
+}
+
 variable "region" {
 	type = string
 	default = "us-central1"

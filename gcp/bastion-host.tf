@@ -1,14 +1,18 @@
 
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_instance
+
 locals {
+	// These default values should work without changes
 	bastion-host-project			= "${google_compute_network.gcp_vpc_network.project}"
 	bastion-host-region			= "${var.region}"
 	bastion-host-zone			= "${var.zone}"
 	bastion-host-network-name		= "${google_compute_network.gcp_vpc_network.name}"
-	bastion-host-subnetwork-name		= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
+	bastion-host-subnetwork-name		= "${google_compute_subnetwork.gcp-vpc-bastion-host-subnetwork.name}"
+	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"
 	
 	//Make sure these are set for this machine
 	bastion-host-vm-name 			= "bastion-host"
-	bastion-host-network-ip			= "10.0.0.2"
+	bastion-host-network-ip			= "10.0.0.5"
 	bastion-host-tags 			= ["bastion-host","iaas-host"]
 	bastion-host-disk-size-gb		= 10
 	bastion-host-description		= "A jump server to allow access to other IaaS on the ${local.bastion-host-subnetwork-name} subnet"
@@ -19,7 +23,6 @@ locals {
 							}),
 							var.default-labels)
 						}"
-	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"
 }
 
 data "google_secret_manager_secret_version" "gcp_iaas_server_ssh_private_key" {
@@ -85,4 +88,18 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
  	}	
 } // end resource "google_compute_instance" "gcp_instance_bastion_host"
 
+output "bastion-host-cpu-platform" {
+	value 		= "${google_compute_instance.gcp_instance_bastion_host.cpu_platform}"
+	description	= "The CPU platform used by this instance"
+}
+
+output "bastion-host-internal-ip-address" {
+	value 		= "${google_compute_instance.gcp_instance_bastion_host.network_interface.0.network_ip}"
+	description	= "The internal ip address of the instance, either manually or dynamically assigned"
+}
+
+output "bastion-host-external-ip-address" {
+	  value = length(google_compute_instance.gcp_instance_bastion_host.network_interface.0.access_config.*.nat_ip) > 0 ? google_compute_instance.gcp_instance_bastion_host.network_interface.0.access_config.*.nat_ip : null
+	description	= "If the instance has an access config, either the given external ip (in the nat_ip field) or the ephemeral (generated) ip"
+}
 

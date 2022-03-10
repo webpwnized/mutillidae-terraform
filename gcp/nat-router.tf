@@ -1,10 +1,12 @@
+
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_router_nat
+
 locals {
 	nat-router-project	= "${google_compute_network.gcp_vpc_network.project}"
-	nat-router-region	= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.region}"
+	nat-router-region	= "${var.region}"
 	nat-router-network	= "${google_compute_network.gcp_vpc_network.name}"
 	nat-router-name		= "${google_compute_network.gcp_vpc_network.name}-nat-router"
 	nat-service-name	= "${google_compute_router.gcp-vpc-nat-router.name}-nat-service"
-	nat-service-subnet	= "${google_compute_subnetwork.gcp_vpc_iaas_subnetwork.name}"
 }
 
 resource "google_compute_router" "gcp-vpc-nat-router" {
@@ -24,7 +26,12 @@ resource "google_compute_router_nat" "gcp-vpc-nat-router-nat-service" {
 	source_subnetwork_ip_ranges_to_nat	= "LIST_OF_SUBNETWORKS"
 	
 	subnetwork {
-		name			= "${local.nat-service-subnet}"
+		name			= "${google_compute_subnetwork.gcp-vpc-bastion-host-subnetwork.name}"
+		source_ip_ranges_to_nat	= ["PRIMARY_IP_RANGE"]
+	}
+
+	subnetwork {
+		name			= "${google_compute_subnetwork.gcp-vpc-application-server-subnetwork.name}"
 		source_ip_ranges_to_nat	= ["PRIMARY_IP_RANGE"]
 	}
 

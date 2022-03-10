@@ -28,4 +28,3 @@ resource "google_compute_firewall" "allow-ssh-to-bastion-host-from-iap" {
 		metadata	= "INCLUDE_ALL_METADATA"
 	}
 }
-

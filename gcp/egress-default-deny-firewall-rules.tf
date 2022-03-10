@@ -51,26 +51,3 @@ resource "google_compute_firewall" "allow-http-https-to-internet" {
 		metadata	= "INCLUDE_ALL_METADATA"
 	}
 }
-
-resource "google_compute_firewall" "allow-ssh-from-bastion-host" {
-	project		= "${local.egress-firewall-project}"
-	name		= "${local.egress-firewall-rule-3-name}"
-	network 	= "${local.egress-firewall-network-name}"
-	description	= "${local.egress-firewall-rule-3-description}"
-	direction	= "EGRESS"
-	disabled	= "false"
-	priority	= 1000
-
-	allow {
-		protocol	= "tcp"
-		ports		= ["${var.ssh-port}"]
-	}
-
-	target_tags		= ["bastion-host"]
-	destination_ranges	= ["${google_compute_instance.gcp_instance_docker_server.network_interface.0.network_ip}"]
-	
-	log_config {
-		metadata	= "INCLUDE_ALL_METADATA"
-	}
-}
-
