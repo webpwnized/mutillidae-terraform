@@ -31,9 +31,9 @@ resource "azurerm_network_security_rule" "inbound-allow-gateway-manager-to-all" 
 	destination_port_range				= "${var.azure-gateway-manager-port-range}"
 }
 
-resource "azurerm_network_security_rule" "inbound-allow-virtual-network-to-application-gateways" {
-	name						= "inbound-allow-virtual-network-to-application-gateways"
-	description					= "Allow inbound virtual network traffic (VirtualNetwork tag) on the network security group"
+resource "azurerm_network_security_rule" "inbound-allow-http-application-gateways-to-application-servers" {
+	name						= "inbound-allow-http-application-gateways-to-application-servers"
+	description					= "Allow http inbound from Appliation Gateway to Application Server"
 	resource_group_name 				= "${azurerm_resource_group.resource-group.name}"
 	network_security_group_name			= "${azurerm_network_security_group.network-security-group.name}"
 	priority					= "124"
