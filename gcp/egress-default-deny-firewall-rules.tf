@@ -45,7 +45,7 @@ resource "google_compute_firewall" "allow-http-https-to-internet" {
 		ports		= ["${var.http-port}","${var.https-port}"]
 	}
 
-	target_tags		= ["iaas-host"]
+	target_tags		= ["bastion-host","docker-server"]
 	
 	log_config {
 		metadata	= "INCLUDE_ALL_METADATA"
