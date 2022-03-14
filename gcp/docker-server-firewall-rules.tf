@@ -39,7 +39,7 @@ resource "google_compute_firewall" "allow-http-to-docker-server-from-internet" {
 
 	allow {
 		protocol	= "tcp"
-		ports		= ["${var.http-port}","${var.mysql-admin-http-port}","${var.ldap-admin-http-port}"]
+		ports		= ["${var.mutillidae-http-port}","${var.mysql-admin-http-port}","${var.ldap-admin-http-port}"]
 	}
 
 	source_ranges	= var.admin-office-ip-address-range

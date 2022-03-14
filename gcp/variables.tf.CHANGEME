@@ -54,9 +54,19 @@ variable "admin-office-ip-address-range" {
 //	The default value of these varaibles may be used or changed
 //########################################################################
 
-variable "application-name" {
+variable "mutillidae-application-name" {
 	type = string
 	default = "mutillidae"
+}
+
+variable "mysql-admin-application-name" {
+	type = string
+	default = "mysql-admin"
+}
+
+variable "ldap-admin-application-name" {
+	type = string
+	default = "ldap-admin"
 }
 
 variable "region" {
@@ -79,9 +89,14 @@ variable "ssh-port" {
 	default = "22"
 }
 
-variable "http-port" {
+variable "mutillidae-http-port" {
 	type = string
 	default = "80"
+}
+
+variable "mutillidae-https-port" {
+	type = string
+	default = "443"
 }
 
 variable "mysql-admin-http-port" {

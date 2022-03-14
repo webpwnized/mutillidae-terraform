@@ -42,7 +42,7 @@ resource "google_compute_firewall" "allow-http-https-to-internet" {
 
 	allow {
 		protocol	= "tcp"
-		ports		= ["${var.http-port}","${var.https-port}"]
+		ports		= ["${var.mutillidae-http-port}","${var.mutillidae-https-port}"]
 	}
 
 	target_tags		= ["bastion-host","docker-server"]
