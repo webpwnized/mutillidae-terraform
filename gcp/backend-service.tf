@@ -23,6 +23,7 @@ resource "google_compute_backend_service" "backend-service" {
 		max_rate_per_instance = 100
 	}
 	
-	health_checks	= ["${google_compute_http_health_check.http-health-check.id}"]
+	health_checks	= ["${google_compute_region_health_check.http-region-health-check.id}"]
 }
+
 

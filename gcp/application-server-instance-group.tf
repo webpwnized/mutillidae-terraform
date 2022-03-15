@@ -3,7 +3,7 @@
 
 locals {
 	application-server-instance-group-project	= "${google_compute_network.gcp_vpc_network.project}"
-	application-server-instance-group-network	= "${google_compute_network.gcp_vpc_network.name}"
+	application-server-instance-group-network	= "${google_compute_network.gcp_vpc_network.id}"
 	application-server-instance-group-name		= "${google_compute_network.gcp_vpc_network.name}-application-server-instance-group"
 }
 

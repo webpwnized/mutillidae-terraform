@@ -94,6 +94,11 @@ variable "ssh-port" {
 	default = "22"
 }
 
+variable "http-port" {
+	type = string
+	default = "80"
+}
+
 variable "mutillidae-http-port" {
 	type = string
 	default = "80"
