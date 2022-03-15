@@ -1,5 +1,5 @@
 
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/data-sources/compute_backend_service
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
 
 locals {
 	backend-service-project	= "${google_compute_network.gcp_vpc_network.project}"
@@ -16,14 +16,23 @@ resource "google_compute_backend_service" "backend-service" {
 	enable_cdn			= false
 	port_name			= "mutillidae-http-port"
 	protocol			= "HTTP"
+	load_balancing_scheme		= "EXTERNAL"
+	custom_response_headers		= ["Proxied-By: Google Load Balancer"]
+	security_policy			= "${google_compute_security_policy.security-policy.id}"
+	session_affinity		= "HEADER_FIELD"
 	
 	backend {
-		group                 = "${google_compute_instance_group.application-server-instance-group.id}"
-		balancing_mode        = "RATE"
-		max_rate_per_instance = 100
+		group		= "${google_compute_instance_group.application-server-instance-group.id}"
+		balancing_mode	= "UTILIZATION"
+		max_utilization	= 0.80
 	}
 	
 	health_checks	= ["${google_compute_region_health_check.http-region-health-check.id}"]
+	
+	log_config {
+		enable		= "true"
+		sample_rate	= 1.0
+	}
 }
 
 
