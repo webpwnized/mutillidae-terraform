@@ -66,9 +66,6 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 		subnetwork_project 	= "${local.docker-server-project}"
 		network_ip		= "${local.docker-server-network-ip}"
 		stack_type		= "IPV4_ONLY"
-		access_config{
-			network_tier	= "STANDARD"
-		}
 	}
 	shielded_instance_config {
 		enable_secure_boot		= true

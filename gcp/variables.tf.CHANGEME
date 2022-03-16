@@ -89,6 +89,11 @@ variable "gcp-iap-ip-address-range" {
 	default = ["35.235.240.0/20"]
 }
 
+variable "gcp-health-check-ip-address-range" {
+	type = list(string)
+	default = ["130.211.0.0/22", "35.191.0.0/16"]
+}
+
 variable "ssh-port" {
 	type = string
 	default = "22"

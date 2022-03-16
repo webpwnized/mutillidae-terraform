@@ -19,7 +19,7 @@ resource "google_compute_backend_service" "backend-service" {
 	load_balancing_scheme		= "EXTERNAL"
 	custom_response_headers		= ["Proxied-By: Google Load Balancer"]
 	security_policy			= "${google_compute_security_policy.security-policy.id}"
-	session_affinity		= "HEADER_FIELD"
+	session_affinity		= "GENERATED_COOKIE"
 	
 	backend {
 		group		= "${google_compute_instance_group.application-server-instance-group.id}"
@@ -27,7 +27,7 @@ resource "google_compute_backend_service" "backend-service" {
 		max_utilization	= 0.80
 	}
 	
-	health_checks	= ["${google_compute_region_health_check.http-region-health-check.id}"]
+	health_checks	= ["${google_compute_health_check.http-health-check.id}"]
 	
 	log_config {
 		enable		= "true"

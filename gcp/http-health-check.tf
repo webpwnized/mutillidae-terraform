@@ -7,11 +7,10 @@ locals {
 	http-health-check-name		= "${var.mutillidae-application-name}-http-health-check"
 }
 
-resource "google_compute_region_health_check" "http-region-health-check" {
+resource "google_compute_health_check" "http-health-check" {
 	project			= "${local.backend-service-project}"
-	region			= "${local.application-server-subnet-region}"
 	name			= "${local.http-health-check-name}"
-	description 		= "The Regional HTTP Health Check"
+	description 		= "The HTTP Health Check"
 	check_interval_sec	= 5
 	timeout_sec		= 5
 	healthy_threshold	= 2
@@ -29,8 +28,8 @@ resource "google_compute_region_health_check" "http-region-health-check" {
 	}
 }
 
-output "http-region-health-check-type" {
-	value 		= "${google_compute_region_health_check.http-region-health-check.type}"
+output "http-health-check-type" {
+	value 		= "${google_compute_health_check.http-health-check.type}"
 	description	= "The type of the health check"
 }
 
