@@ -1,5 +1,6 @@
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_backend_service
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_backend_service
 
 locals {
 	backend-service-project	= "${google_compute_network.gcp_vpc_network.project}"

@@ -1,5 +1,6 @@
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_http_health_check
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_health_check
 
 locals {
 	http-health-check-project	= "${google_compute_network.gcp_vpc_network.project}"
@@ -18,9 +19,9 @@ resource "google_compute_health_check" "http-health-check" {
 	
 	http_health_check {
 		request_path		= "/"	
-		port			= "${var.mutillidae-http-port}"
+		port_name		= "mutillidae-http-port"
 		proxy_header		= "NONE"
-		port_specification	= "USE_FIXED_PORT"
+		port_specification	= "USE_NAMED_PORT"
 	}
 	
 	log_config {

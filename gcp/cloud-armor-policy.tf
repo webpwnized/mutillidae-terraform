@@ -20,7 +20,7 @@ resource "google_compute_security_policy" "security-policy" {
 		priority	= "1000"
 		match {
 			expr {
-				expression = "evaluatePreconfiguredExpr('sqli-stable') or evaluatePreconfiguredExpr('xss-stable') or evaluatePreconfiguredExpr('lfi-stable') or evaluatePreconfiguredExpr('rfi-stable') or evaluatePreconfiguredExpr('rce-stable')"
+				expression = "evaluatePreconfiguredExpr('sqli-stable', ['owasp-crs-v030001-id942421-sqli']) || evaluatePreconfiguredExpr('xss-stable') || evaluatePreconfiguredExpr('lfi-stable') || evaluatePreconfiguredExpr('rfi-stable') || evaluatePreconfiguredExpr('rce-stable')"
 			}
 		}
 	}

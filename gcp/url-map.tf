@@ -1,5 +1,6 @@
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_url_map
+# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_url_map
 
 locals {
 	url-map-project	= "${google_compute_network.gcp_vpc_network.project}"
@@ -8,7 +9,7 @@ locals {
 }
 
 resource "google_compute_url_map" "url-map" {
-	project		= "${local.backend-service-project}"
+	project		= "${local.url-map-project}"
 	name		= "${local.url-map-name}"
 	description	= "The URL map"
 	default_service	= "${google_compute_backend_service.backend-service.id}"
