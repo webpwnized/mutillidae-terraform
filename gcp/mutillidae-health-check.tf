@@ -3,15 +3,15 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_health_check
 
 locals {
-	health-check-project	= "${google_compute_network.gcp_vpc_network.project}"
-	health-check-network	= "${google_compute_network.gcp_vpc_network.name}"
-	health-check-name	= "${var.mutillidae-application-name}-health-check"
+	mutillidae-health-check-project	= "${google_compute_network.gcp_vpc_network.project}"
+	mutillidae-health-check-network	= "${google_compute_network.gcp_vpc_network.name}"
+	mutillidae-health-check-name	= "${var.mutillidae-application-name}-health-check"
 }
 
-resource "google_compute_health_check" "health-check" {
-	project			= "${local.backend-service-project}"
-	name			= "${local.health-check-name}"
-	description 		= "The Health Check"
+resource "google_compute_health_check" "mutillidae-health-check" {
+	project			= "${local.mutillidae-backend-service-project}"
+	name			= "${local.mutillidae-health-check-name}"
+	description 		= "The ${var.mutillidae-application-name} Health Check"
 	check_interval_sec	= 5
 	timeout_sec		= 5
 	healthy_threshold	= 2
@@ -28,8 +28,8 @@ resource "google_compute_health_check" "health-check" {
 	}
 }
 
-output "health-check-type" {
-	value 		= "${google_compute_health_check.health-check.type}"
-	description	= "The type of the health check"
+output "mutillidae-health-check-type" {
+	value 		= "${google_compute_health_check.mutillidae-health-check.type}"
+	description	= "The type of health check"
 }
 

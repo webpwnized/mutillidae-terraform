@@ -3,21 +3,21 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_forwarding_rule
 
 locals {
-	forwarding-rule-project	= "${google_compute_network.gcp_vpc_network.project}"
-	forwarding-rule-network	= "${google_compute_network.gcp_vpc_network.name}"
-	forwarding-rule-name	= "${var.mutillidae-application-name}-forwarding-rule"
+	mutillidae-forwarding-rule-project	= "${google_compute_network.gcp_vpc_network.project}"
+	mutillidae-forwarding-rule-network	= "${google_compute_network.gcp_vpc_network.name}"
+	mutillidae-forwarding-rule-name	= "${var.mutillidae-application-name}-forwarding-rule"
 }
 
-resource "google_compute_global_forwarding_rule" "forwarding-rule" {
-	project			= "${local.forwarding-rule-project}"
-	name			= "${local.forwarding-rule-name}"
-	description		= "The global forwarding rule"
-	target			= "${google_compute_target_http_proxy.target-http-proxy.id}"
+resource "google_compute_global_forwarding_rule" "mutillidae-forwarding-rule" {
+	project			= "${local.mutillidae-forwarding-rule-project}"
+	name			= "${local.mutillidae-forwarding-rule-name}"
+	description		= "The ${var.mutillidae-application-name} global forwarding rule"
+	target			= "${google_compute_target_http_proxy.mutillidae-target-http-proxy.id}"
 	ip_protocol		= "TCP"
 	load_balancing_scheme	= "EXTERNAL_MANAGED"
 	port_range 		= "80"
 }
 
-output "global-load-balancer-ip-address" {
-	value = "${google_compute_global_forwarding_rule.forwarding-rule.ip_address}"
+output "mutillidae-global-load-balancer-ip-address" {
+	value = "${google_compute_global_forwarding_rule.mutillidae-forwarding-rule.ip_address}"
 }
