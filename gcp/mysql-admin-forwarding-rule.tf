@@ -15,7 +15,7 @@ resource "google_compute_global_forwarding_rule" "mysql-admin-forwarding-rule" {
 	target			= "${google_compute_target_http_proxy.mysql-admin-target-http-proxy.id}"
 	ip_protocol		= "TCP"
 	load_balancing_scheme	= "EXTERNAL_MANAGED"
-	port_range 		= "80"
+	port_range 		= "${var.http-port}"
 }
 
 output "mysql-admin-global-load-balancer-ip-address" {
