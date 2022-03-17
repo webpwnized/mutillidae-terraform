@@ -3,15 +3,15 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_health_check
 
 locals {
-	http-health-check-project	= "${google_compute_network.gcp_vpc_network.project}"
-	http-health-check-network	= "${google_compute_network.gcp_vpc_network.name}"
-	http-health-check-name		= "${var.mutillidae-application-name}-http-health-check"
+	health-check-project	= "${google_compute_network.gcp_vpc_network.project}"
+	health-check-network	= "${google_compute_network.gcp_vpc_network.name}"
+	health-check-name	= "${var.mutillidae-application-name}-health-check"
 }
 
-resource "google_compute_health_check" "http-health-check" {
+resource "google_compute_health_check" "health-check" {
 	project			= "${local.backend-service-project}"
-	name			= "${local.http-health-check-name}"
-	description 		= "The HTTP Health Check"
+	name			= "${local.health-check-name}"
+	description 		= "The Health Check"
 	check_interval_sec	= 5
 	timeout_sec		= 5
 	healthy_threshold	= 2
@@ -28,8 +28,8 @@ resource "google_compute_health_check" "http-health-check" {
 	}
 }
 
-output "http-health-check-type" {
-	value 		= "${google_compute_health_check.http-health-check.type}"
+output "health-check-type" {
+	value 		= "${google_compute_health_check.health-check.type}"
 	description	= "The type of the health check"
 }
 
