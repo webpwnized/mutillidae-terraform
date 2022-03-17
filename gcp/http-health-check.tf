@@ -17,11 +17,10 @@ resource "google_compute_health_check" "http-health-check" {
 	healthy_threshold	= 2
 	unhealthy_threshold	= 3
 	
-	http_health_check {
-		request_path		= "/"	
+	tcp_health_check {
 		port_name		= "mutillidae-http-port"
-		proxy_header		= "NONE"
 		port_specification	= "USE_NAMED_PORT"
+		proxy_header		= "NONE"
 	}
 	
 	log_config {

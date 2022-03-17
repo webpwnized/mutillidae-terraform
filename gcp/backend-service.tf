@@ -17,7 +17,7 @@ resource "google_compute_backend_service" "backend-service" {
 	enable_cdn			= false
 	port_name			= "mutillidae-http-port"
 	protocol			= "HTTP"
-	load_balancing_scheme		= "EXTERNAL"
+	load_balancing_scheme		= "EXTERNAL_MANAGED"
 	custom_response_headers		= ["Proxied-By: Google Load Balancer"]
 	security_policy			= "${google_compute_security_policy.security-policy.id}"
 	session_affinity		= "GENERATED_COOKIE"
