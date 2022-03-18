@@ -144,4 +144,3 @@ variable "vm-metadata-startup-script" {
 	default = "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y\napt autoremove -y"
 }
 
-
