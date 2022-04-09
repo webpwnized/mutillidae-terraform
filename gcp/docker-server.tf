@@ -9,10 +9,11 @@ locals {
 	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
 	
 	//Make sure these are set for this machine
-	docker-server-vm-name		= "docker-server"
+	docker-server-vm-name			= "docker-server"
+	docker-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-2110"
 	docker-server-network-ip		= "10.0.1.5"
-	docker-server-tags 		= ["docker-server","web-server","iaas-host"]
-	docker-server-disk-size-gb	= 25
+	docker-server-tags 			= ["docker-server","web-server","iaas-host"]
+	docker-server-disk-size-gb		= 25
 	docker-server-description		= "A docker server to run containers on the ${local.docker-server-subnetwork-name} subnet"
 
 	docker-server-labels 		= "${merge(
@@ -57,7 +58,7 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 		initialize_params {
 			size	= local.docker-server-disk-size-gb
 			type	= "${var.vm-boot-disk-type}"
-			image	= "${var.vm-boot-disk-image}"
+			image	= "${local.docker-server-vm-boot-disk-image}"
 		}
 	}
 	network_interface {

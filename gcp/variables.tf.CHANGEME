@@ -124,6 +124,11 @@ variable "ldap-admin-http-port" {
 	default = "82"
 }
 
+variable "mysql-port" {
+	type = string
+	default = "3306"
+}
+
 variable "vm-machine-type" {
 	type = string
 	default = "e2-small"
@@ -132,11 +137,6 @@ variable "vm-machine-type" {
 variable "vm-boot-disk-type" {
 	type = string
 	default = "pd-standard"
-}
-
-variable "vm-boot-disk-image" {
-	type = string
-	default = "ubuntu-os-cloud/ubuntu-2110"
 }
 
 variable "vm-metadata-startup-script" {

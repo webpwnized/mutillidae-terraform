@@ -7,8 +7,7 @@ locals {
 	egress-firewall-rule-1-description = "Deny all egress traffic leaving the ${local.egress-firewall-network-name} network"
 	egress-firewall-rule-2-name	= "${local.egress-firewall-network-name}-allow-egress-http-https-to-internet"
 	egress-firewall-rule-2-description = "Allow HTTP and HTTPS traffic leaving the ${local.egress-firewall-network-name} network"
-	egress-firewall-rule-3-name	= "${local.egress-firewall-network-name}-allow-egress-ssh-from-bastion-host"
-	egress-firewall-rule-3-description = "Allow SSH traffic leaving the bastion host"
+
 }
 
 resource "google_compute_firewall" "deny-all-egress" {
@@ -52,26 +51,7 @@ resource "google_compute_firewall" "allow-http-https-to-internet" {
 	}
 }
 
-resource "google_compute_firewall" "allow-egress-ssh-from-bastion-host" {
-	project		= "${local.egress-firewall-project}"
-	name		= "${local.egress-firewall-rule-3-name}"
-	network 	= "${local.egress-firewall-network-name}"
-	description	= "${local.egress-firewall-rule-3-description}"
-	direction	= "EGRESS"
-	disabled	= "false"
-	priority	= 1000
 
-	allow {
-		protocol	= "tcp"
-		ports		= ["${var.ssh-port}"]
-	}
-
-	target_tags		= ["bastion-host"]
-	
-	log_config {
-		metadata	= "INCLUDE_ALL_METADATA"
-	}
-}
 
 
 

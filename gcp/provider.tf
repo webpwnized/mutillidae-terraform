@@ -7,3 +7,10 @@ provider "google" {
 	zone		= "${var.zone}"
 }
 
+provider "google-beta" {
+	credentials	= file("${var.terraform-credentials-file}")
+	project		= "${var.project}"
+	region		= "${var.region}"
+	zone		= "${var.zone}"
+}
+
