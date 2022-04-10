@@ -8,7 +8,7 @@ locals {
 	application-server-subnet-name		= "${google_compute_network.gcp_vpc_network.name}-application-server-subnet"
 	application-server-subnet-description	= "VPC subnet to deploy application servers"
 	
-	application-server-subnet-ip-address-range	= "10.0.1.0/28"
+	application-server-subnet-ip-address-range	= "${var.application-server-subnet-ip-address-range}"
 }
 
 resource "google_compute_subnetwork" "gcp-vpc-application-server-subnetwork" {

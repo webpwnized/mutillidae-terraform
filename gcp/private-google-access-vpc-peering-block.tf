@@ -12,8 +12,8 @@ resource "google_compute_global_address" "private_ip_block" {
 	address_type	= "INTERNAL"
 	ip_version	= "IPV4"
 	labels		= "${var.default-labels}"
-	prefix_length	= 24
-	address		= "10.0.4.0"
+	prefix_length	= "${var.database-subnet-prefix-length}"
+	address		= "${var.database-subnet-network}"
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
@@ -22,3 +22,4 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 	service			= "servicenetworking.googleapis.com"
 	reserved_peering_ranges	= ["${google_compute_global_address.private_ip_block.name}"]
 }
+

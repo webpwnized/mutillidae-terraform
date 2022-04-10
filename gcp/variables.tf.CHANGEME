@@ -84,6 +84,26 @@ variable "zone" {
 	default = "us-central1-a"
 }
 
+variable "bastion-host-subnet-ip-address-range" {
+	type = string
+	default = "10.0.0.0/28"
+}
+
+variable "application-server-subnet-ip-address-range" {
+	type = string
+	default = "10.0.1.0/28"
+}
+
+variable "database-subnet-network" {
+	type = string
+	default = "10.0.3.0"
+}
+
+variable "database-subnet-prefix-length" {
+	type = string
+	default = "24"
+}
+
 variable "gcp-iap-ip-address-range" {
 	type = list(string)
 	default = ["35.235.240.0/20"]

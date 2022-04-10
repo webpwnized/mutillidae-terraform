@@ -8,7 +8,7 @@ locals {
 	bastion-host-subnet-name	= "${google_compute_network.gcp_vpc_network.name}-bastion-host-subnet"
 	bastion-host-subnet-description	= "VPC subnet to deploy bastion hosts"
 	
-	bastion-host-subnet-ip-address-range	= "10.0.0.0/28"
+	bastion-host-subnet-ip-address-range	= "${var.bastion-host-subnet-ip-address-range}"
 }
 
 resource "google_compute_subnetwork" "gcp-vpc-bastion-host-subnetwork" {
