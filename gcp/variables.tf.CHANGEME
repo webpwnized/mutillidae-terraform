@@ -124,6 +124,16 @@ variable "http-port" {
 	default = "80"
 }
 
+variable "https-port" {
+	type = string
+	default = "443"
+}
+
+variable "ntp-port" {
+	type = string
+	default = "123"
+}
+
 variable "mutillidae-http-port" {
 	type = string
 	default = "80"

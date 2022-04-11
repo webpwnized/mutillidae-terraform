@@ -10,7 +10,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	mysql-database-name		= "${var.mutillidae-application-name}-database"
-	mysql-database-instance-name	= "${var.mutillidae-application-name}-database-instance-2"
+	mysql-database-instance-name	= "${var.mutillidae-application-name}-database-instance"
 	mysql-version			= "MYSQL_8_0"
 	mysql-tier			= "db-f1-micro"
 	mysql-activation-policy		= "ALWAYS"
@@ -28,6 +28,14 @@ locals {
 						}"
 }
 
+# TODO: Need a better keeper than current date
+resource "random_pet" "random_suffix" {
+	keepers = {
+		keeper = "${formatdate("DD MMM YYYY", timestamp())}"
+	}
+	length	= 1
+}
+
 resource "google_sql_user" "mysql-account" {
 	instance	= "${google_sql_database_instance.mysql.name}"
 	name		= "mutillidae"
@@ -42,7 +50,7 @@ resource "google_sql_database" "mysql" {
 
 resource "google_sql_database_instance" "mysql" {
 	project			= "${local.mysql-project}"
-	name			= "${local.mysql-database-instance-name}"
+	name			= "${local.mysql-database-instance-name}-${random_pet.random_suffix.id}"
 	region 			= "${local.mysql-region}"
 	database_version	= "${local.mysql-version}"
 	deletion_protection	= "false"
@@ -92,5 +100,10 @@ output "mysql-public-ip-address" {
 output "mysql-private-ip-address" {
 	value 		= "${google_sql_database_instance.mysql.private_ip_address}"
 	description	= "The first private (PRIVATE) IPv4 address assigned"
+}
+
+output "database_name_random_pet" {
+	value 		= "${random_pet.random_suffix.id}"
+	description	= "The random pet name assigned to the database name"
 }
 

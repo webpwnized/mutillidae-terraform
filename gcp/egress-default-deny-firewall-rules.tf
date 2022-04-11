@@ -6,7 +6,7 @@ locals {
 	egress-firewall-rule-1-name	= "${local.egress-firewall-network-name}-deny-all-egress"
 	egress-firewall-rule-1-description = "Deny all egress traffic leaving the ${local.egress-firewall-network-name} network"
 	egress-firewall-rule-2-name	= "${local.egress-firewall-network-name}-allow-egress-http-https-to-internet"
-	egress-firewall-rule-2-description = "Allow HTTP and HTTPS traffic leaving the ${local.egress-firewall-network-name} network"
+	egress-firewall-rule-2-description = "Allow HTTP, HTTPS, NTP traffic leaving the ${local.egress-firewall-network-name} network"
 
 }
 
@@ -30,7 +30,7 @@ resource "google_compute_firewall" "deny-all-egress" {
 	}
 }
 
-resource "google_compute_firewall" "allow-http-https-to-internet" {
+resource "google_compute_firewall" "allow-http-https-ntp-to-internet" {
 	project		= "${local.egress-firewall-project}"
 	name		= "${local.egress-firewall-rule-2-name}"
 	network 	= "${local.egress-firewall-network-name}"
@@ -41,7 +41,7 @@ resource "google_compute_firewall" "allow-http-https-to-internet" {
 
 	allow {
 		protocol	= "tcp"
-		ports		= ["${var.mutillidae-http-port}","${var.mutillidae-https-port}"]
+		ports		= ["${var.http-port}","${var.https-port}","${var.ntp-port}"]
 	}
 
 	target_tags		= ["bastion-host","docker-server"]

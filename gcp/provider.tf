@@ -14,3 +14,11 @@ provider "google-beta" {
 	zone		= "${var.zone}"
 }
 
+terraform {
+	required_providers {
+		random = {
+			source = "hashicorp/random"
+		}
+	}
+}
+
