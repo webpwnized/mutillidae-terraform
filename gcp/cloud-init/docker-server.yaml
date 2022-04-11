@@ -31,6 +31,10 @@ runcmd:
   # Allow containers to receive remote connections
   - sed -i 's/127.0.0.1://g' /home/${username}/mutillidae-docker/docker-compose.yml
   
+  # Point www container to Cloud SQL MySQL server
+  - sed -i 's/ARG DATABASE_HOST="database"/ARG DATABASE_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/www/Dockerfile
+  - sed -i 's/DATABASE_USERNAME="root"/DATABASE_USERNAME="mutillidae"/' /home/${username}/mutillidae-docker/www/Dockerfile
+  
   # Point database_admin container to Cloud SQL MySQL server
   - sed -i 's/PMA_HOST="database"/PMA_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
 
@@ -39,12 +43,6 @@ runcmd:
   
   # Build and run the containers
   - sudo -u ${username} docker-compose -f /home/${username}/mutillidae-docker/docker-compose.yml up -d
-  
-  # Change the database user from root to mutillidae in www container
-  - docker exec -it www sed -i 's/root/mutillidae/' /var/www/mutillidae/includes/database-config.inc
-
-  # Point www container to Cloud SQL MySQL server
-  - docker exec -it www sed -i 's/database/${database-ip-address}/' /var/www/mutillidae/includes/database-config.inc
 
 final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
 
