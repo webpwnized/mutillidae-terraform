@@ -35,6 +35,8 @@ data "cloudinit_config" "docker_server_configuration" {
 			{
 				username		= "${var.ssh-username}"
 				ssh-public-key		= "${file(var.ssh-public-key-file)}"
+				database-username	= "${google_sql_user.mysql-account.name}"
+				database-password	= "${google_sql_user.mysql-account.password}"
 				database-ip-address	= "${google_sql_database_instance.mysql.private_ip_address}"
 			}
 		)

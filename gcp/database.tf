@@ -31,7 +31,7 @@ locals {
 # TODO: Need a better keeper than current date
 resource "random_pet" "random_suffix" {
 	keepers = {
-		keeper = "${formatdate("DD MMM YYYY", timestamp())}"
+		keeper = "${md5(formatdate("DD MMM YYYY", timestamp()))}"
 	}
 	length	= 1
 }

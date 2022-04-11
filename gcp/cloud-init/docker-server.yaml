@@ -33,10 +33,13 @@ runcmd:
   
   # Point www container to Cloud SQL MySQL server
   - sed -i 's/ARG DATABASE_HOST="database"/ARG DATABASE_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/www/Dockerfile
-  - sed -i 's/DATABASE_USERNAME="root"/DATABASE_USERNAME="mutillidae"/' /home/${username}/mutillidae-docker/www/Dockerfile
-  
+  - sed -i 's/DATABASE_USERNAME="root"/DATABASE_USERNAME="${database-username}"/' /home/${username}/mutillidae-docker/www/Dockerfile  
+  - sed -i 's/DATABASE_PASSWORD="mutillidae"/DATABASE_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/www/Dockerfile
+
   # Point database_admin container to Cloud SQL MySQL server
   - sed -i 's/PMA_HOST="database"/PMA_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
+  - sed -i 's/PMA_USER="root"/PMA_USER="${database-username}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
+  - sed -i 's/PMA_PASSWORD="mutillidae"/PMA_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
 
   # Change ownership of project from root to user
   - chown -R ${username}:${username} /home/${username}/mutillidae-docker
