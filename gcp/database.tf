@@ -9,6 +9,8 @@ locals {
 	mysql-network-self-link		= "${google_compute_network.gcp_vpc_network.self_link}"
 	
 	//Make sure these are set for this machine
+	mysql-database-name		= "${var.mutillidae-application-name}-database"
+	mysql-database-instance-name	= "${var.mutillidae-application-name}-database-instance-2"
 	mysql-version			= "MYSQL_8_0"
 	mysql-tier			= "db-f1-micro"
 	mysql-activation-policy		= "ALWAYS"
@@ -34,13 +36,13 @@ resource "google_sql_user" "mysql-account" {
 
 resource "google_sql_database" "mysql" {
 	project		= "${local.mysql-project}"
-	name		= "${var.mutillidae-application-name}-database"
+	name		= "${local.mysql-database-name}"
 	instance	= "${google_sql_database_instance.mysql.name}"
 }
 
 resource "google_sql_database_instance" "mysql" {
 	project			= "${local.mysql-project}"
-	name			= "${var.mutillidae-application-name}-database-instance"
+	name			= "${local.mysql-database-instance-name}"
 	region 			= "${local.mysql-region}"
 	database_version	= "${local.mysql-version}"
 	deletion_protection	= "false"
@@ -72,14 +74,14 @@ output "mysql-connection-name" {
 	description	= "The connection name of the instance to be used in connection strings. For example, when connecting with Cloud SQL Proxy"
 }
 
-output "mysql-ip-address" {
-	value 		= "${google_sql_database_instance.mysql.ip_address.0.ip_address}"
-	description	= "The IPv4 address assigned"
-}
-
 output "mysql-ipaddress-type" {
 	value 		= "${google_sql_database_instance.mysql.ip_address.0.type}"
 	description	= "The type of this IP address"
+}
+
+output "mysql-ip-address" {
+	value 		= "${google_sql_database_instance.mysql.ip_address.0.ip_address}"
+	description	= "The IPv4 address assigned"
 }
 
 output "mysql-public-ip-address" {
@@ -91,3 +93,4 @@ output "mysql-private-ip-address" {
 	value 		= "${google_sql_database_instance.mysql.private_ip_address}"
 	description	= "The first private (PRIVATE) IPv4 address assigned"
 }
+

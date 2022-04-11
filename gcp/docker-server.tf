@@ -33,8 +33,9 @@ data "cloudinit_config" "docker_server_configuration" {
 		content_type = "text/cloud-config"
 		content = templatefile("${local.docker-server-cloud-init-config-file}",
 			{
-				username	= "${var.ssh-username}"
-				ssh-public-key	= "${file(var.ssh-public-key-file)}"
+				username		= "${var.ssh-username}"
+				ssh-public-key		= "${file(var.ssh-public-key-file)}"
+				database-ip-address	= "${google_sql_database_instance.mysql.private_ip_address}"
 			}
 		)
 		filename = "${local.docker-server-cloud-init-config-file}"
@@ -42,6 +43,8 @@ data "cloudinit_config" "docker_server_configuration" {
 }
 
 resource "google_compute_instance" "gcp_instance_docker_server" {
+	depends_on			= [google_sql_database_instance.mysql]
+	
 	project				= "${local.docker-server-project}"
 	zone				= "${local.docker-server-zone}"
 	name				= "${local.docker-server-vm-name}"
