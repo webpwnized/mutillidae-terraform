@@ -9,7 +9,7 @@ locals {
 	mysql-network-self-link		= "${google_compute_network.gcp_vpc_network.self_link}"
 	
 	//Make sure these are set for this machine
-	mysql-database-name		= "${var.mutillidae-application-name}-database"
+	mysql-database-name		= "mutillidae"
 	mysql-database-instance-name	= "${var.mutillidae-application-name}-database-instance"
 	mysql-version			= "MYSQL_8_0"
 	mysql-tier			= "db-f1-micro"
@@ -40,12 +40,6 @@ resource "google_sql_user" "mysql-account" {
 	instance	= "${google_sql_database_instance.mysql.name}"
 	name		= "mutillidae"
 	password	= "mutillidae"
-}
-
-resource "google_sql_database" "mysql" {
-	project		= "${local.mysql-project}"
-	name		= "${local.mysql-database-name}"
-	instance	= "${google_sql_database_instance.mysql.name}"
 }
 
 resource "google_sql_database_instance" "mysql" {
