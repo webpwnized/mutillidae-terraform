@@ -6,3 +6,11 @@ output "end_of_script_output_2" {
 	value 	= "Welcome to WestWorld."
 }
 
+output "region" {
+	value 	= "${var.region}"
+}
+
+output "zone" {
+	value 	= "${var.zone}"
+}
+
