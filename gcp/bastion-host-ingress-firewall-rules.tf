@@ -23,7 +23,7 @@ resource "google_compute_firewall" "allow-ssh-to-bastion-host-from-iap" {
 
 	source_ranges	= var.gcp-iap-ip-address-range
 	target_tags	= ["bastion-host"]
-	
+
 	log_config {
 		metadata	= "INCLUDE_ALL_METADATA"
 	}
