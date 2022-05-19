@@ -1,0 +1,8 @@
+bastion-host-subnet.tf
+bastion-host.tf
+docker-server-subnet.tf
+docker-server.tf
+network.tf
+outputs.tf
+provider.tf
+variables.tf
