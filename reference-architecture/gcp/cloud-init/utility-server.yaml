@@ -1,0 +1,14 @@
+#cloud-config
+
+# create user ${username}
+users:
+    - name: "${username}"
+      gecos: "${username}"
+      groups: "docker"
+      homedir: "/home/${username}"
+      primary_group: "${username}"
+      shell: "/bin/bash"
+      ssh_authorized_keys:
+          - "${ssh-public-key}"
+      sudo: "ALL= (ALL) NOPASSWD"
+
