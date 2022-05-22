@@ -10,7 +10,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	utility-server-vm-name			= "utility-server"
-	utility-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-2110"
+	utility-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-minimal-2204-lts"
 	utility-server-network-ip		= "10.0.1.6"
 	utility-server-tags 			= ["utility-server","iaas-host"]
 	utility-server-disk-size-gb		= 10
