@@ -1,10 +1,8 @@
 bastion-host-subnet.tf
 bastion-host.tf
 bastion-host-ingress-firewall-rules.tf
-bastion-host-egress-firewall-rules.tf
 docker-server-subnet.tf
 utility-server.tf
-utility-server-egress-firewall-rules.tf
 utility-server-ingress-firewall-rules.tf
 network.tf
 outputs.tf
