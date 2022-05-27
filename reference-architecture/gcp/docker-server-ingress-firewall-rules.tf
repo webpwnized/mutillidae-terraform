@@ -1,14 +1,9 @@
-locals {
-	docker-server-firewall-project		= "${google_compute_network.gcp_vpc_network.project}"
-	docker-server-firewall-region		= "${var.region}"
-	docker-server-firewall-network-name	= "${google_compute_network.gcp_vpc_network.name}"
-}
 
-resource "google_compute_firewall" "allow-ssh-to-docker-server-from-bastion-host" {
-	project		= "${local.docker-server-firewall-project}"
-	name		= "allow-ssh-to-docker-server-from-bastion-host"
-	network 	= "${local.docker-server-firewall-network-name}"
-	description	= "Allow SSH to docker host from the bastion host in the ${local.docker-server-firewall-network-name} network"
+resource "google_compute_firewall" "allow-ingress-ssh-bastion-host-to-docker-server" {
+	project		= "${google_compute_network.gcp_vpc_network.project}"
+	name		= "allow-ingress-ssh-bastion-host-to-docker-server"
+	network 	= "${google_compute_network.gcp_vpc_network.name}"
+	description	= "Allow SSH from bastion host to docker server"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
@@ -26,10 +21,10 @@ resource "google_compute_firewall" "allow-ssh-to-docker-server-from-bastion-host
 	}
 }
 
-resource "google_compute_firewall" "allow-http-bastion-host-to-docker-server" {
-	project		= "${local.docker-server-firewall-project}"
-	name		= "allow-http-bastion-host-to-docker-server"
-	network 	= "${local.docker-server-firewall-network-name}"
+resource "google_compute_firewall" "allow-ingress-http-bastion-host-to-docker-server" {
+	project		= "${google_compute_network.gcp_vpc_network.project}"
+	name		= "allow-ingress-http-bastion-host-to-docker-server"
+	network 	= "${google_compute_network.gcp_vpc_network.name}"
 	description	= "Allow HTTP from bastion host to docker server"
 	direction	= "INGRESS"
 	disabled	= "false"
@@ -48,10 +43,10 @@ resource "google_compute_firewall" "allow-http-bastion-host-to-docker-server" {
 	}
 }
 
-resource "google_compute_firewall" "allow-health-check-to-docker-server" {
-	project		= "${local.docker-server-firewall-project}"
-	name		= "allow-health-check-to-docker-server"
-	network 	= "${local.docker-server-firewall-network-name}"
+resource "google_compute_firewall" "allow-ingress-web-health-check-to-docker-server" {
+	project		= "${google_compute_network.gcp_vpc_network.project}"
+	name		= "allow-ingress-web-health-check-to-docker-server"
+	network 	= "${google_compute_network.gcp_vpc_network.name}"
 	description	= "Allow health checks to docker host"
 	direction	= "INGRESS"
 	disabled	= "false"
@@ -69,6 +64,4 @@ resource "google_compute_firewall" "allow-health-check-to-docker-server" {
 		metadata	= "EXCLUDE_ALL_METADATA"
 	}
 }
-
-
 

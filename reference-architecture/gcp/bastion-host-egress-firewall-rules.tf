@@ -1,7 +1,7 @@
 
 resource "google_compute_firewall" "allow-egress-ssh-from-bastion-host" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "egress-allow-ssh-from-bastion-host"
+	name		= "allow-egress-ssh-from-bastion-host"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
 	description	= "Allow SSH traffic leaving the bastion host"
 	direction	= "EGRESS"
@@ -20,11 +20,11 @@ resource "google_compute_firewall" "allow-egress-ssh-from-bastion-host" {
 	}
 }
 
-resource "google_compute_firewall" "allow-egress-bastion-host-to-internet" {
+resource "google_compute_firewall" "allow-egress-web-from-bastion-host" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "egress-allow-bastion-host-to-internet"
+	name		= "allow-egress-internet-from-bastion-host"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow HTTP, HTTPS traffic leaving the ${google_compute_network.gcp_vpc_network.name} network"
+	description	= "Allow HTTP, HTTPS traffic leaving the bastion host"
 	direction	= "EGRESS"
 	disabled	= "false"
 	priority	= 1000

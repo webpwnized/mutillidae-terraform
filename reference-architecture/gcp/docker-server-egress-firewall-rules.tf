@@ -1,7 +1,7 @@
 
-resource "google_compute_firewall" "allow-egress-docker-server-to-mysql-server" {
+resource "google_compute_firewall" "allow-egress-mysql-server-from-docker-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "${google_compute_network.gcp_vpc_network.name}-allow-egress-docker-server-to-mysql-server"
+	name		= "allow-egress-mysql-server-from-docker-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
 	description	= "Allow MySql connection from docker server to mysql server"
 	direction	= "EGRESS"
@@ -20,9 +20,9 @@ resource "google_compute_firewall" "allow-egress-docker-server-to-mysql-server" 
 	}
 }
 
-resource "google_compute_firewall" "allow-egress-docker-server-to-internet" {
+resource "google_compute_firewall" "allow-egress-web-from-docker-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-egress-docker-server-to-internet"
+	name		= "allow-egress-web-from-docker-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
 	description	= "Allow HTTP, HTTPS traffic leaving the ${google_compute_network.gcp_vpc_network.name} network"
 	direction	= "EGRESS"
