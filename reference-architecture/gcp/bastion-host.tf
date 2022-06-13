@@ -41,7 +41,8 @@ data "cloudinit_config" "bastion_host_configuration" {
 		content = templatefile("${local.bastion-host-cloud-init-config-file}",
 			{
 				username			= "${var.ssh-username}"
-				ssh-public-key			= "${file(var.ssh-public-key-file)}"
+				# We do not need to pass the public key when using OS Login
+				#ssh-public-key			= "${file(var.ssh-public-key-file)}"
 				ssh-private-key-filename	= "${var.ssh-private-key-secret}"
 				ssh-private-key			= "${data.google_secret_manager_secret_version.gcp_iaas_server_ssh_private_key.secret_data}"
 			}
@@ -83,9 +84,12 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${var.ssh-username}:${file(var.ssh-public-key-file)}"
-		startup-script	= "${var.vm-metadata-startup-script}"
-		user-data = "${data.cloudinit_config.bastion_host_configuration.rendered}"
+		enable-oslogin		= "TRUE"
+		enable-oslogin-2fa	= "TRUE"
+		# We do not need to pass the public key when using OS Login
+		# ssh-keys 		= "${var.ssh-username}:${file(var.ssh-public-key-file)}"
+		startup-script		= "${var.vm-metadata-startup-script}"
+		user-data 		= "${data.cloudinit_config.bastion_host_configuration.rendered}"
  	}	
 } // end resource "google_compute_instance" "gcp_instance_bastion_host"
 
@@ -103,4 +107,5 @@ output "bastion-host-external-ip-address" {
 	  value = length(google_compute_instance.gcp_instance_bastion_host.network_interface.0.access_config.*.nat_ip) > 0 ? google_compute_instance.gcp_instance_bastion_host.network_interface.0.access_config.*.nat_ip : null
 	description	= "If the instance has an access config, either the given external ip (in the nat_ip field) or the ephemeral (generated) ip"
 }
+
 
