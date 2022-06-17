@@ -10,6 +10,12 @@ variable "project" {
 	description	= "The GCP project in which the assets will be built"
 }
 
+variable "os-login-email-account" {
+	type 		= string
+	default 	= "<email>@gmail.com"
+	description	= "The email address used to authenticate to Google Cloud Platform"
+}
+
 variable "terraform-credentials-file" {
 	type 		= string
 	default 	= "<file>"
