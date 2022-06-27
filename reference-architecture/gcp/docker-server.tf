@@ -79,9 +79,13 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		ssh-keys = "${var.ssh-username}:${file(var.ssh-public-key-file)}"
+		# We enable OS Login at the Project Level
+		# enable-oslogin	= "TRUE"
+		# enable-oslogin-2fa	= "TRUE"
+		# We do not need to pass the public key when using OS Login
+		# ssh-keys 		= "${var.ssh-username}:${file(var.ssh-public-key-file)}"
 		startup-script	= "${var.vm-metadata-startup-script}"
-		user-data = "${data.cloudinit_config.docker_server_configuration.rendered}"
+		user-data 	= "${data.cloudinit_config.docker_server_configuration.rendered}"
  	}
 } // end resource "google_compute_instance" "gcp_instance_docker_server"
 

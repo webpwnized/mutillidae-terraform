@@ -26,6 +26,8 @@ locals {
 						}"
 }
 
+# We dont need this SSH key normally. 
+# This key is used in lab exercises and is an example showing how to pass a secret.
 data "google_secret_manager_secret_version" "gcp_iaas_server_ssh_private_key" {
 	project		= "${local.bastion-host-project}"
 	secret 		= "${var.ssh-private-key-secret}"
@@ -84,8 +86,9 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		enable-oslogin		= "TRUE"
-		enable-oslogin-2fa	= "TRUE"
+		# We enable OS Login at the Project Level
+		# enable-oslogin	= "TRUE"
+		# enable-oslogin-2fa	= "TRUE"
 		# We do not need to pass the public key when using OS Login
 		# ssh-keys 		= "${var.ssh-username}:${file(var.ssh-public-key-file)}"
 		startup-script		= "${var.vm-metadata-startup-script}"

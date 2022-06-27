@@ -1,13 +1,9 @@
 
-locals {
-	bastion-host-firewall-rule-1-description = "Allow SSH to bastion host when using Identity Aware Proxy to tunnel traffic from the Internet"
-}
-
 resource "google_compute_firewall" "allow-ingress-ssh-iap-to-bastion-host" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
 	name		= "allow-ingress-ssh-iap-to-bastion-host"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "${local.bastion-host-firewall-rule-1-description}"
+	description	= "Allow SSH to bastion host when using Identity Aware Proxy to tunnel traffic from the Internet"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000

@@ -5,9 +5,6 @@ for i in $(cat terraform-files.txt); do cp ../../reference-architecture/gcp/$i .
 mkdir cloud-init;
 for i in $(cat cloud-init-files.txt); do cp ../../reference-architecture/gcp/cloud-init/$i cloud-init; done
 
-# Remove OS Login feature from the Bastion Host
-sed -i '/enable-oslogin/d' bastion-host.tf
-
 # Deploy the infrastructure using Terraform
 terraform init -upgrade
 terraform apply -auto-approve

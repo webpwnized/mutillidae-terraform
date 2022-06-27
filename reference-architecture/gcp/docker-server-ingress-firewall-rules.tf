@@ -1,21 +1,21 @@
 
-resource "google_compute_firewall" "allow-ingress-ssh-bastion-host-to-docker-server" {
+resource "google_compute_firewall" "allow-ingress-ssh-iap-to-docker-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-ingress-ssh-bastion-host-to-docker-server"
+	name		= "allow-ingress-ssh-iap-to-docker-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow SSH from bastion host to docker server"
+	description	= "Allow SSH to docker host when using Identity Aware Proxy to tunnel traffic from the Internet"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
 
 	allow {
 		protocol	= "tcp"
-		ports		= [var.ssh-port]
+		ports		= ["${var.ssh-port}"]
 	}
 
-	source_tags	= ["bastion-host"]
+	source_ranges	= var.gcp-iap-ip-address-range
 	target_tags	= ["docker-server"]
-	
+
 	log_config {
 		metadata	= "INCLUDE_ALL_METADATA"
 	}

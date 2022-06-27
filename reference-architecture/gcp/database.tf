@@ -28,14 +28,6 @@ locals {
 						}"
 }
 
-# TODO: Need a better keeper than current date
-resource "random_pet" "random_suffix" {
-	keepers = {
-		keeper = "${md5(formatdate("DD MMM YYYY", timestamp()))}"
-	}
-	length	= 1
-}
-
 resource "google_sql_user" "mysql-account" {
 	instance	= "${google_sql_database_instance.mysql.name}"
 	name		= "mutillidae"
@@ -94,10 +86,5 @@ output "mysql-public-ip-address" {
 output "mysql-private-ip-address" {
 	value 		= "${google_sql_database_instance.mysql.private_ip_address}"
 	description	= "The first private (PRIVATE) IPv4 address assigned"
-}
-
-output "database_name_random_pet" {
-	value 		= "${random_pet.random_suffix.id}"
-	description	= "The random pet name assigned to the database name"
 }
 
