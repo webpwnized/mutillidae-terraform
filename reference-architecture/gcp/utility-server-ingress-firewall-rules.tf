@@ -25,7 +25,7 @@ resource "google_compute_firewall" "allow-ssh-to-utility-server-from-bastion-hos
 	project		= "${google_compute_network.gcp_vpc_network.project}"
 	name		= "allow-ssh-to-utility-server-from-bastion-host"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow SSH to utility host from the bastion host in the ${local.utility-server-firewall-network-name} network"
+	description	= "Allow SSH to utility host from the bastion host"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
