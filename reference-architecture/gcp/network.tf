@@ -2,12 +2,11 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network
 
 locals {
-	network-project		= "${var.project}"
 	network-name		= "${var.application-name}-vpc"
 }
 
 resource "google_compute_network" "gcp_vpc_network" {
-	project				= "${local.network-project}"
+	project				= "${var.project}"
 	description			= "The VPC network for this project"
 	name				= "${local.network-name}"
 	auto_create_subnetworks		= false
