@@ -18,7 +18,7 @@ variable "os-login-email-account" {
 
 variable "terraform-credentials-file" {
 	type 		= string
-	default 	= "<file>"
+	default 	= "<file path and name>"
 	description	= "The GCP service account that Terraform will use to authenticate to the project. Create a service account in GCP for Terraform to use. See https://cloud.google.com/community/tutorials/getting-started-on-gcp-with-terraform"
 }
 
