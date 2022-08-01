@@ -20,7 +20,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 ### A Google Cloud Platform (GCP) Service Account for Terraform
 
-[How to create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to create a Service Account for Terraform")
+[How to Create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
 
 ## Installation Instructions
 
