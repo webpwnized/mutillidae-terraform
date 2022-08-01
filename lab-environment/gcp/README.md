@@ -20,7 +20,19 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 [How to create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to create a Service Account for Terraform")
 
-## How to create the lab
+## Installation Instructions
+
+1. Clone this project
+2. Configure the variables in the ***variables.tf*** file at the root of this project
+3. Install, initialize, and authenticate the Google ***gcloud*** client software
+4. Install the ***terraform*** client software
+5. Create a project in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
+6. Create a service account in the Google Cloud Platform (GCP) project
+7. Create a service account key for the service account
+8. Place the service account key in a file. Configure the service account key location in the ***variables.tf*** file.
+9. Deploy the lab
+
+### How to deploy the lab
 
 `./deploy-gcp-lab-environment.sh`
 
