@@ -26,12 +26,12 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 1. Clone this project
 2. Configure the variables in the ***variables.tf*** file at the root of this project
-3. Install, initialize, and authenticate the Google ***gcloud*** client software
-4. Install the ***terraform*** client software
-5. [Create a project](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
-6. Create a service account in the Google Cloud Platform (GCP) project
-7. Create a service account key for the service account
-8. Place the service account key in a file. Configure the service account key location in the ***variables.tf*** file.
+3. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
+4. Install the ***terraform*** client software 
+5. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
+6. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project
+7. [**Create a service account key**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") for the service account
+8. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
 9. Deploy the lab
 
 ### How to deploy the lab
