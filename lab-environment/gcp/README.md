@@ -1,5 +1,7 @@
 # Mutillidae Terraform Google Cloud Platform Lab Environment
 
+This project contains reference architectures for Google Cloud Platform (GCP) and Microsoft Azure Cloud. The project also contains scripts to generate a deliberately insecure lab environment. The lab environment can be used for demonstrations and in classwork.
+
 ## Dependencies
 
 ### This project
