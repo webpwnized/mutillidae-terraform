@@ -28,10 +28,22 @@ locals {
 						}"
 }
 
+data "google_secret_manager_secret_version" "database_username" {
+	project		= "${local.mysql-project}"
+	secret 		= "${var.database-username-secret}"
+	version		= "1"
+}
+
+data "google_secret_manager_secret_version" "database_password" {
+	project		= "${local.mysql-project}"
+	secret 		= "${var.database-password-secret}"
+	version		= "1"
+}
+
 resource "google_sql_user" "mysql-account" {
 	instance	= "${google_sql_database_instance.mysql.name}"
-	name		= "mutillidae"
-	password	= "mutillidae"
+	name		= "${data.google_secret_manager_secret_version.database_username.secret_data}"
+	password	= "${data.google_secret_manager_secret_version.database_password.secret_data}"
 }
 
 resource "google_sql_database_instance" "mysql" {

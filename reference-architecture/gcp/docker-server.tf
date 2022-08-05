@@ -10,7 +10,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	docker-server-vm-name			= "docker-server"
-	docker-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-2110"
+	docker-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-2204-lts"
 	docker-server-network-ip		= "10.0.1.5"
 	docker-server-tags 			= ["docker-server","web-server","iaas-host"]
 	docker-server-disk-size-gb		= 25

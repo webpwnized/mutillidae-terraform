@@ -34,12 +34,6 @@ variable "ssh-public-key-file" {
 	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
 }
 
-variable "ssh-private-key-secret" {
-	type 		= string
-	default 	= "<name of GCP secret>"
-	description	= "The name of the GCP secret that stores the SSH private key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. Because the private key is sensitive, the private key must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
-}
-
 variable "default-labels" { 
 	type = map(string)
 	default = {
@@ -54,6 +48,18 @@ variable "admin-office-ip-address-range" {
 	type = list(string)
 	default = ["<ip address>/32"]
 	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
+}
+
+variable "database-username-secret" {
+	type 		= string
+	default 	= "<name of the mutillidae database username secret>"
+	description	= "The name of the GCP secret that stores the database username the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
+}
+
+variable "database-password-secret" {
+	type 		= string
+	default 	= "<name of the mutillidae database password secret>"
+	description	= "The name of the GCP secret that stores the database password the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
 }
 
 //########################################################################
