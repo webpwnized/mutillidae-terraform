@@ -44,7 +44,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 3. ***ssh-username*** - The Linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. Configure the Linux user name in the ***variables.tf*** file.
 
-4. ***ssh-public-key-file*** - The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the public key in the ***variables.tf*** file.
+4. ***ssh-public-key-file*** - The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the ***public key*** (not the private key) in the ***variables.tf*** file.
 
 5. ***default-labels*** - Put your name in the "owner" field in the ***variables.tf*** file.
 
