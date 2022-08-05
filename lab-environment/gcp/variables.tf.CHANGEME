@@ -16,14 +16,6 @@ variable "project" {
 	description	= "The GCP project in which the assets will be built"
 }
 
-# This is not needed unless Terraform is authenticating with your personal Gmail account.
-# To use this variable, uncomment the lines in os-login.tf
-#variable "os-login-email-account" {
-#	type 		= string
-#	default 	= "<email>@gmail.com"
-#	description	= "The email address used to authenticate to Google Cloud Platform"
-#}
-
 variable "ssh-username" {
 	type 		= string
 	default 	= "<username>"
@@ -50,18 +42,6 @@ variable "admin-office-ip-address-range" {
 	type = list(string)
 	default = ["<your ip address>/32"]
 	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
-}
-
-variable "database-username-secret" {
-	type 		= string
-	default 	= "<name of the mutillidae database username secret>"
-	description	= "The name of the GCP secret that stores the database username the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
-}
-
-variable "database-password-secret" {
-	type 		= string
-	default 	= "<name of the mutillidae database password secret>"
-	description	= "The name of the GCP secret that stores the database password the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
 }
 
 //########################################################################
