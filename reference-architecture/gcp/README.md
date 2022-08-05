@@ -30,6 +30,6 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 ## How to deploy the project with Terraform
 
-`terraform plan`
-`terraform apply`
+	terraform plan
+	terraform apply
 
