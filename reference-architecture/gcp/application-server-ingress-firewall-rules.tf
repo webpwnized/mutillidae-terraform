@@ -1,9 +1,9 @@
 
-resource "google_compute_firewall" "allow-ingress-ssh-iap-to-docker-server" {
+resource "google_compute_firewall" "allow-ingress-ssh-iap-to-application-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-ingress-ssh-iap-to-docker-server"
+	name		= "allow-ingress-ssh-iap-to-application-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow SSH to docker host when using Identity Aware Proxy to tunnel traffic from the Internet"
+	description	= "Allow SSH to application host when using Identity Aware Proxy to tunnel traffic from the Internet"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
@@ -14,18 +14,18 @@ resource "google_compute_firewall" "allow-ingress-ssh-iap-to-docker-server" {
 	}
 
 	source_ranges	= var.gcp-iap-ip-address-range
-	target_tags	= ["docker-server"]
+	target_tags	= ["web-server"]
 
 	log_config {
 		metadata	= "INCLUDE_ALL_METADATA"
 	}
 }
 
-resource "google_compute_firewall" "allow-ingress-http-bastion-host-to-docker-server" {
+resource "google_compute_firewall" "allow-ingress-http-bastion-host-to-application-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-ingress-http-bastion-host-to-docker-server"
+	name		= "allow-ingress-http-bastion-host-to-application-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow HTTP from bastion host to docker server"
+	description	= "Allow HTTP from bastion host to application server"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
@@ -43,11 +43,32 @@ resource "google_compute_firewall" "allow-ingress-http-bastion-host-to-docker-se
 	}
 }
 
-resource "google_compute_firewall" "allow-ingress-web-health-check-to-docker-server" {
+resource "google_compute_firewall" "allow-ingress-icmp-bastion-host-to-application-server" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-ingress-web-health-check-to-docker-server"
+	name		= "allow-ingress-icmp-bastion-host-to-application-server"
 	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow health checks to docker host"
+	description	= "Allow ICMP from bastion host to application server"
+	direction	= "INGRESS"
+	disabled	= "false"
+	priority	= 1000
+
+	allow {
+		protocol	= "icmp"
+	}
+
+	source_tags	= ["bastion-host"]
+	target_tags	= ["web-server"]
+	
+	log_config {
+		metadata	= "INCLUDE_ALL_METADATA"
+	}
+}
+
+resource "google_compute_firewall" "allow-ingress-web-health-check-to-application-server" {
+	project		= "${google_compute_network.gcp_vpc_network.project}"
+	name		= "allow-ingress-web-health-check-to-application-server"
+	network 	= "${google_compute_network.gcp_vpc_network.name}"
+	description	= "Allow health checks to application host"
 	direction	= "INGRESS"
 	disabled	= "false"
 	priority	= 1000
