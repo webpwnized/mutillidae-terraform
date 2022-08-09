@@ -52,5 +52,5 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 ### How to deploy the lab
 
-`./deploy-gcp-lab-environment.sh`
+`./build-gcp-lab-environment.sh`
 

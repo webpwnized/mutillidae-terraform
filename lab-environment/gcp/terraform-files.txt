@@ -1,7 +1,8 @@
-bastion-host-subnet.tf
-bastion-host.tf
+variables.tf.CHANGEME
+provider.tf
+network.tf
 application-server-subnet.tf
 utility-server.tf
-network.tf
+bastion-host-subnet.tf
+bastion-host.tf
 outputs.tf
-provider.tf
