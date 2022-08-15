@@ -25,7 +25,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 ## Installation Instructions
 
 1. Clone this project
-2. The lab files are located in this project within the mutillidae-terraform/lab-environment/gcp directory. The variables used by Terraform are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
+2. The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. The variables used by Terraform are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
 3. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the public key in the ***variables.tf*** file.
 4. Configure the variables in the ***variables.tf*** file at the root of this project
 5. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
