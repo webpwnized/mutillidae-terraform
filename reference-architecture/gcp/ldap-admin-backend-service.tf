@@ -12,7 +12,7 @@ resource "google_compute_backend_service" "ldap-admin-backend-service" {
 	project				= "${local.ldap-admin-backend-service-project}"
 	name				= "${local.ldap-admin-backend-service-name}"
 	description			= "The ${var.ldap-admin-application-name} backend service"
-	timeout_sec			= 3
+	timeout_sec			= 10
 	connection_draining_timeout_sec	= 30
 	enable_cdn			= false
 	port_name			= "ldap-admin-http-port"

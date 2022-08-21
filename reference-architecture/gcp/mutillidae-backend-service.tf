@@ -12,7 +12,7 @@ resource "google_compute_backend_service" "mutillidae-backend-service" {
 	project				= "${local.mutillidae-backend-service-project}"
 	name				= "${local.mutillidae-backend-service-name}"
 	description			= "The ${var.mutillidae-application-name} backend service"
-	timeout_sec			= 3
+	timeout_sec			= 60
 	connection_draining_timeout_sec	= 30
 	enable_cdn			= false
 	port_name			= "mutillidae-http-port"

@@ -12,8 +12,8 @@ resource "google_compute_health_check" "ldap-admin-health-check" {
 	project			= "${local.ldap-admin-backend-service-project}"
 	name			= "${local.ldap-admin-health-check-name}"
 	description 		= "The ${var.ldap-admin-application-name} Health Check"
-	check_interval_sec	= 5
-	timeout_sec		= 5
+	check_interval_sec	= 10
+	timeout_sec		= 10
 	healthy_threshold	= 2
 	unhealthy_threshold	= 3
 	

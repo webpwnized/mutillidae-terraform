@@ -12,8 +12,8 @@ resource "google_compute_health_check" "mutillidae-health-check" {
 	project			= "${local.mutillidae-backend-service-project}"
 	name			= "${local.mutillidae-health-check-name}"
 	description 		= "The ${var.mutillidae-application-name} Health Check"
-	check_interval_sec	= 5
-	timeout_sec		= 5
+	check_interval_sec	= 30
+	timeout_sec		= 30
 	healthy_threshold	= 2
 	unhealthy_threshold	= 3
 	

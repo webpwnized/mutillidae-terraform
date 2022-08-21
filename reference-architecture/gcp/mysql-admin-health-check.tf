@@ -12,8 +12,8 @@ resource "google_compute_health_check" "mysql-admin-health-check" {
 	project			= "${local.mysql-admin-backend-service-project}"
 	name			= "${local.mysql-admin-health-check-name}"
 	description 		= "The ${var.mysql-admin-application-name} Health Check"
-	check_interval_sec	= 5
-	timeout_sec		= 5
+	check_interval_sec	= 10
+	timeout_sec		= 10
 	healthy_threshold	= 2
 	unhealthy_threshold	= 3
 	
