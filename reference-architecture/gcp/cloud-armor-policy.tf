@@ -24,7 +24,7 @@ locals {
 	security-policy-name		= "${google_compute_network.gcp_vpc_network.name}-security-policy"
 	security-policy-description	= "Cloud Armor security policy"
 
-	security-policy-owasp-rules-1	= "evaluatePreconfiguredExpr('sqli-v33-stable', ['owasp-crs-v030301-id942330-sqli', 'owasp-crs-v030301-id942421-sqli']) || evaluatePreconfiguredExpr('xss-v33-stable') || evaluatePreconfiguredExpr('lfi-v33-stable') || evaluatePreconfiguredExpr('rfi-v33-stable') || evaluatePreconfiguredExpr('rce-v33-stable')"
+	security-policy-owasp-rules-1	= "evaluatePreconfiguredExpr('sqli-v33-stable', ['owasp-crs-v030301-id942330-sqli', 'owasp-crs-v030301-id942421-sqli', 'owasp-crs-v030301-id942432-sqli', 'owasp-crs-v030301-id942110-sqli', 'owasp-crs-v030301-id942420-sqli']) || evaluatePreconfiguredExpr('xss-v33-stable', ['owasp-crs-v030301-id941330-xss']) || evaluatePreconfiguredExpr('lfi-v33-stable') || evaluatePreconfiguredExpr('rfi-v33-stable') || evaluatePreconfiguredExpr('rce-v33-stable')"
 
 	security-policy-owasp-rules-2	= "evaluatePreconfiguredExpr('protocolattack-v33-stable') || evaluatePreconfiguredExpr('php-v33-stable') || evaluatePreconfiguredExpr('sessionfixation-v33-stable') || evaluatePreconfiguredExpr('java-v33-stable') || evaluatePreconfiguredExpr('nodejs-v33-stable')"
 
