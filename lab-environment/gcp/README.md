@@ -52,5 +52,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 ### How to deploy the lab
 
+The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. The directory contains a script that will build the lab environment. Run the following script to build the lab environment.
+
 `./build-gcp-lab-environment.sh`
 
