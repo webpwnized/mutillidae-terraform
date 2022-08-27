@@ -1,9 +1,10 @@
 #cloud-config
 
-# install docker
+# install docker and ldapadd client software
 packages:
     - docker.io
     - docker-compose
+    - ldap-utils
 package_update: true
 package_upgrade: true
 package_reboot_if_required: true
@@ -47,6 +48,15 @@ runcmd:
   
   # Build and run the containers using docker-compose
   - sudo -u ${username} docker-compose -f /home/${username}/mutillidae-docker/docker-compose.yml up -d
+  
+  # Wait for database container to start
+  - sudo -u ${username} sleep 20
+  
+  # Request Mutillidae database be built
+  - sudo -u ${username} curl http://mutillidae.localhost/set-up-database.php > /dev/null
+  
+  # Upload the Mutillidae LDIF file into the LDAP directory using ldapadd
+  - sudo -u ${username} ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f /home/${username}/mutillidae-docker/ldap/ldif/mutillidae.ldif
 
 final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
 
