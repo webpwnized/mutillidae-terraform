@@ -28,10 +28,21 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 5. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
 6. Install the ***terraform*** client software 
 7. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
-8. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project
+8. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
+* Editor Role
+* Secret Manager Secret Accessor
+* Service Networking  Admin
+
 9. [**Create a service account key**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") for the service account
 10. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
-11. Deploy the project. See instructions below in section ***How to deploy the project***.
+11. Verify the following Google Cloud Platform (GCP) API are enabled for the Project
+* Compute Engine API
+* Cloud Resource Manager API
+* Service Networking API
+* Cloud SQL Admin API
+
+12. Deploy the lab. See instructions below in section ***How to deploy the lab***.
+
 
 ### How to configure variables.tf
 
