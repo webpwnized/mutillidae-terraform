@@ -4,6 +4,10 @@ This project contains reference architectures for Google Cloud Platform (GCP) an
 
 ## Dependencies
 
+### An operating system to install the needed software
+
+If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=8VCeFRwRmRU). If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
+
 ### This project
 `git clone https://github.com/webpwnized/mutillidae-terraform.git`
 
