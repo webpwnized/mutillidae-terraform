@@ -67,3 +67,5 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 5. ***default-labels*** - Put your name in the "owner" field in the ***variables.tf*** file.
 
 6. ***admin-office-ip-address-range*** - Your IP address. Terraform will set up firewall rules allowing access from this range. Put your IP address or IP address range into this value.
+
+7. Using the above as examples, continue configuring the remaining variables
