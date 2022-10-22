@@ -1,5 +1,10 @@
 # Mutillidae Terraform Reference Architecture for Google Cloud Platform (GCP)
 
+## Dependencies
+
+### An operating system to install the needed software
+
+If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=8VCeFRwRmRU). If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
 
 ### This project
 `git clone https://github.com/webpwnized/mutillidae-terraform.git`
@@ -19,10 +24,16 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 [How to Create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
 
+## Optional Pre-Installation Instructions
+
+1. If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. 
+2. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=8VCeFRwRmRU). 
+3. If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
+
 ## Installation Instructions
 
 1. Clone this project
-2. The GCP files are located in this project within the ***mutillidae-terraform/reference-architecture/gcp*** directory. The variables used by Terraform are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
+2. The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. The variables used by Terraform are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
 3. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the public key in the ***variables.tf*** file.
 4. Configure the variables in the ***variables.tf*** file at the root of this project. See instructions below in section ***How to configure variables.tf***.
 5. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
@@ -43,7 +54,6 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 12. Deploy the lab. See instructions below in section ***How to deploy the lab***.
 
-
 ### How to configure variables.tf
 
 1. ***terraform-credentials-file*** - The GCP service account that Terraform will use to authenticate to the project. [**Create a service account key**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") for the service account. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
@@ -56,7 +66,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 5. ***default-labels*** - Put your name in the "owner" field in the ***variables.tf*** file.
 
-6. ***admin-office-ip-address-range*** - Your IP address. Terraform will set up firewall rules allowing access from this range. Put the full path to the public key in the ***variables.tf*** file.
+6. ***admin-office-ip-address-range*** - Your IP address. Terraform will set up firewall rules allowing access from this range. Put your IP address or IP address range into this value.
 
 7. Using the above as examples, continue configuring the remaining variables
 
