@@ -26,6 +26,12 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 [How to Create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
 
+## Optional Pre-Installation Instructions
+
+1. If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. 
+2. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=8VCeFRwRmRU). 
+3. If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
+
 ## Installation Instructions
 
 1. Clone this project
