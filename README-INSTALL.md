@@ -10,7 +10,7 @@ If you would like to use an Ubuntu virtual machine, [**install Ubuntu on Virtual
 `git clone https://github.com/webpwnized/mutillidae-terraform.git`
 
 ### Terrform client software
-`sudo apt get install terraform`
+Follow the instructions at the [Hashicorp "Install Terraform" Developer Documentation] (https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
 ### The Google Cloud Platform (GPC) *gcloud* client software
 
@@ -37,7 +37,7 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 3. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the public key in the ***variables.tf*** file.
 4. Configure the variables in the ***variables.tf*** file at the root of this project. See instructions below in section ***How to configure variables.tf***.
 5. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
-6. Install the ***terraform*** client software 
+6. [Install the ***terraform*** client software](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 7. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
 8. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
 * Editor Role
