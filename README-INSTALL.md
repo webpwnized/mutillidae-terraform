@@ -10,7 +10,7 @@ If you would like to use an Ubuntu virtual machine, [**install Ubuntu on Virtual
 `git clone https://github.com/webpwnized/mutillidae-terraform.git`
 
 ### Terrform client software
-Follow the instructions at the [Hashicorp "Install Terraform" Developer Documentation](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+Follow the instructions at the [**Hashicorp "Install Terraform" Developer Documentation**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 
 ### The Google Cloud Platform (GPC) *gcloud* client software
 
