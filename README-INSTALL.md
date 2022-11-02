@@ -18,11 +18,11 @@ Follow [**the instructions for your distribution**](https://cloud.google.com/sdk
 
 ### A Google Cloud Platform (GPC) project
 
-[How to Create a Project in Google Cloud Platform (GPC)](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)")
+[**How to Create a Project in Google Cloud Platform (GPC)**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)")
 
 ### A Google Cloud Platform (GCP) Service Account for Terraform
 
-[How to Create a Service Account for Terraform](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
+[**How to Create a Service Account for Terraform**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
 
 ## Optional Pre-Installation Instructions
 
