@@ -1,0 +1,202 @@
+
+//########################################################################
+//	These variables must be set
+//	Rename this file to variables.tf when finished
+//########################################################################
+
+variable "terraform-configuration-file" {
+	type 		= string
+	default 	= "<full path>"
+	description	= "Path to AWS config files"
+}
+
+variable "terraform-credentials-file" {
+	type 		= string
+	default 	= "<full path>"
+	description	= "Path to AWS credentials files"
+}
+
+
+
+
+
+
+
+variable "project" {
+	type 		= string
+	default 	= "<project>"
+	description	= "The GCP project in which the assets will be built"
+}
+
+# This is not needed unless Terraform is authenticating with your personal Gmail account.
+# To use this variable, uncomment the lines in os-login.tf
+#variable "os-login-email-account" {
+#	type 		= string
+#	default 	= "<email>@gmail.com"
+#	description	= "The email address used to authenticate to Google Cloud Platform"
+#}
+
+variable "ssh-username" {
+	type 		= string
+	default 	= "<username>"
+	description	= "The linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "ssh-public-key-file" {
+	type 		= string
+	default 	= "<public key file>"
+	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
+}
+
+variable "default-labels" { 
+	type = map(string)
+	default = {
+		owner: "<your name>",
+		environment: "development",
+		application: "mutillidae"
+	}
+	description	= "The labels that will be applied to the IaaS assets"
+}
+
+variable "admin-office-ip-address-range" {
+	type = list(string)
+	default = ["<your ip address>/32"]
+	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
+}
+
+variable "database-username-secret" {
+	type 		= string
+	default 	= "<name of the mutillidae database username secret>"
+	description	= "The name of the GCP secret that stores the database username the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
+}
+
+variable "database-password-secret" {
+	type 		= string
+	default 	= "<name of the mutillidae database password secret>"
+	description	= "The name of the GCP secret that stores the database password the mutillidae application uses to authenticate to the Cloud SQL database. Because the value is sensitive, the value must be stored in GCP Secret Manager. See https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets"
+}
+
+//########################################################################
+//	The default value of these varaibles may be used or changed
+//########################################################################
+
+variable "application-name" {
+	type = string
+	default = "mutillidae"
+}
+
+variable "mutillidae-application-name" {
+	type = string
+	default = "mutillidae"
+}
+
+variable "mysql-admin-application-name" {
+	type = string
+	default = "mysql-admin"
+}
+
+variable "ldap-admin-application-name" {
+	type = string
+	default = "ldap-admin"
+}
+
+variable "region" {
+	type = string
+	default = "us-central1"
+}
+
+variable "zone" {
+	type = string
+	default = "us-central1-a"
+}
+
+variable "bastion-host-subnet-ip-address-range" {
+	type = string
+	default = "10.0.0.0/28"
+}
+
+variable "application-server-subnet-ip-address-range" {
+	type = string
+	default = "10.0.1.0/28"
+}
+
+variable "database-subnet-network" {
+	type = string
+	default = "10.0.3.0"
+}
+
+variable "database-subnet-prefix-length" {
+	type = string
+	default = "24"
+}
+
+variable "gcp-iap-ip-address-range" {
+	type = list(string)
+	default = ["35.235.240.0/20"]
+}
+
+variable "gcp-health-check-ip-address-range" {
+	type = list(string)
+	default = ["130.211.0.0/22", "35.191.0.0/16"]
+}
+
+variable "ssh-port" {
+	type = string
+	default = "22"
+}
+
+variable "http-port" {
+	type = string
+	default = "80"
+}
+
+variable "https-port" {
+	type = string
+	default = "443"
+}
+
+variable "ntp-port" {
+	type = string
+	default = "123"
+}
+
+variable "mutillidae-http-port" {
+	type = string
+	default = "80"
+}
+
+variable "mutillidae-https-port" {
+	type = string
+	default = "443"
+}
+
+variable "mysql-admin-http-port" {
+	type = string
+	default = "81"
+}
+
+variable "ldap-admin-http-port" {
+	type = string
+	default = "82"
+}
+
+variable "mysql-port" {
+	type = string
+	default = "3306"
+}
+
+variable "vm-machine-type" {
+	type = string
+	default = "e2-small"
+}
+
+variable "vm-boot-disk-type" {
+	type = string
+	default = "pd-standard"
+}
+
+variable "vm-metadata-startup-script" {
+	type = string
+	default = "#! /bin/bash\n# Google runs these commands as root user\napt update\napt upgrade -y\napt autoremove -y"
+}
+
