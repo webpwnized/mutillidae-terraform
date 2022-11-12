@@ -7,16 +7,39 @@
 variable "terraform-configuration-file" {
 	type 		= string
 	default 	= "<full path>"
-	description	= "Path to AWS config files"
+	description	= "Path to AWS config files. By default, these files are located at $HOME/.aws/config and $HOME/.aws/credentials on Linux and macOS"
 }
 
 variable "terraform-credentials-file" {
 	type 		= string
 	default 	= "<full path>"
-	description	= "Path to AWS credentials files"
+	description	= "Path to AWS credentials files. By default, these files are located at $HOME/.aws/config and $HOME/.aws/credentials on Linux and macOS"
 }
 
+variable "terraform-service-account" {
+	type 		= string
+	default 	= "<AWS account>"
+	description	= "Allowed AWS account ID to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment)."
+}
 
+//########################################################################
+//	The default value of these varaibles may be used or changed
+//########################################################################
+
+variable "region" {
+	type = string
+	default = "us-east-1"
+}
+
+variable "default-tags" { 
+	type = map(string)
+	default = {
+		owner: "<your name or account",
+		environment: "testnet",
+		application: "mutillidae"
+	}
+	description	= "The tags that will be applied to the IaaS assets by default"
+}
 
 
 
@@ -46,16 +69,6 @@ variable "ssh-public-key-file" {
 	type 		= string
 	default 	= "<public key file>"
 	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
-}
-
-variable "default-labels" { 
-	type = map(string)
-	default = {
-		owner: "<your name>",
-		environment: "development",
-		application: "mutillidae"
-	}
-	description	= "The labels that will be applied to the IaaS assets"
 }
 
 variable "admin-office-ip-address-range" {
@@ -98,11 +111,6 @@ variable "mysql-admin-application-name" {
 variable "ldap-admin-application-name" {
 	type = string
 	default = "ldap-admin"
-}
-
-variable "region" {
-	type = string
-	default = "us-central1"
 }
 
 variable "zone" {
