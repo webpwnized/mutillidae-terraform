@@ -16,10 +16,15 @@ variable "terraform-credentials-file" {
 	description	= "Path to AWS credentials files. By default, these files are located at $HOME/.aws/config and $HOME/.aws/credentials on Linux and macOS"
 }
 
-variable "terraform-service-account" {
+variable "terraform-service-account-id" {
 	type 		= string
-	default 	= "<AWS account>"
+	default 	= "<AWS account ID>"
 	description	= "Allowed AWS account ID to prevent you from mistakenly using an incorrect one (and potentially end up destroying a live environment)."
+}
+
+variable "default-tag-owner" { 
+	type 	= string
+	default	= "jeremy"
 }
 
 //########################################################################
@@ -31,14 +36,14 @@ variable "region" {
 	default = "us-east-1"
 }
 
-variable "default-tags" { 
-	type = map(string)
-	default = {
-		owner: "<your name or account",
-		environment: "testnet",
-		application: "mutillidae"
-	}
-	description	= "The tags that will be applied to the IaaS assets by default"
+variable "default-tag-environment" { 
+	type 	= string
+	default	= "testnet"
+}
+
+variable "default-tag-application" { 
+	type 	= string
+	default	= "mutillidae"
 }
 
 
