@@ -16,4 +16,3 @@ resource "aws_subnet" "application-server-subnetwork" {
 	}
 }
 
-
