@@ -36,6 +36,11 @@ variable "region" {
 	default = "us-east-1"
 }
 
+variable "availability-zone" {
+	type = string
+	default = "us-east-1a"
+}
+
 variable "default-tag-environment" { 
 	type 	= string
 	default	= "testnet"
@@ -45,6 +50,27 @@ variable "default-tag-application" {
 	type 	= string
 	default	= "mutillidae"
 }
+
+variable "vpc-ip-address-range" {
+	type = string
+	default = "10.0.0.0/16"
+}
+
+variable "bastion-host-subnet-ip-address-range" {
+	type = string
+	default = "10.0.1.0/28"
+}
+
+variable "application-server-subnet-ip-address-range" {
+	type = string
+	default = "10.0.2.0/28"
+}
+
+
+
+
+
+
 
 
 
@@ -121,16 +147,6 @@ variable "ldap-admin-application-name" {
 variable "zone" {
 	type = string
 	default = "us-central1-a"
-}
-
-variable "bastion-host-subnet-ip-address-range" {
-	type = string
-	default = "10.0.0.0/28"
-}
-
-variable "application-server-subnet-ip-address-range" {
-	type = string
-	default = "10.0.1.0/28"
 }
 
 variable "database-subnet-network" {

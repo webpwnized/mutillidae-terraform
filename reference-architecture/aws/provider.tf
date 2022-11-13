@@ -17,10 +17,13 @@ provider "aws" {
 	max_retries			= 25
 		
 	default_tags {
-		tags = {
-			owner 		= "${var.default-tag-owner}"
-			application 	= "${var.default-tag-application}"
-			environment 	= "${var.default-tag-environment}"
+		# Tags are case sensitive
+		tags = {	
+			Name		= "${var.default-tag-application}"
+			Purpose		= "${var.default-tag-application}"
+			Owner 		= "${var.default-tag-owner}"
+			Application 	= "${var.default-tag-application}"
+			Environment 	= "${var.default-tag-environment}"
 		}
 	}
 }
