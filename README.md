@@ -11,4 +11,3 @@ The project also contains scripts to generate a deliberately insecure lab enviro
 ### Lab Environment
 - [Google Cloud Platform (GCP)](https://github.com/webpwnized/mutillidae-terraform/blob/main/lab-environment/gcp/README.md "Google Cloud Platform (GCP)")
 
-
