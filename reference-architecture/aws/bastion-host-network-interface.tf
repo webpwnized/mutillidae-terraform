@@ -15,7 +15,7 @@ locals {
 resource "aws_network_interface" "bastion-host-network-interface" {
 
 	subnet_id       = aws_subnet.bastion-host-subnet.id
-	private_ips     = ["${bastion-host-ip-address}"]
+	private_ips     = ["${var.bastion-host-ip-address}"]
 	security_groups = ["${aws_security_group.bastion-host-security-group.id}"]
 	description	= "${local.bastion-host-network-interface-name}"
 
@@ -25,3 +25,16 @@ resource "aws_network_interface" "bastion-host-network-interface" {
 		Purpose = "${local.bastion-host-network-interface-name}"
 	}
 }
+
+output "bastion-host-network-interface-mac-address" {
+	value		= "${aws_network_interface.bastion-host-network-interface.mac_address}"
+	description	= "MAC address of the network interface"
+	sensitive	= "false"
+}
+
+output "bastion-host-network-interface-private-dns-name" {
+	value		= "${aws_network_interface.bastion-host-network-interface.private_dns_name}"
+	description	= "Private DNS name of the network interface (IPv4)"
+	sensitive	= "false"
+}
+
