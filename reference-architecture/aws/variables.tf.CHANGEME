@@ -66,6 +66,12 @@ variable "application-server-subnet-ip-address-range" {
 	default = "10.0.2.0/28"
 }
 
+variable "bastion-host-ip-address" {
+	type = string
+	default = "10.0.1.5"
+}
+
+
 
 
 
