@@ -3,9 +3,6 @@
 
 locals {
 	// These default values should work without changes
-	bastion-host-project			= "${google_compute_network.gcp_vpc_network.project}"
-	bastion-host-region			= "${var.region}"
-	bastion-host-zone			= "${var.zone}"
 	bastion-host-network-name		= "${google_compute_network.gcp_vpc_network.name}"
 	bastion-host-subnetwork-name		= "${google_compute_subnetwork.gcp-vpc-bastion-host-subnetwork.name}"
 	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"
@@ -44,8 +41,8 @@ data "cloudinit_config" "bastion_host_configuration" {
 }
 
 resource "google_compute_instance" "gcp_instance_bastion_host" {
-	project				= "${local.bastion-host-project}"
-	zone				= "${local.bastion-host-zone}"
+	project				= "${google_compute_network.gcp_vpc_network.project}"
+	zone				= "${var.zone}"
 	name				= "${local.bastion-host-vm-name}"
 	description			= "${local.bastion-host-description}"
 	machine_type			= "${var.vm-machine-type}"
@@ -53,6 +50,10 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 	can_ip_forward			= false
 	tags = local.bastion-host-tags
 	labels = local.bastion-host-labels
+	service_account {
+		email  = google_service_account.bastion-host-service-account.email
+		scopes = ["cloud-platform"]
+	}
 	boot_disk {
 		auto_delete	= true
 		device_name	= "${local.bastion-host-vm-name}-disk"
@@ -76,7 +77,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		# We enable OS Login at the Project Level
+		# We enable OS Login and OS Config at the Project Level
 		# enable-oslogin	= "TRUE"
 		# enable-oslogin-2fa	= "TRUE"
 		# We do not need to pass the public key when using OS Login

@@ -5,7 +5,7 @@ locals {
 	application-server-subnet-project	= "${google_compute_network.gcp_vpc_network.project}"
 	application-server-subnet-region	= "${var.region}"
 	application-server-subnet-network	= "${google_compute_network.gcp_vpc_network.name}"
-	application-server-subnet-name		= "${google_compute_network.gcp_vpc_network.name}-application-server-subnet"
+	application-server-subnet-name		= "application-server-subnet"
 	application-server-subnet-description	= "VPC subnet to deploy application servers"
 	
 	application-server-subnet-ip-address-range	= "${var.application-server-subnet-ip-address-range}"
@@ -19,6 +19,8 @@ resource "google_compute_subnetwork" "gcp-vpc-application-server-subnetwork" {
 	description	= "${local.application-server-subnet-description}"
 
 	ip_cidr_range	= "${local.application-server-subnet-ip-address-range}"
+	private_ip_google_access	= "true"
+	
 	log_config {
 		aggregation_interval	= "INTERVAL_5_SEC"
 		flow_sampling		= "0.25"

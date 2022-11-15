@@ -5,4 +5,6 @@ application-server-subnet.tf
 utility-server.tf
 bastion-host-subnet.tf
 bastion-host.tf
+bastion-host-service-account.tf
+utility-server-service-account.tf
 outputs.tf

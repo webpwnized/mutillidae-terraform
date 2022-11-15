@@ -1,9 +1,6 @@
 
 locals {
 	// The default value of these variables should work
-	utility-server-project		= "${var.project}"
-	utility-server-region		= "${var.region}"
-	utility-server-zone		= "${var.zone}"
 	utility-server-network-name	= "${google_compute_network.gcp_vpc_network.name}"
 	utility-server-subnetwork-name	= "${google_compute_subnetwork.gcp-vpc-application-server-subnetwork.name}"
 	utility-server-cloud-init-config-file	= "./cloud-init/utility-server.yaml"
@@ -42,8 +39,8 @@ data "cloudinit_config" "utility_server_configuration" {
 }
 
 resource "google_compute_instance" "gcp_instance_utility_server" {
-	project				= "${local.utility-server-project}"
-	zone				= "${local.utility-server-zone}"
+	project				= "${google_compute_network.gcp_vpc_network.project}"
+	zone				= "${var.zone}"
 	name				= "${local.utility-server-vm-name}"
 	description			= "${local.utility-server-description}"
 	machine_type			= "${var.vm-machine-type}"
@@ -51,6 +48,10 @@ resource "google_compute_instance" "gcp_instance_utility_server" {
 	can_ip_forward			= false
 	tags = "${local.utility-server-tags}"
 	labels = "${local.utility-server-labels}"
+	service_account {
+		email  = google_service_account.utility-server-service-account.email
+		scopes = ["cloud-platform"]
+	}
 	boot_disk {
 		auto_delete	= true
 		device_name	= "${local.utility-server-vm-name}-disk"
@@ -74,7 +75,7 @@ resource "google_compute_instance" "gcp_instance_utility_server" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		# We enable OS Login at the Project Level
+		# We enable OS Login and OS Config at the Project Level
 		# enable-oslogin	= "TRUE"
 		# enable-oslogin-2fa	= "TRUE"
 		# We do not need to pass the public key when using OS Login

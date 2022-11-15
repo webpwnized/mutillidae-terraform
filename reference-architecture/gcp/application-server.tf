@@ -1,9 +1,6 @@
 
 locals {
 	// The default value of these variables should work
-	docker-server-project		= "${google_compute_network.gcp_vpc_network.project}"
-	docker-server-region		= "${var.region}"
-	docker-server-zone		= "${var.zone}"
 	docker-server-network-name	= "${google_compute_network.gcp_vpc_network.name}"
 	docker-server-subnetwork-name	= "${google_compute_subnetwork.gcp-vpc-application-server-subnetwork.name}"
 	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"
@@ -46,9 +43,8 @@ data "cloudinit_config" "docker_server_configuration" {
 
 resource "google_compute_instance" "gcp_instance_docker_server" {
 	depends_on			= [google_sql_database_instance.mysql]
-	
-	project				= "${local.docker-server-project}"
-	zone				= "${local.docker-server-zone}"
+	project				= "${google_compute_network.gcp_vpc_network.project}"
+	zone				= "${var.zone}"
 	name				= "${local.docker-server-vm-name}"
 	description			= "${local.docker-server-description}"
 	machine_type			= "${var.vm-machine-type}"
@@ -56,6 +52,10 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 	can_ip_forward			= false
 	tags = "${local.docker-server-tags}"
 	labels = "${local.docker-server-labels}"
+	service_account {
+		email  = google_service_account.application-server-service-account.email
+		scopes = ["cloud-platform"]
+	}
 	boot_disk {
 		auto_delete	= true
 		device_name	= "${local.docker-server-vm-name}-disk"
@@ -79,7 +79,7 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
-		# We enable OS Login at the Project Level
+		# We enable OS Login and OS Config at the Project Level
 		# enable-oslogin	= "TRUE"
 		# enable-oslogin-2fa	= "TRUE"
 		# We do not need to pass the public key when using OS Login
