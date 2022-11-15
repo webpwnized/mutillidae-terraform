@@ -16,12 +16,6 @@ output "utility-server-service-account-email" {
 	sensitive	= "false"
 }
 
-output "utility-server-service-account-name" {
-	value	= "${google_service_account.utility-server-service-account.name}"
-	description	= "The fully-qualified name of the service account"
-	sensitive	= "false"
-}
-
 output "utility-server-service-account-unique-id" {
 	value	= "${google_service_account.utility-server-service-account.unique_id}"
 	description	= "The unique id of the service account"

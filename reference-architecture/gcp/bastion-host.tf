@@ -67,7 +67,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 	network_interface {
 		network 		= "${local.bastion-host-network-name}"
 		subnetwork 		= "${local.bastion-host-subnetwork-name}"
-		subnetwork_project 	= "${local.bastion-host-project}"
+		subnetwork_project 	= "${var.project}"
 		network_ip		= "${local.bastion-host-network-ip}"
 		stack_type		= "IPV4_ONLY"
 	}

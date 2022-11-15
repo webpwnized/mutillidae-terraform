@@ -16,12 +16,6 @@ output "bastion-host-service-account-email" {
 	sensitive	= "false"
 }
 
-output "bastion-host-service-account-name" {
-	value	= "${google_service_account.bastion-host-service-account.name}"
-	description	= "The fully-qualified name of the service account"
-	sensitive	= "false"
-}
-
 output "bastion-host-service-account-unique-id" {
 	value	= "${google_service_account.bastion-host-service-account.unique_id}"
 	description	= "The unique id of the service account"

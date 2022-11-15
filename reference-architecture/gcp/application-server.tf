@@ -69,7 +69,7 @@ resource "google_compute_instance" "gcp_instance_docker_server" {
 	network_interface {
 		network 		= "${local.docker-server-network-name}"
 		subnetwork 		= "${local.docker-server-subnetwork-name}"
-		subnetwork_project 	= "${local.docker-server-project}"
+		subnetwork_project 	= "${var.project}"
 		network_ip		= "${local.docker-server-network-ip}"
 		stack_type		= "IPV4_ONLY"
 	}

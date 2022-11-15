@@ -65,7 +65,7 @@ resource "google_compute_instance" "gcp_instance_utility_server" {
 	network_interface {
 		network 		= "${local.utility-server-network-name}"
 		subnetwork 		= "${local.utility-server-subnetwork-name}"
-		subnetwork_project 	= "${local.utility-server-project}"
+		subnetwork_project 	= "${var.project}"
 		network_ip		= "${local.utility-server-network-ip}"
 		stack_type		= "IPV4_ONLY"
 	}
