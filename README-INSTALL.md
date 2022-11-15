@@ -1,6 +1,6 @@
 # Installation Instructions
 
-## Dependencies (Lab)
+## Dependencies
 
 ### An operating system to install the needed software
 
