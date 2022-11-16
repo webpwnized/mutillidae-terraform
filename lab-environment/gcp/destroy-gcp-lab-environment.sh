@@ -25,9 +25,9 @@ if [[ $KEYS != "" ]]; then
 fi;
 
 echo "";
-echo "NOTE: There should be 7 files remaining after destruction. If there are more, you probably created lab files that are left over. Its safe to delete files that you created."
+echo "NOTE: These are the extra files besides the lab files. Its safe to delete files that you created."
 echo "";
-echo "$(ls -1 | wc -l) files remaining";
-echo "---------------------";
-echo "";
-ls -1;
+ls -1 > /tmp/remaining-files.txt
+sort -u terraform-files.txt > /tmp/lab-files.txt
+comm -1 /tmp/lab-files.txt /tmp/remaining-files.txt;
+rm /tmp/lab-files.txt /tmp/remaining-files.txt;
