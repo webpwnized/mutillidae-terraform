@@ -27,7 +27,25 @@ fi;
 echo "";
 echo "NOTE: These are the extra files besides the lab files. Its safe to delete files that you created."
 echo "";
-ls -1 > /tmp/remaining-files.txt
-sort -u terraform-files.txt > /tmp/lab-files.txt
-comm -1 /tmp/lab-files.txt /tmp/remaining-files.txt;
+
+ls -1 > /tmp/remaining-files.txt;
+
+cat terraform-files.txt > /tmp/lab-files.txt;
+echo "build-gcp-lab-environment.sh" >> /tmp/lab-files.txt;
+echo "cloud-init-files.txt" >> /tmp/lab-files.txt;
+echo "destroy-gcp-lab-environment.sh" >> /tmp/lab-files.txt;
+echo "README.md" >> /tmp/lab-files.txt;
+echo "terraform-files.txt" >> /tmp/lab-files.txt;
+echo "terraform.tfstate" >> /tmp/lab-files.txt;
+echo "terraform.tfstate.backup" >> /tmp/lab-files.txt;
+echo "variables.tf" >> /tmp/lab-files.txt;
+sort -u /tmp/lab-files.txt > /tmp/lab-files-sorted.txt;
+mv /tmp/lab-files-sorted.txt /tmp/lab-files.txt;
+
+comm -13 /tmp/lab-files.txt /tmp/remaining-files.txt;
+
 rm /tmp/lab-files.txt /tmp/remaining-files.txt;
+
+
+
+
