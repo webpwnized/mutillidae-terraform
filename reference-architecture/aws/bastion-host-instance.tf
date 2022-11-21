@@ -17,9 +17,14 @@ resource "aws_instance" "bastion-host" {
 	ami           		= "ami-0c04187570dfc5ccf"
 	availability_zone	= "${var.availability-zone}"
 	instance_type 		= "t3.micro"
-	#subnet_id       	= aws_subnet.bastion-host-subnet.id
 	
+	# Subnet is specified in the Network Interface
+	# subnet_id       	= "${aws_subnet.bastion-host-subnet.id}"
+	
+	# IP is specified in the Network Interface
 	#associate_public_ip_address	= "false"
+	
+	iam_instance_profile	= "${aws_iam_instance_profile.bastion-host-iam-instance-profile.name}"
 
 	root_block_device {
 		delete_on_termination	= "true"
