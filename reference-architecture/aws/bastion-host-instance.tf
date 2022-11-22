@@ -13,6 +13,12 @@ locals {
 	bastion-host-name	= "bastion-host"
 }
 
+resource "aws_key_pair" "aws-ssh-key" {
+  key_name   = "aws-ssh-key"
+  public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCh6uFBnUmWPjc+0AZUvEl1/Bukf29UZOfDbMAqqblQ jeremy@ubuntu-cloud"
+}
+
+
 resource "aws_instance" "bastion-host" {
 	ami           		= "ami-0c04187570dfc5ccf"
 	availability_zone	= "${var.availability-zone}"
@@ -23,6 +29,8 @@ resource "aws_instance" "bastion-host" {
 	
 	# IP is specified in the Network Interface
 	#associate_public_ip_address	= "false"
+	
+	key_name	= "${aws_key_pair.aws-ssh-key.key_name}"
 	
 	iam_instance_profile	= "${aws_iam_instance_profile.bastion-host-iam-instance-profile.name}"
 
