@@ -43,3 +43,23 @@ resource "google_compute_firewall" "allow-ssh-to-utility-server-from-bastion-hos
 	}
 }
 
+resource "google_compute_firewall" "allow-icmp-to-utility-server-from-bastion-host" {
+	project		= "${google_compute_network.gcp_vpc_network.project}"
+	name		= "allow-icmp-to-utility-server-from-bastion-host"
+	network 	= "${google_compute_network.gcp_vpc_network.name}"
+	description	= "Allow PING to utility host from the bastion host"
+	direction	= "INGRESS"
+	disabled	= "false"
+	priority	= 1000
+
+	allow {
+		protocol	= "icmp"
+	}
+
+	source_tags	= ["bastion-host"]
+	target_tags	= ["utility-server"]
+	
+	log_config {
+		metadata	= "INCLUDE_ALL_METADATA"
+	}
+}

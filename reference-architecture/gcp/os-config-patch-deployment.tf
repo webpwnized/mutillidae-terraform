@@ -16,7 +16,7 @@ resource "google_os_config_patch_deployment" "recurring-patch-deployment" {
 		}
 
 		time_of_day {
-			hours	= 2	# 3:00 AM Eastern Time
+			hours	= 3	# 3:00 AM Eastern Time
 		}
 	}
 }
@@ -31,6 +31,6 @@ resource "google_os_config_patch_deployment" "recurring-patch-deployment" {
 #
 #	# Example of one time schedule in case immediate patch needed. Cannot be used at same time as recurring_schedule
 #	one_time_schedule {
-#		execute_time	= "2022-11-15T23:05:00Z"
+#		execute_time	= "2022-11-30T15:10:00Z"
 #	}
 #}

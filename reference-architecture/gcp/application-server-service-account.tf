@@ -1,5 +1,5 @@
 locals {
-	application-server-service-account-id	= "application-server-service-account"
+	application-server-service-account-id	= "app-server-service-account"
 }
 
 resource "google_service_account" "application-server-service-account" {
