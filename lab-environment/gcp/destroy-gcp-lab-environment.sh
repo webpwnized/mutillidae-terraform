@@ -1,14 +1,15 @@
 
-# Tear down the infrastucture using Terraform
+echo "Tearing down the infrastucture using Terraform"
 terraform destroy -auto-approve
 
-# Delete the terraform configuration files
+echo "Deleting the terraform configuration files"
 for i in $(cat terraform-files.txt); do rm $i; done
 
-# Delete the cloud-init files
+echo "Deleting the cloud-init files"
 rm -rf cloud-init;
 
-KEYS=$(gcloud compute project-info describe --format="json" | jq -rc '.commonInstanceMetadata.items[].key');
+echo "Asking Google Cloud to list project metadata keys so they can be removed"
+KEYS=$(gcloud compute project-info describe --format="json" | jq -rc 'try .commonInstanceMetadata.items[].key');
 
 if [[ $KEYS != "" ]]; then
 
@@ -45,7 +46,5 @@ mv /tmp/lab-files-sorted.txt /tmp/lab-files.txt;
 comm -13 /tmp/lab-files.txt /tmp/remaining-files.txt;
 
 rm /tmp/lab-files.txt /tmp/remaining-files.txt;
-
-
 
 

@@ -1,5 +1,12 @@
 #cloud-config
-  
+
+# install ping software
+packages:
+    - inetutils-ping
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+
 # create user ${username}
 users:
   - name: "${username}"
