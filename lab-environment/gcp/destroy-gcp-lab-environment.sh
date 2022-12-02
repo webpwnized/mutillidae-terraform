@@ -3,10 +3,10 @@ echo "Tearing down the infrastucture using Terraform"
 terraform destroy -auto-approve
 
 echo "Deleting the terraform configuration files"
-for i in $(cat terraform-files.txt); do rm $i; done
+for i in $(cat terraform-files.txt); do rm $i 2>/dev/null; done
 
 echo "Deleting the cloud-init files"
-rm -rf cloud-init;
+rm -rf cloud-init 2>/dev/null;
 
 echo "Asking Google Cloud to list project metadata keys so they can be removed"
 KEYS=$(gcloud compute project-info describe --format="json" | jq -rc 'try .commonInstanceMetadata.items[].key');
