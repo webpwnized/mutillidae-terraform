@@ -27,6 +27,25 @@ variable "default-tag-owner" {
 	default	= "jeremy"
 }
 
+variable "ssh-username" {
+	type 		= string
+	default 	= "<username>"
+	description	= "The linux username you will use to authenticate to the IaaS bastion using SSH"
+}
+
+variable "ssh-public-key-file" {
+	type 		= string
+	default 	= "<public key file>"
+	description	= "The SSH public key you will use to authenticate to the IaaS bastion host using SSH"
+}
+
+variable "admin-office-ip-address-range" {
+	type = list(string)
+	default = ["<your ip address>/32"]
+	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
+}
+
+
 //########################################################################
 //	The default value of these varaibles may be used or changed
 //########################################################################
@@ -82,37 +101,9 @@ variable "bastion-host-ip-address" {
 
 
 
-variable "project" {
-	type 		= string
-	default 	= "<project>"
-	description	= "The GCP project in which the assets will be built"
-}
 
-# This is not needed unless Terraform is authenticating with your personal Gmail account.
-# To use this variable, uncomment the lines in os-login.tf
-#variable "os-login-email-account" {
-#	type 		= string
-#	default 	= "<email>@gmail.com"
-#	description	= "The email address used to authenticate to Google Cloud Platform"
-#}
 
-variable "ssh-username" {
-	type 		= string
-	default 	= "<username>"
-	description	= "The linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
-}
 
-variable "ssh-public-key-file" {
-	type 		= string
-	default 	= "<public key file>"
-	description	= "The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH"
-}
-
-variable "admin-office-ip-address-range" {
-	type = list(string)
-	default = ["<your ip address>/32"]
-	description	= "Your IP address. Terraform will set up firewall rules allowing access from this range."
-}
 
 variable "database-username-secret" {
 	type 		= string

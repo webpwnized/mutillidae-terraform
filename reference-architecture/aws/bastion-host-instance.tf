@@ -18,7 +18,6 @@ resource "aws_key_pair" "aws-ssh-key" {
   public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCh6uFBnUmWPjc+0AZUvEl1/Bukf29UZOfDbMAqqblQ jeremy@ubuntu-cloud"
 }
 
-
 resource "aws_instance" "bastion-host" {
 	ami           		= "ami-0c04187570dfc5ccf"
 	availability_zone	= "${var.availability-zone}"

@@ -17,7 +17,7 @@ resource "aws_security_group_rule" "allow-egress-https-bastion-host-to-private-s
 resource "aws_security_group_rule" "allow-ingress-ssh-office-to-bastion-host" {
 	security_group_id = "${aws_security_group.bastion-host-security-group.id}"
 	type			= "ingress"
-	cidr_blocks 		= ["0.0.0.0/0"]
+	cidr_blocks 		= ["${var.admin-office-ip-address-range}"]
 	from_port         	= 22
 	to_port           	= 22
 	protocol          	= "tcp"
