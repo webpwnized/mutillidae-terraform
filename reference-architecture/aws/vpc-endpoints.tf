@@ -3,6 +3,8 @@
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_endpoint
 
+# https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/
+
 resource "aws_vpc_endpoint" "ssm-private-endpoint" {
 	vpc_id			= aws_vpc.mutillidae-vpc.id
 	subnet_ids		= ["${aws_subnet.bastion-host-subnet.id}"]
