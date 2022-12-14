@@ -14,7 +14,7 @@ The Azure az software is only needed for the Reference Architecture, but not the
 
 ## Installation Instructions for Azure Cloud
 
- TODO - Please contribute with a Pull Request
+- TODO - Please contribute with a Pull Request
 
 ## How to deploy the Azure Cloud project with Terraform
 
