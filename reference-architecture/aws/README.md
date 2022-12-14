@@ -10,11 +10,11 @@ The Amazon Web Services (AWS) *aws* CLI client software is only needed for the R
 
 ### Other Dependencies
 
-* TODO - Please contribute with a Pull Request
+- TODO - Please contribute with a Pull Request
 
 ## Installation Instrutions for Amazon Web Services (AWS) Cloud Platform
 
-* TODO - Please contribute with a Pull Request
+- TODO - Please contribute with a Pull Request
 
 ## How to deploy the Amazon Web Services (AWS) project with Terraform
 

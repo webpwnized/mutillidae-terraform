@@ -4,20 +4,20 @@ This project contains reference architectures for Google Cloud Platform (GCP) an
 
 ## Dependencies for the Google Cloud lab environment
 
-* An operating system to install the needed software
-* This project
-* Terrform client software
-* The Google Cloud Platform (GPC) *gcloud* client software
-* A Google Cloud Platform (GPC) project
-* A Google Cloud Platform (GCP) Service Account for Terraform
+- An operating system to install the needed software
+- This project
+- Terrform client software
+- The Google Cloud Platform (GPC) ***gcloud*** client software
+- A Google Cloud Platform (GPC) project
+- A Google Cloud Platform (GCP) Service Account for Terraform
 
-### The Google Cloud Platform (GPC) *gcloud* client software
+### The Google Cloud Platform (GPC) ***gcloud*** client software
 
 [**This video**](https://www.youtube.com/watch?v=04GONi_U6zU) shows [**how to install the gcloud CLI on Ubuntu Linux**](https://www.youtube.com/watch?v=04GONi_U6zU). Otherwise, follow [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux)
 
 ## Installation for the Google Cloud lab environment
 
-[**Installation Instructions**](../../README-INSTALL.md)
+- [**Installation Instructions**](README-INSTALL.md)
 
 ## How to deploy the lab
 
