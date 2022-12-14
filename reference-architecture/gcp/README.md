@@ -1,10 +1,10 @@
-# Mutillidae Terraform Reference Architecture for Google Cloud Platform (GCP)
+# Mutillidae Terraform Reference Architecture
 
-## Installation
+## Installation Instrutions for Google Cloud Platform (GCP)
 
-[**Installation Instructions**](../../README-INSTALL.md)
+[**Installation Instructions**](../../lab-environment/gcp/README-INSTALL.md)
 
-## How to deploy the project with Terraform
+## How to deploy the Google Cloud Platform (GCP) project with Terraform
 
 	terraform plan
 	terraform apply
