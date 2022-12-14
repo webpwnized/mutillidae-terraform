@@ -4,11 +4,16 @@ This project contains reference architectures for Amazon Web Services (AWS), Goo
 
 The project also contains scripts to generate a deliberately insecure lab environment. The lab environment can be used for demonstrations and in classwork.
 
-## Google Cloud Reference Architecture
-- [Google Cloud Platform (GCP)](https://github.com/webpwnized/mutillidae-terraform/blob/main/reference-architecture/gcp/README.md "Google Cloud Platform (GCP)")
-- Microsoft Azure Cloud
+## Reference Architectures
 
-## Google Cloud Lab Environment
+- [Amazon Web Services (AWS)](https://github.com/webpwnized/mutillidae-terraform/blob/main/reference-architecture/aws/README.md "Google Cloud Platform (GCP)")
+- [Microsoft Azure Cloud](https://github.com/webpwnized/mutillidae-terraform/blob/main/reference-architecture/azure/README.md "Microsoft Azure Cloud")
+- [Google Cloud Platform (GCP)](https://github.com/webpwnized/mutillidae-terraform/blob/main/reference-architecture/gcp/README.md "Google Cloud Platform (GCP)")
+
+## Lab Environments
+
+- Amazon Web Services (AWS) - TODO - Please contribute using a Pull Request
+- Microsoft Azure Cloud - TODO - Please contribute using a Pull Request
 - [Google Cloud Platform (GCP)](https://github.com/webpwnized/mutillidae-terraform/blob/main/lab-environment/gcp/README.md "Google Cloud Platform (GCP)")
 
 ## Cloud Command Line Interfaces (CLI) used in this project
