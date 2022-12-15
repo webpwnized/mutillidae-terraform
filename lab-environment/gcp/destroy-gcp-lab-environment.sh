@@ -36,6 +36,7 @@ echo "build-gcp-lab-environment.sh" >> /tmp/lab-files.txt;
 echo "cloud-init-files.txt" >> /tmp/lab-files.txt;
 echo "destroy-gcp-lab-environment.sh" >> /tmp/lab-files.txt;
 echo "README.md" >> /tmp/lab-files.txt;
+echo "README-INSTALL.md" >> /tmp/lab-files.txt;
 echo "terraform-files.txt" >> /tmp/lab-files.txt;
 echo "terraform.tfstate" >> /tmp/lab-files.txt;
 echo "terraform.tfstate.backup" >> /tmp/lab-files.txt;
