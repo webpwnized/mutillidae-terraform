@@ -185,6 +185,6 @@ variable "vm-boot-disk-type" {
 
 variable "vm-metadata-startup-script" {
 	type = string
-	default = "#! /bin/bash\n# Google runs these commands as root user\n#! /bin/bash\nsudo apt update\nsudo apt -y install google-osconfig-agent"
+	default = "#!/bin/bash\nsudo apt update\nsudo apt -y install google-osconfig-agent"
 }
 
