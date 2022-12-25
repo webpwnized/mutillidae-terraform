@@ -18,6 +18,7 @@ resource "google_compute_router" "gcp-vpc-nat-router" {
 }
 
 resource "google_compute_router_nat" "gcp-vpc-nat-router-nat-service" {
+	depends_on 				= [google_compute_router.gcp-vpc-nat-router]
 	project					= "${local.nat-router-project}"
 	region  				= "${local.nat-router-region}"
 	router					= "${local.nat-router-name}"

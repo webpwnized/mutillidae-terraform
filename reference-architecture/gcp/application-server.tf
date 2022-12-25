@@ -42,7 +42,12 @@ data "cloudinit_config" "docker_server_configuration" {
 }
 
 resource "google_compute_instance" "gcp_instance_docker_server" {
-	depends_on			= [google_sql_database_instance.mysql]
+
+	depends_on = [
+		google_sql_database_instance.mysql,
+		google_compute_router_nat.gcp-vpc-nat-router-nat-service
+	]
+	
 	project				= "${google_compute_network.gcp_vpc_network.project}"
 	zone				= "${var.zone}"
 	name				= "${local.docker-server-vm-name}"
