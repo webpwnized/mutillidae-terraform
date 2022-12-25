@@ -4,6 +4,8 @@
 # To test the deployment, go to GCP Console --> Patch Management --> Scheduled Jobs and start the job manually
 resource "google_os_config_patch_deployment" "recurring-patch-deployment" {
 
+	depends_on= [google_project_service.osconfig-service, google_project_service.containeranalysis-service]
+
 	patch_deployment_id = "iaas-recurring-patch-deployment"
 
 	instance_filter {
