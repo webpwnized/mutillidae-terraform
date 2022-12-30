@@ -9,6 +9,8 @@
 # Pricing information: https://aws.amazon.com/ec2/pricing/on-demand/
 # t3.micro	$0.0104	2	1 GiB	EBS Only	Up to 5 Gigabit
 
+# The default username for Ubuntu images is "ubuntu"
+
 locals {
 	bastion-host-name	= "bastion-host"
 }
@@ -69,6 +71,8 @@ resource "aws_instance" "bastion-host" {
 	}
 
 	user_data_replace_on_change		= "true"
+	
+	# https://aws.amazon.com/premiumsupport/knowledge-center/install-ssm-agent-ec2-linux/
 	user_data = <<EOF
 		#!/bin/bash
 		mkdir /tmp/ssm
