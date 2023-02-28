@@ -30,8 +30,8 @@ resource "aws_route_table" "private-endpoint-route-table" {
 
 # Associate the Route Table with the Subnet that will send traffic to the VPC Private Endpoints
 resource "aws_route_table_association" "bastion-host-subnet-private-endpoint-route-table-association" {
-	subnet_id	= aws_subnet.bastion-host-subnet.id
 	route_table_id	= aws_route_table.private-endpoint-route-table.id
+	subnet_id	= aws_subnet.bastion-host-subnet.id
 }
 
 # Associate the VPC Private Endpoint with the Route Table
@@ -39,4 +39,5 @@ resource "aws_vpc_endpoint_route_table_association" "s3-private-endpoint-private
 	route_table_id  = aws_route_table.private-endpoint-route-table.id
 	vpc_endpoint_id = aws_vpc_endpoint.s3-private-gateway.id
 }
+
 
