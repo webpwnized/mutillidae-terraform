@@ -89,3 +89,10 @@ This video shows [**how to Create a Service Account for Terraform**](https://www
 6. ***admin-office-ip-address-range*** - Your IP address. Terraform will set up firewall rules allowing access from this range. Put your IP address or IP address range into this value.
 
 7. Using the above as examples, continue configuring the remaining variables
+
+## How to deploy the lab
+
+The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. The directory contains a script that will build the lab environment. Run the following script to build the lab environment.
+
+`./build-gcp-lab-environment.sh`
+
