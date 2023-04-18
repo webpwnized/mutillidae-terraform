@@ -19,7 +19,24 @@ if [[ $KEYS != "" ]]; then
 
 	for KEY in $KEYS; do
 		echo "Removing key $KEY"; 
-		gcloud compute project-info remove-metadata --keys=$KEY
+		gcloud compute project-info remove-metadata --keys=$KEY;
+		echo "Removed key $KEY";
+	done;
+	echo "";
+fi;
+
+echo "Asking Google Cloud to list OS Login SSH keys so they can be removed"
+KEYS=$(gcloud compute os-login describe-profile --format=json | jq '.sshPublicKeys' | jq '. | values | .[].key');
+
+if [[ $KEYS != "" ]]; then
+
+	echo "";
+	echo "Removing OS Login SSH keys";
+	echo "";
+
+	for KEY in $KEYS; do
+		echo "Removing OS Login SSH key $KEY"; 
+		gcloud compute os-login ssh-keys remove --key="$KEY";
 		echo "Removed key $KEY";
 	done;
 	echo "";
