@@ -13,7 +13,9 @@
 	This project can be cloned from GitHub using the ***git*** command line tool. If git is not installed, [***install git***](https://www.youtube.com/watch?v=TBlmCo6hIwc). You may want to install the project in a folder that is easy to locate. For example, you may create a folder named ***projects***, then install the project within. This example is run from the users "***home***" directory. If the user was ***jdoe***, the folder created below would be ***/home/jdoe/projects/*** and the project would be cloned within this folder.
 	
 	`mkdir projects`
+	
 	`cd projects`
+	
 	`git clone https://github.com/webpwnized/mutillidae-terraform.git`
 
 3. ### The *Terrform* client software
