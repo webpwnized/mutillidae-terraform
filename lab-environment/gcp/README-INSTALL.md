@@ -40,7 +40,7 @@
 
 ## Installation Instructions the Google Cloud lab environment
 
-1. Clone this project. This project can be cloned from GitHub using the ***git*** command line tool. If git is not installed, [***install git***](https://www.youtube.com/watch?v=TBlmCo6hIwc).
+1. Clone this project. This project can be cloned from GitHub using the **git** command line tool. If git is not installed, [**install git**](https://www.youtube.com/watch?v=TBlmCo6hIwc).
 	
 	`git clone https://github.com/webpwnized/mutillidae-terraform.git`
 
@@ -52,7 +52,7 @@
 
 5. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
 
-6. [Install the ***terraform*** client software](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
+6. [**Install the *terraform* client software**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
 7. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
 
