@@ -82,6 +82,7 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		# enable-oslogin-2fa	= "TRUE"
 		# We do not need to pass the public key when using OS Login
 		# ssh-keys 		= "${var.ssh-username}:${file(var.ssh-public-key-file)}"
+		block-project-ssh-keys	= "TRUE"
 		startup-script		= "${var.vm-metadata-startup-script}"
 		user-data 		= "${data.cloudinit_config.bastion_host_configuration.rendered}"
  	}	
