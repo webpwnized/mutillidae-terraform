@@ -6,6 +6,7 @@ mkdir cloud-init;
 for i in $(cat cloud-init-files.txt); do cp ../../reference-architecture/gcp/cloud-init/$i cloud-init; done
 
 # Remove security controls from Terraform files so the lab user can fix the issues
+##	Remove the block project-wide SSH keys protection from the compute instances
 sed -i '/block-project-ssh-keys	= "TRUE"/d' ./bastion-host.tf
 sed -i '/block-project-ssh-keys	= "TRUE"/d' ./utility-server.tf
 
