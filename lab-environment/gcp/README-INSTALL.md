@@ -37,35 +37,41 @@
 
 ## Optional Pre-Installation Instructions
 
-1. If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
+1. If ***VirtualBox*** is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
 2. If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. 
 3. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=AuJGvJoMrgQ). If the Guest Additions are not installed, [**install the Guest Additions**](https://www.youtube.com/watch?v=AuJGvJoMrgQ).
 
 ## Installation Instructions the Google Cloud lab environment
 
-1. Clone this project. This project can be cloned from GitHub using the **git** command line tool. If git is not installed, [**install git**](https://www.youtube.com/watch?v=TBlmCo6hIwc).
+1. If git is not installed, [**install git**](https://www.youtube.com/watch?v=TBlmCo6hIwc).
+
+2. Clone this project. This project can be cloned from GitHub using the **git** command line tool.
 	
 	**`git clone https://github.com/webpwnized/mutillidae-terraform.git`**
 
-2. The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. Change into the lab directory. The remaining commands are run from the lab directory.
+3. The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. Change into the lab directory.
 
 	**`cd mutillidae-terraform/lab-environment/gcp`**
 
-3. The variables used by ***Terraform*** are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
+4. The remaining commands are run from the lab directory. You will not leave this directory for the rest of the installation or when running the labs.
+
+5. The variables used by ***Terraform*** are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
 
 	**`cp ../../reference-architecture/gcp/variables.tf.CHANGEME variables.tf`**
 
-4. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the public key in the ***variables.tf*** file.
+6. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key").
 
-5. Configure the variables in the ***variables.tf*** file at the root of this project. See instructions below in section ***How to configure variables.tf***.
+7. Put the full path to the public key in the ***variables.tf*** file. Do not use the relative path. Terraform does not use relative paths. 
 
-6. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
+8. Configure the remaining variables in the ***variables.tf*** file at the root of this project. See instructions below in section ***How to configure variables.tf***.
 
-7. [**Install the *terraform* client software**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
+9. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
 
-8. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). Configure the project name in the ***variables.tf*** file.
+11. [**Install the *terraform* client software**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
-9. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
+12. [**Create a Google Cloud project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud (GPC)") in Google Cloud (GCP). Configure the project name in the ***variables.tf*** file.
+
+13. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
 
 * Editor Role
 * Secret Manager Secret Accessor
@@ -109,8 +115,11 @@ The lab does not use all of the variables in the variables.tf file. The lab only
 All of the project dependencies and the lab environment must be installed before trying to build the lab. 
 
  - The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. 
- - The directory contains a script that will build the lab environment. 
+ - The directory contains a script that will build the lab environment. Ensure the command is run from within the lab folder.
+
+	**`cd mutillidae-terraform/lab-environment/gcp`**
+
  - Run the following script to build the lab environment.
 
-`./build-gcp-lab-environment.sh`
+	**`./build-gcp-lab-environment.sh`**
 
