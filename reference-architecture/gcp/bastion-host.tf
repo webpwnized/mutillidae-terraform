@@ -77,6 +77,8 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_integrity_monitoring	= true
 	}
 	metadata = {
+		# Lab anchor points allow the lab scripts to change the file to set up labs
+		# Lab-22-Anchor-Point
 		# We enable OS Login and OS Config at the Project Level
 		# enable-oslogin	= "TRUE"
 		# enable-oslogin-2fa	= "TRUE"

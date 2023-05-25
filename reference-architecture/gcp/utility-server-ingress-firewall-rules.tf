@@ -21,28 +21,6 @@ resource "google_compute_firewall" "allow-ingress-ssh-iap-to-utility-server" {
 	}
 }
 
-resource "google_compute_firewall" "allow-ssh-to-utility-server-from-bastion-host" {
-	project		= "${google_compute_network.gcp_vpc_network.project}"
-	name		= "allow-ssh-to-utility-server-from-bastion-host"
-	network 	= "${google_compute_network.gcp_vpc_network.name}"
-	description	= "Allow SSH to utility host from the bastion host"
-	direction	= "INGRESS"
-	disabled	= "false"
-	priority	= 1000
-
-	allow {
-		protocol	= "tcp"
-		ports		= [var.ssh-port]
-	}
-
-	source_tags	= ["bastion-host"]
-	target_tags	= ["utility-server"]
-	
-	log_config {
-		metadata	= "INCLUDE_ALL_METADATA"
-	}
-}
-
 resource "google_compute_firewall" "allow-icmp-to-utility-server-from-bastion-host" {
 	project		= "${google_compute_network.gcp_vpc_network.project}"
 	name		= "allow-icmp-to-utility-server-from-bastion-host"
