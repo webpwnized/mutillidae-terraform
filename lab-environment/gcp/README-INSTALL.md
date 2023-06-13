@@ -81,12 +81,13 @@
 
 10. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
 
-11. Verify the following Google Cloud Platform (GCP) API are enabled for the Project
+11. Verify the following Google Cloud Platform (GCP) API are enabled for the Project. Enable the following API if not already enabled.
 
 * Compute Engine API
 * Cloud Resource Manager API
 * Service Networking API
 * Cloud SQL Admin API
+* Identity and Access Management (IAM) API
 
 12. Deploy the lab. See instructions below in section ***How to deploy the lab***.
 
