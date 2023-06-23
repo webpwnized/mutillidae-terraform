@@ -69,7 +69,7 @@
 
 11. [**Install the *terraform* client software**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
-12. [**Create a Google Cloud project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud (GPC)") in Google Cloud (GCP). Configure the project name in the ***variables.tf*** file.
+12. [**Create a Google Cloud project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud (GPC)") in Google Cloud (GCP). Configure the project name in the ***variables.tf*** file. Note that Google will require a ***Google Billing Account*** to create a ***Google Cloud Project***. If you have an existing ***Google Billing Account***, you can point the ***Google Cloud Project*** to the existing ***Google Billing Account***. Otherwise, you will create a ***Google Billing Account*** as a part of opening a ***Google Cloud Account***.
 
 13. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
 
