@@ -1,126 +1,84 @@
+# Installation Instructions for the Google Cloud Lab Environment
 
+## Step 1: Set up the Operating System and VirtualBox  
++ ##### If VirtualBox is not installed, [**Install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw) from the  [**Official Website.**](https://www.virtualbox.org/wiki/Downloads)  
++ ##### If you prefer to use an [**Ubuntu virtual machine**](https://ubuntu.com/download/desktop), [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or any other hypervisor.  
++ ##### For improved performance on VirtualBox, install Guest Additions for Ubuntu as shown in the video. 
 
-# Installation Instructions for the Google Cloud lab environment
+## Step 2: Install Required Packages  
 
-## Dependencies for the Google Cloud lab environment
++ ##### Open the terminal in the Ubuntu virtual machine by pressing **`Ctrl+Alt+T`**.  
++ ##### Install the necessary packages by running the following commands in the terminal:  
+  -   **`sudo apt-get update`**  
+  -   **`sudo apt-get install curl`**  
+  -   **`sudo apt-get install git`**  
+  
+## Step 3: Download Terraform Client Software  
+ 
++ ##### This [**Video**](https://www.youtube.com/watch?v=LM3RLgNu7tU) shows how to install Terraform on Ubuntu Linux. Visit the [**HashiCorp "Install Terraform" Developer Documentation**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) for the commands to download and install Terraform on your operating system.
 
-1. ### An operating system to install the needed software
+## Step 4: Download the Google Cloud (GPC) gcloud Client Software  
 
-	a. If VirtualBox is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
-	b. If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. 
-	c. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=AuJGvJoMrgQ). If the Guest Additions are not installed, [**install the Guest Additions**](https://www.youtube.com/watch?v=AuJGvJoMrgQ).
++ ##### You can follow the [**video tutorial**](https://www.youtube.com/watch?v=04GONi_U6zU) that demonstrates the step-by-step process of installing the gcloud CLI on Ubuntu Linux. Visit the [**Install the gcloud CLI instruction**](https://cloud.google.com/sdk/docs/install#deb) for the commands.
 
-2. ### This project
-	This project can be cloned from GitHub using the ***git*** command line tool. If git is not installed, [***install git***](https://www.youtube.com/watch?v=TBlmCo6hIwc). You may want to install the project in a folder that is easy to locate. For example, you may create a folder named ***projects***, then install the project within. This example is run from the users "***home***" directory. If the user was ***jdoe***, the folder created below would be ***/home/jdoe/projects/*** and the project would be cloned within this folder.
-	
-	**`mkdir projects`**
-	
-	**`cd projects`**
-	
-	**`git clone https://github.com/webpwnized/mutillidae-terraform.git`**
+## Step 5: Prepare SSH Key Pair  
 
-3. ### The *Terrform* client software
++ ##### Open the terminal and navigate to your home directory using the command **`cd`**.
++ ##### Generate an SSH key pair by following the [**video**](https://www.youtube.com/watch?v=eUwOlc9HfZs) on creating SSH key pairs. Take note of the path where the public key is saved, which should be displayed as: **`"Your public key has been saved in /home/user/.ssh/file_name.pub"`**. Save the path as the **`variable "ssh-public-key-file"`** for later use.
 
-	[**This video**](https://www.youtube.com/watch?v=LM3RLgNu7tU) shows [**how to install Terraform on Ubuntu Linux**](https://www.youtube.com/watch?v=LM3RLgNu7tU). Otherwise, follow the instructions for your distribution at the [**Hashicorp "Install Terraform" Developer Documentation**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+## Step 6: Create a Google Cloud Platform (GPC) Project.  
++ #####	Follow this [video](https://www.youtube.com/watch?v=qUgfKkeJ29Y) tutorial on how to create a project in [Google Cloud Platform](https://console.cloud.google.com/) (GPC). Once you create the project, make note of the project ID, which can be found by clicking on **`"My Project"`** and locating the **`name`** and **`ID`**. Save the project ID as a **`variable "project"`** for future configuration.
++ #####	Additionally, note down your email that you used to create the project. Save your email as a **`variable called "os-login-email-account"`**.
 
-4. ### The Google Cloud (GPC) *gcloud* client software
+## Step 7: Create Google Cloud (GPC) Service Account for Terraform  
++ ##### Follow the [video](https://www.youtube.com/watch?v=hMcVrKgX30w) on creating a Service Account for Terraform in Google Cloud Platform (GPC).  
++ ##### In addition to the editor role, grant the Service Account the following two roles:  
+    - **`Secret Manager Secret Accessor`**  
+    - **`Service Networking Admin`** 
++ ##### Click **`"ADD ANOTHER ROLE"`** and search for each role to add it.  
++ ##### Save the path to the Service Account key file, which should be something like **`"/home/user_name/folder_name/gcp-terraform-service-account-key.json"`** . Store this path as the **`variable "terraform-credentials-file"`** for later use.  
 
-	[**This video**](https://www.youtube.com/watch?v=04GONi_U6zU) shows [**how to install the gcloud CLI on Ubuntu Linux**](https://www.youtube.com/watch?v=04GONi_U6zU). Otherwise, follow [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux)
+## Step 8: Create Secrets in Google Cloud Secret Manager  
++ ##### Follow the [video](https://www.youtube.com/watch?v=yilzpyyAtX0) on creating secrets in Google Cloud Secret Manager.  
++ ##### Use the SSH key you created earlier and make note of the names you provide for the secrets. Save the names as the **`variables "database-username-secret"`** and **`"database-password-secret"`** for later use.  
 
-5. ### A Google Cloud Platform (GPC) project
+## Step 9: Gather Additional Information
++ ##### In the terminal, type **`whoami`** and press enter. Save the displayed username as the **`variable "ssh-username"`**.
++ #####	Browse to **`google.com`** from your virtual machine and search **`"What's my IP"`**. Save the displayed IP address as the **`variable "admin-office-ip-address-range"`**.
++ #####	Save **`your name`** (all lowercase) as the **`variable "default-labels"`**.
 
-	This video shows [**how to Create a Project in Google Cloud Platform (GPC)**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)")
+## Step 10: Configuration
 
-6. ### A Google Cloud (GCP) Service Account for Terraform
++ #####	If you are not in the home directory, navigate there using the command **`cd`**.
++ #####	Create a folder named **`"projects"`** using the command **`mkdir projects`**, then navigate to the folder with **`cd projects`**.
++ #####	Clone the project using the command **`git clone https://github.com/webpwnized/mutillidae-terraform.git`**.
++ #####	Change into the lab directory by running the command **`cd mutillidae-terraform/lab-environment/gcp`**.
++ #####	The variables used by Terraform are stored in the file **`variables.tf.CHANGEME`**. Create a new file named **`variables.tf`** and copy the content from **`variables.tf.CHANGEME`** using the command **`cp ../../reference-architecture/gcp/variables.tf.CHANGEME variables.tf`**
++ #####	Open the **`variables.tf`** file using your preferred text editor **`(e.g., nano, vi, vim)`**.
++ #####	Configure the variables in the variables.tf file as follows:
+    -	##### For the **`variable “terraform-credentials-file”`**, set the path to the service account key file you saved earlier as the **`default`** value.
+    -	##### For the **`variable “project”`**, set the **`project ID`** as the **`default`** value you saved earlier.
+    -	##### If Terraform is authenticating with your Gmail account, uncomment the **`os-login.tf`** section and set your **`email address`** as the **`default`** value. Otherwise, leave it as it is.
+    -	##### For the **`variable “ssh-username”`**, set your Linux username (found using whoami) as the **`default`** value.
+    -	##### For the **`variable “ssh-public-key-file”`**, set the file name you saved earlier as the **`default`** value.
+    -	##### For the **`variable “default-labels”`**, set your name (all lowercase) as the **`default`** value.
+    -	##### For the **`variable “admin-office-ip-address-range”`**, set your IP address as the **`default`** value.
++ #####	Save the changes made to the variables.tf file.
 
-	This video shows [**how to Create a Service Account for Terraform**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform")
+## Step 11: Enable Required APIs in Google Cloud Platform (GPC)  
 
-## Optional Pre-Installation Instructions
++ ##### Verify if the following Google Cloud Platform (GPC) APIs are enabled for your project. If not, enable them by searching each name in the search bar, selecting the corresponding result under **`"MARKETPLACE,"`** and clicking **`"Enable"`**:
+    -	**`Compute Engine API`**
+    -	**`Cloud Resource Manager API`**
+    -	**`Service Networking API`**
+    -	**`Cloud SQL Admin API`**
+    -	**`Identity and Access Management (IAM) API`**
 
-1. If ***VirtualBox*** is not installed, [**install VirtualBox**](https://www.youtube.com/watch?v=61GhP8DsQMw).
-2. If you would like to use an Ubuntu virtual machine, [**install Ubuntu on VirtualBox**](https://www.youtube.com/watch?v=Cazzls2sZVk) or other hypervisor. 
-3. Ubuntu runs better on VirtualBox if [**the Guest Additions are installed**](https://www.youtube.com/watch?v=AuJGvJoMrgQ). If the Guest Additions are not installed, [**install the Guest Additions**](https://www.youtube.com/watch?v=AuJGvJoMrgQ).
+## Step 12: Deploy the Lab Environment
 
-## Installation Instructions the Google Cloud lab environment
++ #####	In the terminal, navigate to the lab directory if you are not already there by running the command:
+    -	**`cd mutillidae-terraform/lab-environment/gcp`**
++ ####	Run the following script to build the lab environment:
+    -	**`./build-gcp-lab-environment.sh`**
 
-1. If git is not installed, [**install git**](https://www.youtube.com/watch?v=TBlmCo6hIwc).
-
-2. Clone this project. This project can be cloned from GitHub using the **git** command line tool.
-	
-	**`git clone https://github.com/webpwnized/mutillidae-terraform.git`**
-
-3. The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. Change into the lab directory.
-
-	**`cd mutillidae-terraform/lab-environment/gcp`**
-
-4. The remaining commands are run from the lab directory. You will not leave this directory for the rest of the installation or when running the labs.
-
-5. The variables used by ***Terraform*** are inside the file ***variables.tf.CHANGEME***. Copy this file to a new file named ***variables.tf***. You will configure your variables in ***variables.tf***.
-
-	**`cp ../../reference-architecture/gcp/variables.tf.CHANGEME variables.tf`**
-
-6. Create an SSH key pair. You will use the SSH public key to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key").
-
-7. Put the full path to the public key in the ***variables.tf*** file. Do not use the relative path. Terraform does not use relative paths. 
-
-8. Configure the remaining variables in the ***variables.tf*** file at the root of this project. See instructions below in section ***How to configure variables.tf***.
-
-9. Install, initialize, and authenticate the Google ***gcloud*** client software following [**the instructions for your distribution**](https://cloud.google.com/sdk/docs/install#linux "the instructions for your distribution")
-
-11. [**Install the *terraform* client software**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
-
-12. [**Create a Google Cloud project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud (GPC)") in Google Cloud (GCP). Configure the project name in the ***variables.tf*** file. Note that Google will require a ***Google Billing Account*** to create a ***Google Cloud Project***. If you have an existing ***Google Billing Account***, you can point the ***Google Cloud Project*** to the existing ***Google Billing Account***. Otherwise, you will create a ***Google Billing Account*** as a part of opening a ***Google Cloud Account***.
-
-13. [**Create a service account**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the Google Cloud Platform (GCP) project. The service account will need the following permissions.
-
-* Editor Role
-* Secret Manager Secret Accessor
-* Service Networking  Admin
-
-9. [**Create a service account key**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") for the service account
-
-10. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
-
-11. Verify the following Google Cloud Platform (GCP) API are enabled for the Project. Enable the following API if not already enabled.
-
-* Compute Engine API
-* Cloud Resource Manager API
-* Service Networking API
-* Cloud SQL Admin API
-* Identity and Access Management (IAM) API
-
-12. Deploy the lab. See instructions below in section ***How to deploy the lab***.
-
-### How to configure variables.tf
-
-The lab does not use all of the variables in the variables.tf file. The lab only uses the following variables.
-
- 1. ***terraform-credentials-file*** - The GCP service account that Terraform will use to authenticate to the project. [**Create a service account key**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") for the service account. Place the service account key in a file. [**Configure the service account key location**](https://www.youtube.com/watch?v=hMcVrKgX30w "How to Create a Service Account for Terraform") in the ***variables.tf*** file.
-
- 2. ***project*** - The GCP project in which the assets will be built. [**Create a project**](https://www.youtube.com/watch?v=qUgfKkeJ29Y "How to Create a Project in Google Cloud Platform (GPC)") in Google Cloud Platform (GCP). 
-
- 3. Configure the **Project ID** in the ***variables.tf*** file.
-
-4. ***ssh-username*** - The Linux username you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. Configure the Linux user name in the ***variables.tf*** file.
-
-5. ***ssh-public-key-file*** - The SSH public key you will use to authenticate to the IaaS bastion host via GCP Identity Aware Proxy and the Docker Host using SSH. [**Create and SSH key pair**](https://www.youtube.com/watch?v=eUwOlc9HfZs "Linux Basics: How to Create SSH Key"). Put the full path to the ***public key*** (not the private key) in the ***variables.tf*** file.
-
-6. ***default-labels*** - Put your name in the "owner" field in the ***variables.tf*** file.
-
-7. ***admin-office-ip-address-range*** - Your IP address. Terraform will set up firewall rules allowing access from this range. Put your IP address or IP address range into this value.
-
-8. Using the above as examples, continue configuring the remaining variables.
-
-## How to deploy the lab
-
-All of the project dependencies and the lab environment must be installed before trying to build the lab. 
-
- - The lab files are located in this project within the ***mutillidae-terraform/lab-environment/gcp*** directory. 
- - The directory contains a script that will build the lab environment. Ensure the command is run from within the lab folder.
-
-	**`cd mutillidae-terraform/lab-environment/gcp`**
-
- - Run the following script to build the lab environment.
-
-	**`./build-gcp-lab-environment.sh`**
-
+### Congratulations! You have successfully deployed the Lab Environment
