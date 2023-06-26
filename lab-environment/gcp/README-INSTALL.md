@@ -63,6 +63,7 @@
     -	##### For the **`variable “ssh-public-key-file”`**, set the file name you saved earlier as the **`default`** value.
     -	##### For the **`variable “default-labels”`**, set your name (all lowercase) as the **`default`** value.
     -	##### For the **`variable “admin-office-ip-address-range”`**, set your IP address as the **`default`** value.
+    -	##### For the **`variable “database-username-secret”`**, and **`variable “database-password-secret”`** set the name you saved eariler as the **`default`** value.
 + #####	Save the changes made to the variables.tf file.
 
 ## Step 11: Enable Required APIs in Google Cloud Platform (GPC)  
