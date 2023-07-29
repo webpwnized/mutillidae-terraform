@@ -31,7 +31,8 @@ data "cloudinit_config" "utility_server_configuration" {
 		content = templatefile("${local.utility-server-cloud-init-config-file}",
 			{
 				username		= "${var.ssh-username}"
-				ssh-public-key		= "${file(var.ssh-public-key-file)}"
+				# We do not need to pass the public key when using OS Login
+				# ssh-public-key	= "${file(var.ssh-public-key-file)}"
 			}
 		)
 		filename = "${local.utility-server-cloud-init-config-file}"
@@ -74,6 +75,14 @@ resource "google_compute_instance" "gcp_instance_utility_server" {
 		enable_vtpm			= true
 		enable_integrity_monitoring	= true
 	}
+	# We cannot use confidential computing because that requires hosts to set on_host_maintenance = "TERMINATE" which in turn requires hosts to be preemptable. 
+	# confidential_instance_config {
+	# 	enable_confidential_compute	= true
+	# }
+	# scheduling {
+	# 	# Required for confidential computing
+	# 	on_host_maintenance		= "TERMINATE"
+	# }
 	metadata = {
 		# Lab anchor points allow the lab scripts to change the file to set up labs
 		# Lab-22-Anchor-Point
