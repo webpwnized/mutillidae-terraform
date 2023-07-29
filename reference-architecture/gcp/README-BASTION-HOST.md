@@ -16,7 +16,7 @@
 	- 3.6 Ensure That SSH Access Is Restricted From the Internet
 	- 3.7 Ensure That RDP Access Is Restricted From the Internet
 	- 3.10 Use Identity Aware Proxy (IAP) to Ensure Only Traffic From Google IP Addresses are 'Allowed'
-- ***[bastion-host-egress-firewall-rules.tf*](bastion-host-egress-firewall-rules.tf* "bastion-host-egress-firewall-rules.tf*")**
+- ***[bastion-host-egress-firewall-rules.tf](bastion-host-egress-firewall-rules.tf "bastion-host-egress-firewall-rules.tf")***
 	- Blocks all outbound traffic except what is needed to reach patch update servers
 - ***[bastion-host-service-account.tf](bastion-host-service-account.tf "bastion-host-service-account.tf")***
 	- 4.1 Ensure That Instances Are Not Configured To Use the Default Service Account
