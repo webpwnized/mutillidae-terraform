@@ -2,7 +2,7 @@
 
 ## The following files are used to create the reference Bastion Host for Google Cloud Platform (GCP)
 
-- ***network.tf***
+- ***[network.tf](network.tf "network.tf")***
 	- 3.1 Ensure That the Default Network Does Not Exist in a Project 
 - ***bastion-host-subnet.tf***
 	- 3.8 Ensure that VPC Flow Logs is Enabled for Every Subnet in a VPC Network
