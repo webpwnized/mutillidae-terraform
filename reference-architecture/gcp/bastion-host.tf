@@ -9,7 +9,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	bastion-host-vm-name 			= "bastion-host"
-	bastion-host-vm-boot-disk-image		= "ubuntu-os-cloud/ubuntu-minimal-2204-lts"
+	bastion-host-vm-boot-disk-image		= "ubuntu-os-cloud/ubuntu-minimal-2304-amd64"
 	bastion-host-network-ip			= "10.0.0.5"
 	bastion-host-tags 			= ["bastion-host","iaas-host"]
 	bastion-host-disk-size-gb		= 10
@@ -31,9 +31,9 @@ data "cloudinit_config" "bastion_host_configuration" {
 		content_type = "text/cloud-config"
 		content = templatefile("${local.bastion-host-cloud-init-config-file}",
 			{
-				username			= "${var.ssh-username}"
+				username		= "${var.ssh-username}"
 				# We do not need to pass the public key when using OS Login
-				#ssh-public-key			= "${file(var.ssh-public-key-file)}"
+				#ssh-public-key		= "${file(var.ssh-public-key-file)}"
 			}
 		)
 		filename = "${local.bastion-host-cloud-init-config-file}"

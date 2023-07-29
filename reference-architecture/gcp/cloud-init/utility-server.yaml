@@ -8,7 +8,8 @@ users:
       homedir: "/home/${username}"
       primary_group: "${username}"
       shell: "/bin/bash"
-      ssh_authorized_keys:
-          - "${ssh-public-key}"
+      #We do not need to pass the public key when using OS Login
+      #ssh_authorized_keys:
+          #- "$#{ssh-public-key}"
       sudo: "ALL= (ALL) NOPASSWD"
 
