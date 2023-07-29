@@ -76,6 +76,14 @@ resource "google_compute_instance" "gcp_instance_bastion_host" {
 		enable_vtpm			= true
 		enable_integrity_monitoring	= true
 	}
+	# We cannot use confidential computing because that requires hosts to set on_host_maintenance = "TERMINATE" which in turn requires hosts to be preemptable. 
+	# confidential_instance_config {
+	# 	enable_confidential_compute	= true
+	# }
+	# scheduling {
+	# 	# Required for confidential computing
+	# 	on_host_maintenance		= "TERMINATE"
+	# }
 	metadata = {
 		# Lab anchor points allow the lab scripts to change the file to set up labs
 		# Lab-22-Anchor-Point
