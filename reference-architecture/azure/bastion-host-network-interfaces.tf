@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface
+
 locals {
 	bastion-host-nic-name	= "bastion-host-network-interface-1"
 }

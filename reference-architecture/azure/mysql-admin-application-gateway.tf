@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
+
 locals {
 	mysql-admin-gateway-ip-configuration	= "${var.mysql-admin-application-name}-gateway-ip-configuration"
 	mysql-admin-frontend-port-name		= "${var.mysql-admin-application-name}-frontend-port-name"

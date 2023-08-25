@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
+
 locals {
 	mutillidae-gateway-ip-configuration	= "${var.mutillidae-application-name}-gateway-ip-configuration"
 	mutillidae-frontend-port-name		= "${var.mutillidae-application-name}-frontend-port-name"

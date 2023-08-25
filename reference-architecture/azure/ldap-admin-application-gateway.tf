@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway
+
 locals {
 	ldap-admin-gateway-ip-configuration	= "${var.ldap-admin-application-name}-gateway-ip-configuration"
 	ldap-admin-frontend-port-name		= "${var.ldap-admin-application-name}-frontend-port-name"
