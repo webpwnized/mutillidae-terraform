@@ -1,4 +1,6 @@
 
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule
+
 resource "azurerm_network_security_rule" "inbound-allow-ssh-bastion-hosts-asg-to-application-server-asg" {
 	name						= "inbound-allow-ssh-bastion-hosts-asg-to-application-server-asg"
 	description					= "Allow SSH from Bastion Host ASG to App Server ASG"
@@ -37,7 +39,7 @@ resource "azurerm_network_security_rule" "inbound-allow-http-application-gateway
 	priority					= "112"
 	access						= "Allow"
 	direction					= "Inbound"
-	protocol					= "TCP"
+	protocol					= "Tcp"
 	source_address_prefix				= "GatewayManager"
 	source_port_range				= "*"
 	destination_application_security_group_ids	= ["${azurerm_application_security_group.application-servers-application-security-group.id}"]
@@ -52,7 +54,7 @@ resource "azurerm_network_security_rule" "inbound-allow-load-balancer-health-pro
 	priority					= "113"
 	access						= "Allow"
 	direction					= "Inbound"
-	protocol					= "TCP"
+	protocol					= "Tcp"
 	source_address_prefix				= "${var.azure-load-balancer-health-probe-ip-address}"
 	source_port_range				= "*"
 	destination_application_security_group_ids	= ["${azurerm_application_security_group.application-servers-application-security-group.id}"]

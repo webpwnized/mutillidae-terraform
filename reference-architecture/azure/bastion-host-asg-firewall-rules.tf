@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_rule
+
 resource "azurerm_network_security_rule" "inbound-allow-ssh-office-to-bastion-hosts" {
 	name						= "inbound-allow-ssh-office-to-bastion-host"
 	description					= "Allow SSH to bastion host from office"

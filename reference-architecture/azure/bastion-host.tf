@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
+
 locals {
 	bastion-host-name			= "bastion-host"
 	bastion-host-cloud-init-config-file	= "./cloud-init/bastion-host.yaml"

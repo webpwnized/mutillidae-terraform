@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_virtual_machine
+
 locals {
 	docker-server-name			= "docker-server"
 	docker-server-cloud-init-config-file	= "./cloud-init/docker-server.yaml"

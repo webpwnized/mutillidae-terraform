@@ -1,3 +1,6 @@
+
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface
+
 locals {
 	docker-server-nic-name	= "docker-server-network-interface-1"
 }
