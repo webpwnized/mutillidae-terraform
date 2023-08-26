@@ -60,6 +60,11 @@ variable "location" {
 	description = "East US"
 }
 
+variable "azure-bastion-host-name" {
+	type = string
+	default = "azure-bastion-host"
+}
+
 variable "mutillidae-application-name" {
 	type = string
 	default = "mutillidae"
@@ -73,6 +78,11 @@ variable "mysql-admin-application-name" {
 variable "ldap-admin-application-name" {
 	type = string
 	default = "ldap-admin"
+}
+
+variable "azure-bastion-host-subnet-range" {
+	type = string
+	default = "10.0.4.0/26"
 }
 
 variable "bastion-host-subnet-range" {
