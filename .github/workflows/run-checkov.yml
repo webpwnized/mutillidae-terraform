@@ -1,4 +1,4 @@
-
+name: run-checkov
 on: [push]
 jobs:
   checkov-job:
