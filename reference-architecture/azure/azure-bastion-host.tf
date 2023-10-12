@@ -25,13 +25,13 @@ resource "azurerm_bastion_host" "azurerm-bastion-host" {
 	#	The subnet can't contain other resources.
 	ip_configuration {
 		name                 = "${var.azure-bastion-host-name}-ip-configuration"
-		subnet_id            = "${azurerm_subnet.azure-bastion-host-subnet}"
-		public_ip_address_id = "${azurerm_public_ip.azure-bastion-host-public-ip}"
+		subnet_id            = "${azurerm_subnet.azure-bastion-host-subnet.id}"
+		public_ip_address_id = "${azurerm_public_ip.azure-bastion-host-public-ip.id}"
 	}
 }
 
-output "azure-bastion-host-fqdn" {
-	value 		= "${azurerm_public_ip.azurerm-bastion-host.fqdn}"
-	description	= "Fully qualified domain name of the A DNS record associated with the bastion host"
+output "azure-bastion-host-dns-name" {
+	value 		= "${azurerm_bastion_host.azurerm-bastion-host.dns_name}"
+	description	= "Fully qualified domain name of the bastion host"
 }
 
