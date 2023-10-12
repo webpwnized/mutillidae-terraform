@@ -76,6 +76,7 @@ resource "azurerm_application_gateway" "mutillidae-application-gateway" {
 		http_listener_name		= "${local.mutillidae-http-listener-name}"
 		backend_address_pool_name	= "${local.mutillidae-backend-address-pool-name}"
 		backend_http_settings_name	= "${local.mutillidae-backend-http-setting-name}"
+		priority			= 10
 	}
 
 	sku {

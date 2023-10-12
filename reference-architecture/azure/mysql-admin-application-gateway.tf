@@ -76,6 +76,7 @@ resource "azurerm_application_gateway" "mysql-admin-application-gateway" {
 		http_listener_name		= "${local.mysql-admin-http-listener-name}"
 		backend_address_pool_name	= "${local.mysql-admin-backend-address-pool-name}"
 		backend_http_settings_name	= "${local.mysql-admin-backend-http-setting-name}"
+		priority			= 10
 	}
 
 	sku {

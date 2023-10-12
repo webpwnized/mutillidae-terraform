@@ -16,8 +16,8 @@ locals {
 
 resource "azurerm_application_gateway" "ldap-admin-application-gateway" {
 	name			= "ldap-admin-application-gateway"
-	location		= "${azurerm_resource_group.resource-group.location}"
 	resource_group_name 	= "${azurerm_resource_group.resource-group.name}"
+	location		= "${azurerm_resource_group.resource-group.location}"
 	tags			= "${var.default-tags}"
 	fips_enabled		= false
 	firewall_policy_id		= "${azurerm_web_application_firewall_policy.web-application-firewall-policy.id}"
@@ -76,6 +76,7 @@ resource "azurerm_application_gateway" "ldap-admin-application-gateway" {
 		http_listener_name		= "${local.ldap-admin-http-listener-name}"
 		backend_address_pool_name	= "${local.ldap-admin-backend-address-pool-name}"
 		backend_http_settings_name	= "${local.ldap-admin-backend-http-setting-name}"
+		priority			= 10
 	}
 
 	sku {
