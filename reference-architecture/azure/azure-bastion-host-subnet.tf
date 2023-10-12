@@ -1,6 +1,8 @@
 
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet
 
+# https://learn.microsoft.com/en-us/azure/bastion/configuration-settings
+
 resource "azurerm_subnet" "azure-bastion-host-subnet" {
 	name			= "AzureBastionSubnet"
 	resource_group_name	= "${azurerm_resource_group.resource-group.name}"
