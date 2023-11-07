@@ -38,16 +38,12 @@
 + ##### Click **`"ADD ANOTHER ROLE"`** and search for each role to add it.  
 + ##### Save the path to the Service Account key file, which should be something like **`"/home/user_name/folder_name/gcp-terraform-service-account-key.json"`** . Store this path as the **`variable "terraform-credentials-file"`** for later use.  
 
-## Step 8: Create Secrets in Google Cloud Secret Manager  
-+ ##### Follow the [video](https://www.youtube.com/watch?v=yilzpyyAtX0) on creating secrets in Google Cloud Secret Manager.  
-+ ##### Use the SSH key you created earlier and make note of the names you provide for the secrets. Save the names as the **`variables "database-username-secret"`** and **`"database-password-secret"`** for later use.  
-
-## Step 9: Gather Additional Information
+## Step 8: Gather Additional Information
 + ##### In the terminal, type **`whoami`** and press enter. Save the displayed username as the **`variable "ssh-username"`**.
 + #####	Browse to **`google.com`** from your virtual machine and search **`"What's my IP"`**. Save the displayed IP address as the **`variable "admin-office-ip-address-range"`**.
 + #####	Save **`your name`** (all lowercase) as the **`variable "default-labels"`**.
 
-## Step 10: Configuration
+## Step 9: Configuration
 
 + #####	If you are not in the home directory, navigate there using the command **`cd`**.
 + #####	Create a folder named **`"projects"`** using the command **`mkdir projects`**, then navigate to the folder with **`cd projects`**.
@@ -65,7 +61,7 @@
     -	##### For the **`variable “admin-office-ip-address-range”`**, set your IP address as the **`default`** value.
 + #####	Save the changes made to the variables.tf file.
 
-## Step 11: Enable Required APIs in Google Cloud Platform (GPC)  
+## Step 10: Enable Required APIs in Google Cloud Platform (GPC)  
 
 + ##### Verify if the following Google Cloud Platform (GPC) APIs are enabled for your project. If not, enable them by searching each name in the search bar, selecting the corresponding result under **`"MARKETPLACE,"`** and clicking **`"Enable"`**:
     -	**`Compute Engine API`**
@@ -74,7 +70,7 @@
     -	**`Cloud SQL Admin API`**
     -	**`Identity and Access Management (IAM) API`**
 
-## Step 12: Deploy the Lab Environment
+## Step 11: Deploy the Lab Environment
 
 + #####	In the terminal, navigate to the lab directory if you are not already there by running the command:
     -	**`cd mutillidae-terraform/lab-environment/gcp`**
