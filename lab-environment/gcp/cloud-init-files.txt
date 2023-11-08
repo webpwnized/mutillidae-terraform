@@ -1,3 +1,3 @@
 bastion-host.yaml
-docker-server.yaml
+application-server.yaml
 utility-server.yaml
