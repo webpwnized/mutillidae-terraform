@@ -72,9 +72,17 @@
 
 ## Step 11: Deploy the Lab Environment
 
++ #####	Make sure you are in the lab directory
+    -	**`pwd`**
 + #####	In the terminal, navigate to the lab directory if you are not already there by running the command:
     -	**`cd mutillidae-terraform/lab-environment/gcp`**
++ ####	Ensure the Build script is executable:
+    -	**`chmod u+x ./build-gcp-lab-environment.sh`**
++ ####	Ensure the Destroy script is executable:
+    -	**`chmod u+x ./destroy-gcp-lab-environment.sh`**
 + ####	Run the following script to build the lab environment:
     -	**`./build-gcp-lab-environment.sh`**
++ ####	When you are done, do NOT forget to destroy the lab environment:
+    -	**`./destroy-gcp-lab-environment.sh`**
 
 ### Congratulations! You have successfully deployed the Lab Environment
