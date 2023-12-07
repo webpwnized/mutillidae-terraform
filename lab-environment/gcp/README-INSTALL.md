@@ -11,7 +11,8 @@
 + ##### Install the necessary packages by running the following commands in the terminal:  
   -   **`sudo apt-get update`**  
   -   **`sudo apt-get install curl`**  
-  -   **`sudo apt-get install git`**  
+  -   **`sudo apt-get install git`**
+  -   **`sudo apt-get install jq`**
   
 ## Step 3: Download Terraform Client Software  
  
