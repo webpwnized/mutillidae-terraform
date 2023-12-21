@@ -14,7 +14,7 @@ resource "google_compute_instance_group" "application-server-instance-group" {
 	zone		= "${var.zone}"
 	description	= "The unmanaged instance group containing application servers"
 	
-	instances	= ["${google_compute_instance.gcp_instance_docker_server.id}"]
+	instances	= ["${google_compute_instance.gcp_instance_application_server.id}"]
 	
 	named_port{
 		name	= "mutillidae-http-port"
