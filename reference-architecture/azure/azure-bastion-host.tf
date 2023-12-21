@@ -7,14 +7,14 @@
 
 resource "azurerm_bastion_host" "azurerm-bastion-host" {
 	name			= "${var.azure-bastion-host-name}"
-	location		= "${azurerm_resource_group.resource-group.location}"
 	resource_group_name	= "${azurerm_resource_group.resource-group.name}"
+	location		= "${azurerm_resource_group.resource-group.location}"
 	tags			= "${var.default-tags}"
 	sku			= "Basic"
-	copy_paste_enabled	= true
-	scale_units		= 2	# A "Scale Unit" is an instance of an Azure Bastion Server. scale_units only can be changed when sku is Standard
+	copy_paste_enabled	= true	# file_copy_enabled is only supported when sku is Standard
+	scale_units		= 2	# A "Scale Unit" is an instance of an Azure Bastion Server. scale_units only can be changed when sku is Standard. scale_units is always 2 when sku is Basic.
 	file_copy_enabled	= false	# file_copy_enabled is only supported when sku is Standard
-	ip_connect_enabled	= false # ip_connect_enabled is only supported when sku is Standard
+	ip_connect_enabled	= false # IP-based connection lets you connect to your on-premises, non-Azure, and Azure virtual machines via Azure Bastion over ExpressRoute or a VPN site-to-site connection using a specified private IP address. ip_connect_enabled is only supported when sku is Standard
 	shareable_link_enabled	= false # Security risk. Ensure this is false. The Bastion Shareable Link feature lets users connect to a target resource using Azure Bastion without accessing the Azure portal. shareable_link_enabled is only supported when sku is Standard.
 	tunneling_enabled	= false # tunneling_enabled is only supported when sku is Standard.
 
