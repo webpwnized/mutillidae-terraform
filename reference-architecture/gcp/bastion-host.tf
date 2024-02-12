@@ -9,7 +9,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	bastion-host-vm-name 			= "bastion-host"
-	bastion-host-vm-boot-disk-image		= "ubuntu-os-cloud/ubuntu-minimal-2304-amd64"
+	bastion-host-vm-boot-disk-image		= "ubuntu-os-cloud/ubuntu-minimal-2310-amd64"
 	bastion-host-network-ip			= "10.0.0.5"
 	bastion-host-tags 			= ["bastion-host","iaas-host"]
 	bastion-host-disk-size-gb		= 10
