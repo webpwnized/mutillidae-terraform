@@ -1,10 +1,11 @@
-variables.tf.CHANGEME
-provider.tf
-network.tf
 application-server-subnet.tf
-utility-server.tf
 bastion-host-subnet.tf
 bastion-host.tf
 bastion-host-service-account.tf
-utility-server-service-account.tf
+network.tf
 outputs.tf
+project-services.tf
+provider.tf
+utility-server.tf
+utility-server-service-account.tf
+variables.tf.CHANGEME
