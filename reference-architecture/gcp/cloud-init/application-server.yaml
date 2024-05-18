@@ -1,62 +1,58 @@
 #cloud-config
 
-# install docker and ldapadd client software
+# Install Docker and ldapadd client software
 packages:
-    - docker.io
-    - docker-compose
-    - ldap-utils
+  - docker.io
+  - docker-compose
+  - ldap-utils
 package_update: true
 package_upgrade: true
 package_reboot_if_required: true
 
-# create the docker group and add user ${username}
-groups: 
+# Create the docker group and add user ${username}
+groups:
   - docker
-  
-# create user ${username}
+
+# Create user ${username}
 users:
-    - name: "${username}"
-      gecos: "${username}"
-      groups: "docker"
-      homedir: "/home/${username}"
-      primary_group: "${username}"
-      shell: "/bin/bash"
-      #We do not need to pass the public key when using OS Login
-      #ssh_authorized_keys:
-        #- "$#{ssh-public-key}"
-      sudo: "ALL= (ALL) NOPASSWD"
+  - name: "${username}"
+    gecos: "${username}"
+    groups: "docker"
+    homedir: "/home/${username}"
+    primary_group: "${username}"
+    shell: "/bin/bash"
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
 
 runcmd:
-  # Download application
+  # Download Mutillidae Docker project
   - git clone https://github.com/webpwnized/mutillidae-docker.git /home/${username}/mutillidae-docker
 
-  # Allow containers to receive remote connections
-  - sed -i 's/127.0.0.1://g' /home/${username}/mutillidae-docker/docker-compose.yml
-  
-  # Point www container to Cloud SQL MySQL server
-  - sed -i 's/ARG DATABASE_HOST="database"/ARG DATABASE_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/www/Dockerfile
-  - sed -i 's/DATABASE_USERNAME="root"/DATABASE_USERNAME="${database-username}"/' /home/${username}/mutillidae-docker/www/Dockerfile  
-  - sed -i 's/DATABASE_PASSWORD="mutillidae"/DATABASE_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/www/Dockerfile
+  # Configure Mutillidae Docker project
+  - sed -i 's/127.0.0.1://g' /home/${username}/mutillidae-docker/.build/docker-compose.yml
 
-  # Point database_admin container to Cloud SQL MySQL server
-  - sed -i 's/PMA_HOST="database"/PMA_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
-  - sed -i 's/PMA_USER="root"/PMA_USER="${database-username}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
-  - sed -i 's/PMA_PASSWORD="mutillidae"/PMA_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/database_admin/Dockerfile
+  # Configure Mutillidae www container
+  - sed -i 's/ARG DATABASE_HOST="database"/ARG DATABASE_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/.build/www/Dockerfile
+  - sed -i 's/DATABASE_USERNAME="root"/DATABASE_USERNAME="${database-username}"/' /home/${username}/mutillidae-docker/.build/www/Dockerfile
+  - sed -i 's/DATABASE_PASSWORD="mutillidae"/DATABASE_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/.build/www/Dockerfile
 
-  # Change ownership of project from root to user
+  # Configure Mutillidae database_admin container
+  - sed -i 's/PMA_HOST="database"/PMA_HOST="${database-ip-address}"/' /home/${username}/mutillidae-docker/.build/database_admin/Dockerfile
+  - sed -i 's/PMA_USER="root"/PMA_USER="${database-username}"/' /home/${username}/mutillidae-docker/.build/database_admin/Dockerfile
+  - sed -i 's/PMA_PASSWORD="mutillidae"/PMA_PASSWORD="${database-password}"/' /home/${username}/mutillidae-docker/.build/database_admin/Dockerfile
+
+  # Change ownership of Mutillidae Docker project to user
   - chown -R ${username}:${username} /home/${username}/mutillidae-docker
-  
-  # Build and run the containers using docker-compose
-  - sudo -u ${username} docker-compose -f /home/${username}/mutillidae-docker/docker-compose.yml up -d
-  
+
+  # Build and run containers using docker-compose
+  - sudo -u ${username} docker-compose -f /home/${username}/mutillidae-docker/.build/docker-compose.yml up -d
+
   # Wait for database container to start
   - sudo -u ${username} sleep 20
-  
-  # Request Mutillidae database be built
+
+  # Request Mutillidae database setup
   - sudo -u ${username} curl http://mutillidae.localhost/set-up-database.php > /dev/null
-  
-  # Upload the Mutillidae LDIF file into the LDAP directory using ldapadd
-  - sudo -u ${username} ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f /home/${username}/mutillidae-docker/ldap/ldif/mutillidae.ldif
+
+  # Upload Mutillidae LDIF file to LDAP directory using ldapadd
+  - sudo -u ${username} ldapadd -c -x -D "cn=admin,dc=mutillidae,dc=localhost" -w mutillidae -H ldap:// -f /home/${username}/mutillidae-docker/.build/ldap/ldif/mutillidae.ldif
 
 final_message: "cloud-init version $VERSION has completed at $TIMESTAMP after $UPTIME using $DATASOURCE"
-
