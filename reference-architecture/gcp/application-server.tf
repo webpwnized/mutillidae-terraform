@@ -7,7 +7,7 @@ locals {
 	
 	//Make sure these are set for this machine
 	application-server-vm-name			= "application-server"
-	application-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-minimal-2310-amd64"
+	application-server-vm-boot-disk-image	= "ubuntu-os-cloud/ubuntu-minimal-2404-lts-amd64"
 	application-server-network-ip		= "10.0.1.5"
 	application-server-tags 			= ["application-server","web-server","iaas-host"]
 	application-server-disk-size-gb		= 25
